@@ -1,0 +1,225 @@
+"use client";
+import React, { useState } from 'react';
+
+const GamingCareer = () => {
+    const [hoveredSpec, setHoveredSpec] = useState(null);
+    const [activeTab, setActiveTab] = useState('csgo');
+
+    const pcSpecs = [
+        { component: 'CPU', spec: 'Ryzen 5 7600X 6-Core' },
+        { component: 'GPU', spec: 'NVIDIA RTX 4060' },
+        { component: 'RAM', spec: 'A-Data 16GB DDR5 5200MHz' },
+        { component: 'Storage', spec: '1TB NVMe WD_BLACK SN770 SSD' },
+        { component: 'Motherboard', spec: 'GigaByte B650M Gaming Wifi' },
+        { component: 'PSU', spec: '750W MSI Bronze' },
+        { component: 'Cooling', spec: 'DeepCool Mystique 240mm ARGB' },
+        { component: 'Case', spec: 'Deepcool CH370' },
+        { component: 'Monitor', spec: 'LG UltraGear 180Hz 24gs60f-B' },
+        { component: 'Laptop', spec: 'HP Pavilion Ryzen 5 5600H' },
+    ];
+
+    const csgoClips = [
+        { title: 'Dust 2 Crazy Scenes', videoId: 'RtyeFe6HYrA' },
+        { title: 'Mirage No Scope Shot', videoId: 'qyIrDyOVt3A' },
+        { title: 'Ancient last man alive clutch', videoId: '-5YEfQaLvoE' },
+        { title: 'Mirage Clutch', videoId: 'w0pobV-zsks' },
+        { title: 'Shot of Universe', videoId: 'XmnbqohcwiY' }
+    ];
+
+    const cs2Clips = [
+        { title: 'Dust 2 One position Clutch', videoId: 'A5Ba0fhAKCE' },
+        { title: 'D2 B Site Window No Scope', videoId: 'HC2Q1U771b4' },
+        { title: 'D2 AK Clutch', videoId: '0K82wS4F3CI' },
+        { title: 'D2 Awp Clutch', videoId: 'uJcXExmXOYo' },
+        { title: 'No Reaction Time', videoId: 'NarHP7unzGU' },
+        { title: 'Flying Awp Kill', videoId: 'FRKPkQsV898' },
+        { title: 'Another Flying Awp Kill', videoId: 'c6lQplqfBnQ' },
+        { title: 'Sad For The Bizon One', videoId: 'X6Co64K49wg' },
+        { title: 'Failed Clutch', videoId: 'nvkBLpjYYIo' },
+        { title: '4k Clutch D2', videoId: 'gYDlxyHmjAA' },
+        { title: '3k Clutch D2', videoId: 'iBsMoVLplt0' },
+    ];
+
+    const VideoCard = ({ clip, index }) => (
+        <div
+            className=" bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform  w-full max-w-sm sm:max-w-md md:max-w-sm lg:max-w-md mx-auto"
+            style={{ animationDelay: `${index * 0.1}s` }}
+        >
+            <div className="relative overflow-hidden">
+                <iframe
+                    width="100%"
+                    height="200"
+                    src={`https://www.youtube.com/embed/${clip.videoId}`}
+                    title={clip.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="w-full h-48 sm:h-52 md:h-48 lg:h-56 transition-transform duration-300 group-hover:scale-105"
+                />
+            </div>
+            <div className="p-3 sm:p-4">
+                <h4 className="font-semibold text-xs sm:text-sm md:text-base group-hover:text-blue-600 transition-colors duration-300">
+                    {clip.title}
+                </h4>
+            </div>
+        </div>
+    );
+
+    return (
+        <div className="px-4 py-8 font-signika">
+            <div className="max-w-7xl mx-auto">
+                {/* Header Section */}
+                <div className="text-center mb-12 sm:mb-16 md:mb-20">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-portfolio-700 mb-4 sm:mb-6 font-quantico">
+                        My Setup
+                    </h2>
+                </div>
+
+                {/* Setup Section */}
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24">
+                    <div className="w-full max-w-[640px] lg:w-1/2 border-4 border-border relative overflow-hidden rounded-lg shadow-lg aspect-video group">
+                        <img
+                            src="/hero.jpg"
+                            alt="Gaming Career"
+                            width={640}
+                            height={442}
+                            className="w-full h-full object-cover shadow-lg transition-transform duration-300 group-hover:scale-105"
+                        />
+                    </div>
+
+                    <div className="w-full lg:w-1/2 text-center lg:text-left flex justify-center lg:justify-end">
+                        <div>
+                            <h3 className="text-xl sm:text-2xl font-semibold text-primary mb-4">PC Specs</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 sm:gap-y-4">
+                                <div className="space-y-3 sm:space-y-4">
+                                    {pcSpecs.slice(0, 6).map((item, index) => (
+                                        <div
+                                            key={index}
+                                            className={`flex items-center justify-start space-x-2 p-2 rounded-md transition-all duration-300 cursor-pointer ${hoveredSpec === index
+                                                ? 'bg-gray-100 shadow-md transform scale-105'
+                                                : 'hover:bg-gray-50'
+                                                }`}
+                                            onMouseEnter={() => setHoveredSpec(index)}
+                                            onMouseLeave={() => setHoveredSpec(null)}
+                                        >
+                                            <div className="bg-dark-brown w-2 h-2 rounded-full flex-shrink-0" />
+                                            <span className="text-sm sm:text-base">
+                                                <span className="font-medium text-primary">{item.component}:</span>{' '}
+                                                <span className="font-medium text-portfolio-700">{item.spec}</span>
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="space-y-3 sm:space-y-4">
+                                    {pcSpecs.slice(6).map((item, index) => (
+                                        <div
+                                            key={index + 6}
+                                            className={`flex items-center justify-start space-x-2 p-2 rounded-md transition-all duration-300 cursor-pointer ${hoveredSpec === index + 6
+                                                ? 'bg-gray-100 shadow-md transform scale-105'
+                                                : 'hover:bg-gray-50'
+                                                }`}
+                                            onMouseEnter={() => setHoveredSpec(index + 6)}
+                                            onMouseLeave={() => setHoveredSpec(null)}
+                                        >
+                                            <div className="bg-dark-brown w-2 h-2 rounded-full flex-shrink-0" />
+                                            <span className="text-sm sm:text-base">
+                                                <span className="font-medium text-primary">{item.component}:</span>{' '}
+                                                <span className="font-medium text-portfolio-700">{item.spec}</span>
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="border-t-2 border-dark-brown opacity-20 lg:mx-48 mx-10 my-10" />
+
+                {/* Gaming Career Section */}
+                <div className="max-w-7xl mx-auto text-center mt-12 sm:mt-16 md:mt-20">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-portfolio-700 mb-4 sm:mb-6 font-quantico">
+                        CSGO and CS2 Career
+                    </h2>
+                    <p className="text-justify text-sm sm:text-base mb-8 sm:mb-12 px-2 sm:px-4 md:px-0">
+                        I have been playing CSGO since 2021 and CS2 since its release in 2023. I got alot of friends and connections through this game and i have around 4k+ Hours of gameplay.
+                        I love the game because of its complexity and not everyone gets that and if u are good enough to think at max level u become a pro. It's not only a game but a way to meet people and find different kind of people
+                        across the world and talk about there life in general and u get to know alot from them and their experiences.
+                    </p>
+
+
+                    <div className="mb-12 sm:mb-16">
+                        <div className="flex justify-center items-center gap-20">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-portfolio-700 font-geo">
+                                Rank
+                            </h3>
+                            <div className="relative">
+                                <img    
+                                    src="/LEM.png"
+                                    alt="Legendary Eagle Master Rank"
+                                    className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain filter drop-shadow-lg"
+                                />
+                                <p className="font-signika absolute bottom-7 left-1/2 transform -translate-x-1/2 text-xs text-portfolio-700 font-medium whitespace-nowrap">
+                                    Legendary Eagle Master
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Tab Navigation */}
+                    <div className="flex justify-center mb-8">
+                        <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-1">
+                            <button
+                                onClick={() => setActiveTab('csgo')}
+                                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-md font-semibold transition-all duration-300 text-sm sm:text-base cursor-pointer ${activeTab === 'csgo'
+                                    ? 'bg-amber-800 text-white shadow-md'
+                                    : 'text-gray-700 hover:bg-gray-100'
+                                    }`}
+                            >
+                                CSGO Highlights
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('cs2')}
+                                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-md font-semibold transition-all duration-300 ml-1 text-sm sm:text-base cursor-pointer ${activeTab === 'cs2'
+                                    ? 'bg-amber-800 text-white shadow-md'
+                                    : 'text-gray-700 hover:bg-gray-100'
+                                    }`}
+                            >
+                                CS2 Highlights
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Video Grid */}
+                    <div className="mb-12 sm:mb-16">
+                        <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+                            {(activeTab === 'csgo' ? csgoClips : cs2Clips).map((clip, index) => (
+                                <VideoCard key={clip.videoId} clip={clip} index={index} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="border-t-2 border-dark-brown opacity-20 lg:mx-48 mx-10 my-10" />
+            </div>
+
+            <style jsx>{`
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                .group {
+                    animation: fadeInUp 0.6s ease-out forwards;
+                }
+            `}</style>
+        </div>
+    );
+};
+
+export default GamingCareer;

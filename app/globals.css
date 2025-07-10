@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Geo:ital@0;1&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&family=Signika:wght@300..700&family=Silkscreen:wght@400;700&display=swap');
+
+:root {
+  /* Portfolio Color Palette */
+  --cream: #ede0d4;
+  --light-tan: #e6ccb2;
+  --medium-tan: #ddb892;
+  --brown: #b08968;
+  --dark-brown: #7f5539;
+  --accent-brown: #9c6644;
+  
+  /* Semantic Color Variables */
+  --background: var(--cream);
+  --foreground: var(--dark-brown);
+  --muted: var(--light-tan);
+  --muted-foreground: var(--brown);
+  --accent: var(--accent-brown);
+  --accent-foreground: var(--cream);
+  --border: var(--medium-tan);
+  --input: var(--light-tan);
+  --ring: var(--brown);
+  --card: var(--light-tan);
+  --card-foreground: var(--dark-brown);
+  --popover: var(--cream);
+  --popover-foreground: var(--dark-brown);
+  --primary: var(--dark-brown);
+  --primary-foreground: var(--cream);
+  --secondary: var(--medium-tan);
+  --secondary-foreground: var(--dark-brown);
+  --destructive: #dc2626;
+  --destructive-foreground: var(--cream);
+  
+  /* Layout Variables */
+  --radius: 0.5rem;
+  --section-padding: 5rem;
+  --card-padding: 2rem;
+  --content-max-width: 1200px;
+  
+  /* Shadows with Portfolio Colors */
+  --shadow-sm: 0 1px 2px 0 rgba(127, 85, 57, 0.05);
+  --shadow: 0 1px 3px 0 rgba(127, 85, 57, 0.1), 0 1px 2px 0 rgba(127, 85, 57, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(127, 85, 57, 0.1), 0 2px 4px -1px rgba(127, 85, 57, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(127, 85, 57, 0.1), 0 4px 6px -2px rgba(127, 85, 57, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(127, 85, 57, 0.1), 0 10px 10px -5px rgba(127, 85, 57, 0.04);
+}
+
+
+
+@theme {
+  /* Tailwind Integration */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
+  /* Portfolio Palette Colors */
+  --color-cream: var(--cream);
+  --color-light-tan: var(--light-tan);
+  --color-medium-tan: var(--medium-tan);
+  --color-brown: var(--brown);
+  --color-dark-brown: var(--dark-brown);
+  --color-accent-brown: var(--accent-brown);
+  
+  /* Fonts */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Focus States */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: var(--radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+.font-chakra {
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.font-geo {
+  font-family: 'Geo', cursive;
+}
+
+.font-kanit {
+  font-family: 'Kanit', sans-serif;
+}
+
+.font-oswald {
+  font-family: 'Oswald', sans-serif;
+}
+
+.font-quantico {
+  font-family: 'Quantico', sans-serif;
+}
+
+.font-signika {
+  font-family: 'Signika', sans-serif;
+}
+
+.font-silkscreen {
+  font-family: 'Silkscreen', monospace;
+}
