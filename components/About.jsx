@@ -14,16 +14,15 @@ const About = () => {
           <div className='w-full lg:w-1/2 order-2 lg:order-1'>
             <p className='text-sm sm:text-base md:text-lg font-kanit text-portfolio-600 leading-relaxed sm:leading-loose text-justify'>
               Hey There 👋! I am Manish Gupta, a Passionate Software Engineer and doing coding since 2018 and always into finding new ideas and solve it with the help programming, making me more lazy day by day but if it works why not!
-              
-              <br className='hidden sm:block' />
-              <br className='hidden sm:block' />
-              
+              <br />
+              <br />
+
               I'm an introvert but if you meet me.... spend time with me! you just can't leave (except my ex hahahaha).
               
-              <br className='hidden sm:block' />
-              <br className='hidden sm:block' />
+              <br  />
+              <br  />
               
-              Being a Melophile i just love music and coding together. Talking further about me programming career i started my journey by learning C++ and did Competitive Programming for around 2 years then just switched to Web Development learning MERN Stack and soon found a Project to work on with DropMyOrder. Made their Website, BackOffice, POS system which manages the whole restaurant chains and their deliveries.{' '}
+              Being a Melophile i just love music and coding together. Talking further about my programming career i started my journey with learning C++ and did Competitive Programming for around 2 years then just switched to Web Development learning MERN Stack and soon found a Project to work on with DropMyOrder. Made their Website, BackOffice, POS system which manages the whole restaurant chains and their deliveries.{' '}
               
               <a 
                 href='https://dropmyorder.com/' 

@@ -59,12 +59,12 @@ const Work = () => {
                     </h2>
                     <p className='text-sm sm:text-base md:text-lg text-justify px-2 sm:px-0 leading-relaxed'>
                         In this Programming world this was my first invention i made out of javascript in 2019 after working on it for around a year to make it stable. I got tempted
-                        by seeing the craze of music applications on discord and being a melophile i wanted to make for me and my "someone" at that point of my life hahaha. As soon as i made it live for the world i got great
+                        by seeing the craze of music applications on discord and being a melophile i wanted to make for myself and my "someone" at that point of my life hahaha. As soon as i made it live for the world i got great
                         attractions because i was providing features like filters, playlists etc for free spending my own money on to it. Soon i got out of money and starting using some free services like heroku with fake accounts and temp mails
                         but they caught me and improved their security xD... because i was burning there dynos like anything at that point, like just exploiting there bugs lmao.
                         <br /> <br />
                         Soon Google just striked all the music applications running on discord because of some legal issues the one i got to know was that we are streaming audio without video
-                        and that came out againt the policies of youtube , growing Jarvis more was not possible so i just used it to listen to music with my friends and
+                        and that came out againt the policies of youtube, growing Jarvis more was not possible so i just used it to listen to music with my friends and
                         some close ones.
                     </p>
                     <div className='flex flex-col lg:flex-row items-center justify-center gap-4 mt-8'>
@@ -280,7 +280,7 @@ const Work = () => {
                     <a href='https://play.omegaindiaworld.win' target='_blank' rel='noopener noreferrer' className='break-words'>OmegaWorld - CSGO Matchmaking Platform</a>
                 </h2>
                 <p className='text-sm sm:text-base md:text-lg text-justify px-2 sm:px-0 leading-relaxed'>
-                    A Good Friend of mine approached me to bring back CSGO to life again after Valve ( the developer of CSGO) stopped the official servers and supporting the game.
+                    A good friend of mine approached me to bring back CSGO to life again after Valve ( the developer of CSGO) stopped the official servers and supporting the game.
                     He contacted me to build his frontend for the website and i was like why not, ofcourse we all loved to play that game once and considering the current upgraded version of the game
                     CS2 is full of hackers and people are eager to find a non-toxic place to play the game again. 
                     <br /> <br />
@@ -301,7 +301,7 @@ const Work = () => {
                     </div>
                 </div>
                      <span className='font-medium text-brown flex justify-center italic mt-4'>Tech Stack : Next.js(React + next-pwa), Tailwind CSS, Django, Python, SQL</span>
-
+                        
                 <p className='text-sm sm:text-base md:text-lg text-justify mt-8 sm:mt-12 px-2 sm:px-0 leading-relaxed'>
                     If you are a gamer and loved to play csgo at some point of your life, you should definitely check this out! Here is a <a className='text-blue-600 hover:underline break-words' href='https://www.reddit.com/r/csgolegacy/comments/1lvep9v/csgo_india_why_am_i_rewarding_players_to_play_csgo/' target='_blank' rel='noopener noreferrer'>Reddit Post</a> about us and our website 
                     <a className='text-blue-600 hover:underline break-words' href='https://play.omegaindiaworld.win' target='_blank' rel='noopener noreferrer'> play.omegaindiaworld.win</a> where you can download the game and play with your friends.
