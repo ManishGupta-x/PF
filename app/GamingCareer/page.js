@@ -143,7 +143,7 @@ const GamingCareer = () => {
                     </h2>
                     <p className="text-justify text-sm sm:text-base mb-8 sm:mb-12 px-2 sm:px-4 md:px-0">
                         I have been playing CSGO since 2021 and CS2 since its release in 2023. I got alot of friends and connections through this game and i have around 4k+ Hours of gameplay.
-                        I love the game because of its complexity and not everyone gets that and if u are good enough to think at max level u become a pro. It's not only a game but a way to meet people and find different kind of people
+                        I love the game because of its complexity and not everyone gets that and if u are good enough to think at max level u become a pro. It&apos;s not only a game but a way to meet people and find different kind of people
                         across the world and talk about there life in general and u get to know alot from them and their experiences.
                     </p>
 
