@@ -93,7 +93,7 @@ export default function Footer() {
     };
 
     checkHomePage();
-   
+
     window.addEventListener('popstate', checkHomePage);
     return () => {
       window.removeEventListener('popstate', checkHomePage);
@@ -101,18 +101,39 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer id="contact" className="border-t border-border bg-gradient-to-br from-light-tan/20 via-light-tan/30 to-light-tan/40 relative overflow-hidden">
+    <footer id="footer" className="border-t border-border bg-gradient-to-br from-light-tan/20 via-light-tan/30 to-light-tan/40 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none"></div>
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative">
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          
-          {/* Brand Section */}
-          <div className="lg:col-span-1 text-center sm:text-left">
-            <div className="flex items-center justify-center sm:justify-start space-x-3 mb-4">
-              <div className="relative">
+
+        {/* Mobile-Optimized Brand Section */}
+        <div className="mb-8 lg:hidden">
+          <div className="flex items-start space-x-4 mb-4">
+            <div className="relative flex-shrink-0">
+              <img
+                src="/mypic.jpg"
+                alt="Manish Gupta"
+                className="w-16 h-16 rounded-full object-contain border-2 border-accent-brown shadow-md"
+              />
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+            </div>
+            <div className="font-quantico flex-1 min-w-0">
+              <h2 className="font-bold text-primary text-xl mb-1">Manish Gupta</h2>
+              <p className="text-sm text-muted-foreground mb-2">Full Stack Developer</p>
+              <p className="text-dark-brown text-sm leading-relaxed">
+                Creating innovative software solutions that make a difference. Passionate about coding, design, and technological innovation.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Grid - Hidden on Mobile */}
+        <div className="hidden lg:grid grid-cols-4 gap-12 mb-8">
+          {/* Brand Section - Desktop */}
+          <div className="text-left">
+            <div className="flex items-center justify-start space-x-3 mb-4">
+              <div className="relative flex-shrink-0">
                 <img
                   src="/mypic.jpg"
                   alt="Manish Gupta"
@@ -120,19 +141,19 @@ export default function Footer() {
                 />
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
               </div>
-              <div>
+              <div className="font-quantico flex-1">
                 <span className="font-bold text-primary text-lg sm:text-xl block">Manish Gupta</span>
                 <span className="text-xs text-muted-foreground">Full Stack Developer</span>
               </div>
             </div>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto sm:mx-0">
+            <p className="text-dark-brown text-sm leading-relaxed font-quantico">
               Creating innovative software solutions that make a difference. Passionate about coding, design, and technological innovation.
             </p>
           </div>
 
-          {/* Contact Info */}
-          <div className="text-center sm:text-left">
-            <h3 className="font-semibold text-primary mb-4 text-base sm:text-lg flex items-center justify-center sm:justify-start">
+          {/* Contact Info - Desktop */}
+          <div className="text-left font-signika">
+            <h3 className="font-semibold text-primary mb-4 text-base sm:text-lg flex items-center justify-start">
               <svg className="w-4 h-4 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
@@ -140,41 +161,41 @@ export default function Footer() {
             </h3>
             <div className="space-y-3">
               {contactInfo.map((contact, index) => (
-                <div key={index} className="flex items-center justify-center sm:justify-start space-x-3 text-sm group">
+                <div key={index} className="flex items-center justify-start space-x-3 text-sm group">
                   <div className="p-2 rounded-lg bg-white/50 group-hover:bg-accent/10 transition-colors duration-200">
                     {contact.icon}
                   </div>
                   {contact.href ? (
                     <a
                       href={contact.href}
-                      className="hover:text-accent transition-colors duration-200 text-muted-foreground break-words"
+                      className="hover:text-accent transition-colors duration-200 text-dark-brown break-words"
                     >
                       {contact.text}
                     </a>
                   ) : (
-                    <span className="text-muted-foreground">{contact.text}</span>
+                    <span className="text-dark-brown">{contact.text}</span>
                   )}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Social Links */}
-          <div className="text-center sm:text-left">
-            <h3 className="font-semibold text-primary mb-4 text-base sm:text-lg flex items-center justify-center sm:justify-start">
+          {/* Social Links - Desktop */}
+          <div className="text-left">
+            <h3 className="font-semibold text-primary mb-4 text-base sm:text-lg flex items-center justify-start font-signika">
               <svg className="w-4 h-4 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
               Follow Me
             </h3>
-            <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
+            <div className="flex flex-wrap gap-3 justify-start">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-white/50 hover:bg-accent hover:text-white hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-lg group"
+                  className="p-3 rounded-xl bg-white/50 hover:bg-accent hover:text-white hover:scale-110 transition-all duration-300 shadow-sm hover:shadow-lg group flex-shrink-0"
                   aria-label={social.name}
                   title={social.name}
                 >
@@ -184,25 +205,22 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            <p className="text-xs text-muted-foreground mt-3 opacity-75">
-              Connect with me on social media
-            </p>
           </div>
 
-          {/* Quick Links */}
-          <div className="text-center sm:text-left">
-            <h3 className="font-semibold text-primary mb-4 text-base sm:text-lg flex items-center justify-center sm:justify-start">
+          {/* Quick Links - Desktop */}
+          <div className="text-left">
+            <h3 className="font-semibold text-primary mb-4 text-base sm:text-lg flex items-center justify-start font-signika">
               <svg className="w-4 h-4 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
               </svg>
               Quick Links
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-2 font-signika">
               {quickLinks.map((link, index) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block text-muted-foreground hover:text-accent transition-all duration-200 text-sm py-1 px-2 rounded-lg hover:bg-white/30 relative overflow-hidden group"
+                  className="block text-muted-foreground hover:text-accent transition-all duration-200 text-sm py-1 px-2 rounded-lg hover:bg-white/60 relative overflow-hidden group"
                 >
                   <span className="relative z-10">{link.label}</span>
                   <div className="absolute inset-0 bg-accent/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -212,27 +230,109 @@ export default function Footer() {
           </div>
         </div>
 
-      <div className="border-t border-border my-8"></div>
+        {/* Mobile-Optimized Two-Column Layout */}
+        <div className="lg:hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+
+            {/* Contact & Social Combined */}
+            <div className="space-y-6">
+              {/* Contact Info */}
+              <div className="text-left font-signika">
+                <h3 className="font-semibold text-primary mb-4 text-lg flex items-center justify-center">
+                  <svg className="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  Get in Touch
+                </h3>
+                <div className="space-y-3 flex justify-between flex-col">
+                  {contactInfo.map((contact, index) => (
+                    <div key={index} className="flex items-center space-x-3 text-sm group justify-center">
+                      <div className="p-2 rounded-lg bg-white/50 group-hover:bg-accent/10 transition-colors duration-200 flex-shrink-0">
+                        {contact.icon}
+                      </div>
+                      {contact.href ? (
+                        <a
+                          href={contact.href}
+                          className="hover:text-accent transition-colors duration-200 text-dark-brown break-words flex-1"
+                        >
+                          {contact.text}
+                        </a>
+                      ) : (
+                        <span className="text-dark-brown flex-1">{contact.text}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Social Links */}
+              <div className="text-center">
+                <h3 className="font-semibold text-primary mb-4 text-lg flex items-center font-signika just">
+                  <svg className="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  Follow Me
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-xl bg-white/50 hover:bg-accent hover:text-white hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-lg group"
+                      aria-label={social.name}
+                      title={social.name}
+                    >
+                      <div className="group-hover:rotate-12 transition-transform duration-300">
+                        {social.icon}
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="text-left">
+              <h3 className="font-semibold text-primary mb-4 text-lg flex items-center font-signika">
+                <svg className="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                Quick Links
+              </h3>
+              <div className="space-y-2 font-signika">
+                {quickLinks.map((link, index) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="block text-muted-foreground hover:text-accent transition-all duration-200 text-sm py-2 px-3 rounded-lg hover:bg-white/60 relative overflow-hidden group"
+                  >
+                    <span className="relative z-10">{link.label}</span>
+                    <div className="absolute inset-0 bg-accent/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-border my-8"></div>
 
         {/* Bottom Footer */}
-        <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 text-center sm:text-left">
-          <div className="space-y-2 sm:space-y-0">
-            <p className="text-muted-foreground text-sm">
+        <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center space-y-4 sm:space-y-0">
+          <div className="w-full sm:w-auto text-center sm:text-left">
+            <p className="text-dark-brown font-quantico text-sm">
               &copy; {currentYear} Manish Gupta. All rights reserved.
             </p>
-           
           </div>
-          
-          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6">
-            <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-              <span>Made with</span>
-              <svg className="w-4 h-4 text-red-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-              </svg>
-              <span>& coffee</span>
-            </div>
-            
-         
+
+          <div className="flex items-center space-x-1 text-xs text-dark-brown font-bold font-quantico">
+            <span>Made with</span>
+            <svg className="w-4 h-4 text-red-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            <span>& coffee</span>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import About from "@/components/About";
+import ContactForm from "@/components/ContactForm";
 import GamingCareerSection from "@/components/GamingCareerProfile";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
@@ -15,7 +16,7 @@ export default function Home() {
       <div className="border-t-2 border-dark-brown opacity-20 lg:mx-48 mx-10" />
       <Work />
       <GamingCareerSection />
-
+      <ContactForm />
     </div>
   );
 }

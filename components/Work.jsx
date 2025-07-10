@@ -1,7 +1,44 @@
+"use client";
+
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
+import Shimmer from './Shimmer' // Adjust the import path as needed
 
 const Work = () => {
+    // State to track image loading status
+    const [imageLoaded, setImageLoaded] = useState({
+        jarvis1: false,
+        jarvis2: false,
+        jarvis3: false,
+        jarvis4: false,
+        dmo1: false,
+        dmo2: false,
+        backoffice1: false,
+        backoffice2: false
+    })
+
+    // State to track image error status
+    const [imageError, setImageError] = useState({
+        jarvis1: false,
+        jarvis2: false,
+        jarvis3: false,
+        jarvis4: false,
+        dmo1: false,
+        dmo2: false,
+        backoffice1: false,
+        backoffice2: false
+    })
+
+    const handleImageLoad = (imageName) => {
+        setImageLoaded(prev => ({ ...prev, [imageName]: true }))
+        setImageError(prev => ({ ...prev, [imageName]: false }))
+    }
+
+    const handleImageError = (imageName) => {
+        setImageError(prev => ({ ...prev, [imageName]: true }))
+        setImageLoaded(prev => ({ ...prev, [imageName]: false }))
+    }
+
     return (
         <section id="work" className='px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-portfolio-50 to-portfolio-100 relative overflow-hidden'>
             <div className='max-w-7xl mx-auto'>
@@ -31,32 +68,84 @@ const Work = () => {
                         some close ones.
                     </p>
                     <div className='flex flex-col lg:flex-row items-center justify-center gap-4 mt-8'>
-                        <Image src='https://raw.githubusercontent.com/ManishGupta-x/Jarvis/master/Images/image5.png'
-                            alt='Jarvis-A Music Streaming Service Application' className='mt-8 rounded-lg shadow-lg'
-                            width={460}
-                            height={300}
-                        />
-                        <Image src='https://raw.githubusercontent.com/ManishGupta-x/Jarvis/master/Images/image7.png'
-                            alt='Jarvis-A Music Streaming Service Application' className='mt-8 rounded-lg shadow-lg'
-                            width={500}
-                            height={300}
-                        />
+                        <div className="relative">
+                            {(!imageLoaded.jarvis1 || imageError.jarvis1) && (
+                                <Shimmer width={460} height={300} className="mt-8" />
+                            )}
+                            {!imageError.jarvis1 && (
+                                <Image 
+                                    src='https://raw.githubusercontent.com/ManishGupta-x/Jarvis/master/Images/image5.png'
+                                    alt='Jarvis-A Music Streaming Service Application' 
+                                    className={`mt-8 rounded-lg shadow-lg transition-opacity duration-300 ${
+                                        imageLoaded.jarvis1 ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                                    }`}
+                                    width={460}
+                                    height={300}
+                                    onLoad={() => handleImageLoad('jarvis1')}
+                                    onError={() => handleImageError('jarvis1')}
+                                />
+                            )}
+                        </div>
+                        <div className="relative">
+                            {(!imageLoaded.jarvis2 || imageError.jarvis2) && (
+                                <Shimmer width={500} height={300} className="mt-8" />
+                            )}
+                            {!imageError.jarvis2 && (
+                                <Image 
+                                    src='https://raw.githubusercontent.com/ManishGupta-x/Jarvis/master/Images/image7.png'
+                                    alt='Jarvis-A Music Streaming Service Application' 
+                                    className={`mt-8 rounded-lg shadow-lg transition-opacity duration-300 ${
+                                        imageLoaded.jarvis2 ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                                    }`}
+                                    width={500}
+                                    height={300}
+                                    onLoad={() => handleImageLoad('jarvis2')}
+                                    onError={() => handleImageError('jarvis2')}
+                                />
+                            )}
+                        </div>
                     </div>
                     <p className='text-sm sm:text-base md:text-lg text-justify mt-8 sm:mt-12 px-2 sm:px-0 leading-relaxed'>
                         Moving on to the technical part of it, i used discord.js v12 and v13 and used distube <a className='text-blue-600 hover:underline break-words' href='https://distube.js.org/' target='_blank' rel='noopener noreferrer'>documentation</a> for implementing the music features.
                         Utilized MongoDB's free clusters to efficiently store and manage user data and their playlists. Developed and integrated numerous features into the application leveraging this database infrastructure. A visual overview of these features is provided below.
                     </p>
                     <div className='flex flex-col sm:flex-row items-center justify-center gap-4 mt-8'>
-                        <Image src='https://raw.githubusercontent.com/ManishGupta-x/Jarvis/refs/heads/master/Images/image3.png'
-                            alt='Jarvis-A Music Streaming Service Application' className='mt-8 rounded-lg shadow-lg'
-                            width={300}
-                            height={200}
-                        />
-                        <Image src='https://raw.githubusercontent.com/ManishGupta-x/Jarvis/master/Images/image4.png'
-                            alt='Jarvis-A Music Streaming Service Application' className='mt-8 rounded-lg shadow-lg'
-                            width={290}
-                            height={200}
-                        />
+                        <div className="relative">
+                            {(!imageLoaded.jarvis3 || imageError.jarvis3) && (
+                                <Shimmer width={300} height={200} className="mt-8" />
+                            )}
+                            {!imageError.jarvis3 && (
+                                <Image 
+                                    src='https://raw.githubusercontent.com/ManishGupta-x/Jarvis/refs/heads/master/Images/image3.png'
+                                    alt='Jarvis-A Music Streaming Service Application' 
+                                    className={`mt-8 rounded-lg shadow-lg transition-opacity duration-300 ${
+                                        imageLoaded.jarvis3 ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                                    }`}
+                                    width={300}
+                                    height={200}
+                                    onLoad={() => handleImageLoad('jarvis3')}
+                                    onError={() => handleImageError('jarvis3')}
+                                />
+                            )}
+                        </div>
+                        <div className="relative">
+                            {(!imageLoaded.jarvis4 || imageError.jarvis4) && (
+                                <Shimmer width={290} height={200} className="mt-8" />
+                            )}
+                            {!imageError.jarvis4 && (
+                                <Image 
+                                    src='https://raw.githubusercontent.com/ManishGupta-x/Jarvis/master/Images/image4.png'
+                                    alt='Jarvis-A Music Streaming Service Application' 
+                                    className={`mt-8 rounded-lg shadow-lg transition-opacity duration-300 ${
+                                        imageLoaded.jarvis4 ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                                    }`}
+                                    width={290}
+                                    height={200}
+                                    onLoad={() => handleImageLoad('jarvis4')}
+                                    onError={() => handleImageError('jarvis4')}
+                                />
+                            )}
+                        </div>
                     </div>
                      <span className='font-medium text-brown flex justify-center italic mt-4'>Tech Stack : Discord.js, MongoDB, Node.js</span>
                 </div>
@@ -80,25 +169,49 @@ const Work = () => {
                 </p>
 
                 <div className='flex flex-col lg:flex-row items-center justify-center gap-4 mt-8'>
-                    <Image src='https://cdn.discordapp.com/attachments/730714810614022228/1392492843607658637/image.png?ex=686fbb85&is=686e6a05&hm=1104221441b58974bc234f4fae6b993877e6ea9fbc2796b2d580f10b7e0caf38&'
-                        alt='Dropmyorder1' className='mt-8 rounded-lg shadow-lg'
-                        width={500}
-                        height={200}
-                    />
-                    <Image src='https://cdn.discordapp.com/attachments/730714810614022228/1392492965485609083/image.png?ex=686fbba2&is=686e6a22&hm=8af0b82eca2e9357ee8de78e0e8ebdb6945ffcb55fe944fe3c409d86e7dae426&'
-                        alt='Dropmyorder2' className='mt-8 rounded-lg shadow-lg'
-                        width={500}
-                        height={200}
-                    />
+                    <div className="relative">
+                        {(!imageLoaded.dmo1 || imageError.dmo1) && (
+                            <Shimmer width={500} height={200} className="mt-8" />
+                        )}
+                        {!imageError.dmo1 && (
+                            <Image 
+                                src='https://cdn.discordapp.com/attachments/730714810614022228/1392492843607658637/image.png?ex=686fbb85&is=686e6a05&hm=1104221441b58974bc234f4fae6b993877e6ea9fbc2796b2d580f10b7e0caf38&'
+                                alt='Dropmyorder1' 
+                                className={`mt-8 rounded-lg shadow-lg transition-opacity duration-300 ${
+                                    imageLoaded.dmo1 ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                                }`}
+                                width={500}
+                                height={200}
+                                onLoad={() => handleImageLoad('dmo1')}
+                                onError={() => handleImageError('dmo1')}
+                            />
+                        )}
+                    </div>
+                    <div className="relative">
+                        {(!imageLoaded.dmo2 || imageError.dmo2) && (
+                            <Shimmer width={500} height={200} className="mt-8" />
+                        )}
+                        {!imageError.dmo2 && (
+                            <Image 
+                                src='https://cdn.discordapp.com/attachments/730714810614022228/1392492965485609083/image.png?ex=686fbba2&is=686e6a22&hm=8af0b82eca2e9357ee8de78e0e8ebdb6945ffcb55fe944fe3c409d86e7dae426&'
+                                alt='Dropmyorder2' 
+                                className={`mt-8 rounded-lg shadow-lg transition-opacity duration-300 ${
+                                    imageLoaded.dmo2 ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                                }`}
+                                width={500}
+                                height={200}
+                                onLoad={() => handleImageLoad('dmo2')}
+                                onError={() => handleImageError('dmo2')}
+                            />
+                        )}
+                    </div>
                 </div>
                      <span className='font-medium text-brown flex justify-center italic mt-4'>Tech Stack : Next.js(React + next-pwa), Tailwind CSS, Django, Python, SQL</span>
-
 
                 <p className='text-sm sm:text-base md:text-lg text-justify mt-8 sm:mt-12 px-2 sm:px-0 leading-relaxed'>
                     If you ever get a chance to visit Shimla and want to order food online feel free to visit <a className='text-blue-600 hover:underline break-words' href='https://dropmyorder.com' target='_blank' rel='noopener noreferrer'>dropmyorder.com</a> and order food from the restaurant of your choice.
                     And if you tell me you ordered from the website being in shimla because u saw it here 😂 i can provide u discounts fr lmao.
                 </p>
-
             </div>
 
             <div className='max-w-[95%] sm:max-w-[90%] mx-auto flex flex-col mt-12 sm:mt-16'>
@@ -118,16 +231,42 @@ const Work = () => {
                 </p>
 
                 <div className='flex flex-col lg:flex-row items-center justify-center gap-4 mt-8'>
-                    <Image src='https://cdn.discordapp.com/attachments/730714810614022228/1392502149790830765/image.png?ex=686fc42f&is=686e72af&hm=c108fe63083c97535acc715eaa53aba6b19cee0444edc52a9875378e208bcf09&'
-                        alt='BackOffice1' className='mt-8 rounded-lg shadow-lg border-2 border-border'
-                        width={500}
-                        height={200}
-                    />
-                    <Image src='https://cdn.discordapp.com/attachments/730714810614022228/1392502076852011068/image.png?ex=686fc41e&is=686e729e&hm=13bb0c117107bfa74704a3deea29ce0d6c1a2aa16e5bff39cc2bd2bebb968a12&'
-                        alt='BackOffice2' className='mt-8 rounded-lg shadow-lg border-2 border-border'
-                        width={575}
-                        height={200}
-                    />
+                    <div className="relative">
+                        {(!imageLoaded.backoffice1 || imageError.backoffice1) && (
+                            <Shimmer width={500} height={200} className="mt-8 border-2 border-border" />
+                        )}
+                        {!imageError.backoffice1 && (
+                            <Image 
+                                src='https://cdn.discordapp.com/attachments/730714810614022228/1392502149790830765/image.png?ex=686fc42f&is=686e72af&hm=c108fe63083c97535acc715eaa53aba6b19cee0444edc52a9875378e208bcf09&'
+                                alt='BackOffice1' 
+                                className={`mt-8 rounded-lg shadow-lg border-2 border-border transition-opacity duration-300 ${
+                                    imageLoaded.backoffice1 ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                                }`}
+                                width={500}
+                                height={200}
+                                onLoad={() => handleImageLoad('backoffice1')}
+                                onError={() => handleImageError('backoffice1')}
+                            />
+                        )}
+                    </div>
+                    <div className="relative">
+                        {(!imageLoaded.backoffice2 || imageError.backoffice2) && (
+                            <Shimmer width={575} height={200} className="mt-8 border-2 border-border" />
+                        )}
+                        {!imageError.backoffice2 && (
+                            <Image 
+                                src='https://cdn.discordapp.com/attachments/730714810614022228/1392502076852011068/image.png?ex=686fc41e&is=686e729e&hm=13bb0c117107bfa74704a3deea29ce0d6c1a2aa16e5bff39cc2bd2bebb968a12&'
+                                alt='BackOffice2' 
+                                className={`mt-8 rounded-lg shadow-lg border-2 border-border transition-opacity duration-300 ${
+                                    imageLoaded.backoffice2 ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                                }`}
+                                width={575}
+                                height={200}
+                                onLoad={() => handleImageLoad('backoffice2')}
+                                onError={() => handleImageError('backoffice2')}
+                            />
+                        )}
+                    </div>
                 </div>
                      <span className='font-medium text-brown flex justify-center italic mt-4'>Tech Stack : Next.js(React + next-pwa), Tailwind CSS, Django, Python, SQL</span>
 
@@ -177,6 +316,16 @@ const Work = () => {
             </div>
 
             <div className='border-border border-b mt-6 max-w-[95%] sm:max-w-[90%] mx-auto'/>
+            
+            <style jsx>{`
+                @keyframes shimmer {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(100%); }
+                }
+                .shimmer-animation {
+                    animation: shimmer 2s infinite ease-in-out;
+                }
+            `}</style>
         </section>
     )
 }
