@@ -8,31 +8,27 @@ const About = () => {
         <h2 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-chakra text-portfolio-700 mb-8 sm:mb-12 md:mb-16'>
           About Me
         </h2>
-        
+
         <div className='flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24'>
           {/* Text Content */}
           <div className='w-full lg:w-1/2 order-2 lg:order-1'>
             <p className='text-sm sm:text-base md:text-lg font-kanit text-portfolio-600 leading-relaxed sm:leading-loose text-justify'>
-              Hey There 👋! I am Manish Gupta, a Passionate Software Engineer and doing coding since 2018 and always into finding new ideas and solve it with the help programming, making me more lazy day by day but if it works why not!
-              <br />
-              <br />
-
-              I'm an introvert but if you meet me.... spend time with me! you just can't leave (except my ex hahahaha).
-              
-              <br  />
-              <br  />
-              
-              Being a Melophile i just love music and coding together. Talking further about my programming career i started my journey with learning C++ and did Competitive Programming for around 2 years then just switched to Web Development learning MERN Stack and soon found a Project to work on with DropMyOrder. Made their Website, BackOffice, POS system which manages the whole restaurant chains and their deliveries.{' '}
-              
-              <a 
-                href='https://dropmyorder.com/' 
-                className='text-blue-500 hover:text-blue-600 hover:underline transition-colors duration-200' 
+              Hey there 👋! I&apos;m Manish Gupta — a passionate Software Engineer who&apos;s been coding since 2018. I&apos;ve always been curious about solving problems through code, which might be making me a little lazier every day… but hey, if it works, why not!
+              <br /><br />
+              I consider myself an ambivert — someone who enjoys both deep solo focus and engaging with the right company .
+              <br /><br />
+              A melophile at heart, I absolutely love blending music with my coding sessions. My journey began with C++ and Competitive Programming, which I pursued seriously for over two years. Eventually, I shifted gears to Web Development, diving deep into the MERN stack.
+              <br /><br />
+              One of the most exciting phases of my journey has been working with <a
+                href='https://dropmyorder.com/'
+                className='text-blue-500 hover:text-blue-600 hover:underline transition-colors duration-200'
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                Check it out
-              </a>
+                DropMyOrder
+              </a>, where I built their website, back-office dashboard, and a complete POS system — powering restaurant chains and their delivery networks.
             </p>
+
           </div>
 
           {/* Image Container with Decorative Elements */}
@@ -40,7 +36,7 @@ const About = () => {
             <div className='relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl'>
               {/* Circle Decoration - Top Right */}
               <div className='absolute -top-8 -right-2 sm:-top-10 sm:-right-10 md:-top-12 md:-right-12 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 border-2 border-medium-tan/50 rounded-full -z-10'></div>
-              
+
               {/* Rhombus Decoration - Bottom Left */}
               <div className='absolute -bottom-8 -left-8  w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 -z-10'>
                 <div className='w-full h-full border-2 border-medium-tan/50 transform rotate-45'></div>
