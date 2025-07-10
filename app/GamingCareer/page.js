@@ -13,7 +13,7 @@ const GamingCareer = () => {
         { component: 'Motherboard', spec: 'GigaByte B650M Gaming Wifi' },
         { component: 'PSU', spec: '750W MSI Bronze' },
         { component: 'Cooling', spec: 'DeepCool Mystique 240mm ARGB' },
-        { component: 'Case', spec: 'Deepcool CH370' },
+        { component: 'Case', spec: 'Deepcool CH370 White' },
         { component: 'Monitor', spec: 'LG UltraGear 180Hz 24gs60f-B' },
         { component: 'Laptop', spec: 'HP Pavilion Ryzen 5 5600H' },
     ];
@@ -159,7 +159,7 @@ const GamingCareer = () => {
                                     alt="Legendary Eagle Master Rank"
                                     className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain filter drop-shadow-lg"
                                 />
-                                <p className="font-signika absolute bottom-7 left-1/2 transform -translate-x-1/2 text-xs text-portfolio-700 font-medium whitespace-nowrap">
+                                <p className="font-signika absolute lg:bottom-7 bottom-2 left-1/2 transform -translate-x-1/2 text-xs text-portfolio-700 font-medium whitespace-nowrap">
                                     Legendary Eagle Master
                                 </p>
                             </div>

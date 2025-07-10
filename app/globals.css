@@ -148,3 +148,17 @@ html {
 .font-silkscreen {
   font-family: 'Silkscreen', monospace;
 }
+/* Keyframes */
+@keyframes bounceSoft {
+  0%, 100% { 
+    transform: translateY(0); 
+  }
+  50% { 
+    transform: translateY(-2px); 
+  }
+}
+
+/* Animation class */
+.animate-bounce-soft {
+  animation: bounceSoft 2s infinite;
+}
