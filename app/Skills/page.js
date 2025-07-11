@@ -4,8 +4,6 @@ import { achievements, skillCategories } from '@/lib/data' // Adjust the import 
 import Hero from '@/components/Hero'
 
 const Skills = () => {
-   
-
     return (
         <div>
             <Hero />

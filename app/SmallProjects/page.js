@@ -1,12 +1,11 @@
 import Hero from '@/components/Hero'
-import Image from 'next/image';
 import React from 'react'
 import { 
   smallProjectsData, 
   renderProjectTitle, 
   renderProjectImage, 
   renderFooterStars 
-} from './data' // Adjust the import path as needed
+} from '@/lib/data' // Adjust the import path as needed
 
 const SmallProjectsPage = () => {
   return (
