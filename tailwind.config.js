@@ -18,6 +18,7 @@ module.exports = {
         'silkscreen': ['Silkscreen', 'monospace'],
         'geist-sans': ['var(--font-geist-sans)', 'sans-serif'],
         'geist-mono': ['var(--font-geist-mono)', 'monospace'],
+        'iceland': ['Iceland', 'sans-serif']
       },
       colors: {
         // Portfolio Color Palette

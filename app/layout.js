@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import StartScreen from "@/components/StartScreen";
 import HourglassLoader from "@/components/HourGlassLoader";
 import FloatingCoffeeButton from "@/components/FloatingCoffeeButton";
+import TerminalModal from "@/components/TerminalModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -97,11 +98,12 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
         <title>Manish Gupta - Portfolio</title>
         <style>
-          {`@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Geo:ital@0;1&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&family=Signika:wght@300..700&family=Silkscreen:wght@400;700&display=swap');`}
+          {`@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Geo:ital@0;1&family=Iceland&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&family=Signika:wght@300..700&family=Silkscreen:wght@400;700&display=swap');`}
         </style>
       </head>
       <body className="antialiased bg-background text-foreground font-sans">
         <FloatingCoffeeButton />
+        <TerminalModal />
         {/* Start Screen - Only show for first-time visitors */}
         {showStartScreen && (
           <StartScreen onComplete={handleStartScreenComplete} />

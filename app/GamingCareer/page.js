@@ -1,44 +1,10 @@
 "use client";
 import React, { useState } from 'react';
+import { pcSpecs, csgoClips, cs2Clips } from '@/lib/data'; 
 
 const GamingCareer = () => {
     const [hoveredSpec, setHoveredSpec] = useState(null);
     const [activeTab, setActiveTab] = useState('csgo');
-
-    const pcSpecs = [
-        { component: 'CPU', spec: 'Ryzen 5 7600X 6-Core' },
-        { component: 'GPU', spec: 'NVIDIA RTX 4060' },
-        { component: 'RAM', spec: 'A-Data 16GB DDR5 5200MHz' },
-        { component: 'Storage', spec: '1TB NVMe WD_BLACK SN770 SSD' },
-        { component: 'Motherboard', spec: 'GigaByte B650M Gaming Wifi' },
-        { component: 'PSU', spec: '750W MSI Bronze' },
-        { component: 'Cooling', spec: 'DeepCool Mystique 240mm ARGB' },
-        { component: 'Case', spec: 'Deepcool CH370 White' },
-        { component: 'Monitor', spec: 'LG UltraGear 180Hz 24gs60f-B' },
-        { component: 'Laptop', spec: 'HP Pavilion Ryzen 5 5600H' },
-    ];
-
-    const csgoClips = [
-        { title: 'Dust 2 Crazy Scenes', videoId: 'RtyeFe6HYrA' },
-        { title: 'Mirage No Scope Shot', videoId: 'qyIrDyOVt3A' },
-        { title: 'Ancient last man alive clutch', videoId: '-5YEfQaLvoE' },
-        { title: 'Mirage Clutch', videoId: 'w0pobV-zsks' },
-        { title: 'Shot of Universe', videoId: 'XmnbqohcwiY' }
-    ];
-
-    const cs2Clips = [
-        { title: 'Dust 2 One position Clutch', videoId: 'A5Ba0fhAKCE' },
-        { title: 'D2 B Site Window No Scope', videoId: 'HC2Q1U771b4' },
-        { title: 'D2 AK Clutch', videoId: '0K82wS4F3CI' },
-        { title: 'D2 Awp Clutch', videoId: 'uJcXExmXOYo' },
-        { title: 'No Reaction Time', videoId: 'NarHP7unzGU' },
-        { title: 'Flying Awp Kill', videoId: 'FRKPkQsV898' },
-        { title: 'Another Flying Awp Kill', videoId: 'c6lQplqfBnQ' },
-        { title: 'Sad For The Bizon One', videoId: 'X6Co64K49wg' },
-        { title: 'Failed Clutch', videoId: 'nvkBLpjYYIo' },
-        { title: '4k Clutch D2', videoId: 'gYDlxyHmjAA' },
-        { title: '3k Clutch D2', videoId: 'iBsMoVLplt0' },
-    ];
 
     const VideoCard = ({ clip, index }) => (
         <div

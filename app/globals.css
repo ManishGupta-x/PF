@@ -1,6 +1,5 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Geo:ital@0;1&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&family=Signika:wght@300..700&family=Silkscreen:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Geo:ital@0;1&family=Iceland&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&family=Signika:wght@300..700&family=Silkscreen:wght@400;700&display=swap');
 :root {
   /* Portfolio Color Palette */
   --cream: #ede0d4;
@@ -9,7 +8,7 @@
   --brown: #b08968;
   --dark-brown: #7f5539;
   --accent-brown: #9c6644;
-  
+
   /* Semantic Color Variables */
   --background: var(--cream);
   --foreground: var(--dark-brown);
@@ -30,13 +29,13 @@
   --secondary-foreground: var(--dark-brown);
   --destructive: #dc2626;
   --destructive-foreground: var(--cream);
-  
+
   /* Layout Variables */
   --radius: 0.5rem;
   --section-padding: 5rem;
   --card-padding: 2rem;
   --content-max-width: 1200px;
-  
+
   /* Shadows with Portfolio Colors */
   --shadow-sm: 0 1px 2px 0 rgba(127, 85, 57, 0.05);
   --shadow: 0 1px 3px 0 rgba(127, 85, 57, 0.1), 0 1px 2px 0 rgba(127, 85, 57, 0.06);
@@ -68,7 +67,7 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
-  
+
   /* Portfolio Palette Colors */
   --color-cream: var(--cream);
   --color-light-tan: var(--light-tan);
@@ -76,17 +75,16 @@
   --color-brown: var(--brown);
   --color-dark-brown: var(--dark-brown);
   --color-accent-brown: var(--accent-brown);
-  
+
   /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-/* Base Styles */
 * {
   box-sizing: border-box;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><defs><linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23a67c6a;stop-opacity:1" /><stop offset="30%" style="stop-color:%237f5539;stop-opacity:1" /><stop offset="70%" style="stop-color:%235d3e28;stop-opacity:1" /><stop offset="100%" style="stop-color:%23483020;stop-opacity:1" /></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="1" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g transform="rotate(135 14 14)"><path fill="url(%23heartGrad)" stroke="%23331a0f" stroke-width="1.5" filter="url(%23glow)" d="M14 25.35l-1.8-1.65C6.5 18.45 2.5 14.85 2.5 10.5 2.5 6.77 5.27 4 9 4c2.04 0 4.01.95 5.25 2.45C15.49 4.95 17.46 4 19.5 4c3.73 0 6.5 2.77 6.5 6.5 0 4.35-4 7.95-10.2 13.2L14 25.35z"/></g></svg>') 2 2, auto;
 }
-
 html {
   scroll-behavior: smooth;
 }
@@ -148,13 +146,24 @@ html {
 .font-silkscreen {
   font-family: 'Silkscreen', monospace;
 }
+
+.font-iceland {
+  font-family: "Iceland", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 /* Keyframes */
 @keyframes bounceSoft {
-  0%, 100% { 
-    transform: translateY(0); 
+
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  50% { 
-    transform: translateY(-2px); 
+
+  50% {
+    transform: translateY(-2px);
   }
 }
 

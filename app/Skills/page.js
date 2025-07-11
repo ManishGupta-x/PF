@@ -1,12 +1,15 @@
 "use client"
 import React from 'react'
 import { achievements, skillCategories } from '@/lib/data' // Adjust the import path as needed
+import Hero from '@/components/Hero'
 
 const Skills = () => {
    
 
     return (
-        <section id="skills" className='px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-portfolio-50 to-portfolio-100 relative overflow-hidden'>
+        <div>
+            <Hero />
+            <section id="skills" className='px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-portfolio-50 to-portfolio-100 relative overflow-hidden'>
             
             <div className='max-w-7xl mx-auto'>
                 {/* Header */}
@@ -124,6 +127,7 @@ const Skills = () => {
                 </div>
             </div>
         </section>
+        </div>
     )
 }
 

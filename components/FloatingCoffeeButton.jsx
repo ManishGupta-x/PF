@@ -153,11 +153,11 @@ const FloatingCoffeeButton = () => {
 
   return (
     <>
-      {/* Floating Button */}
+     
       <div className={getButtonClasses()}>
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          className="coffee-button group relative bg-gradient-to-br from-accent-brown to-dark-brown text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 ease-out"
+          className="coffee-button group relative bg-gradient-to-br from-accent-brown to-dark-brown text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 ease-out"
           aria-label="Buy me a coffee"
           variants={buttonVariants}
           whileHover="hover"
@@ -168,10 +168,9 @@ const FloatingCoffeeButton = () => {
             whileHover="hover"
             animate="animate"
           >
-            <Coffee className="w-6 h-6" />
+            <Coffee className="w-5 h-5 sm:w-6 sm:h-6" />
           </motion.div>
-          
-      
+
           {!isOpen && windowWidth >= 1024 && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -210,7 +209,7 @@ const FloatingCoffeeButton = () => {
                 >
                   <X className="w-4 h-4" />
                 </motion.button>
-                
+
                 <div className="flex items-center gap-3">
                   <motion.div
                     className="p-2 bg-brown bg-opacity-20 rounded-full "
@@ -252,8 +251,8 @@ const FloatingCoffeeButton = () => {
                   <div className="mt-2 flex items-center gap-1 flex-wrap">
                     <span className="text-xs text-blue-500"><FaGlobe /></span>
                     <motion.a
-                      href="https://play.omegaindiaworld.win" 
-                      target="_blank" 
+                      href="https://play.omegaindiaworld.win"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-accent-brown hover:text-dark-brown text-xs font-medium underline transition-colors break-all"
                       whileHover={{ scale: 1.05 }}

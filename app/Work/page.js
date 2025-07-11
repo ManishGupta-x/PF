@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import React, { useState } from 'react'
-import Shimmer from './Shimmer' // Adjust the import path as needed
+import Shimmer from '@/components/Shimmer' // Adjust the import path as needed
 import { workData, createInitialImageState } from '@/lib/data' // Adjust the import path as needed
+import Hero from '@/components/Hero';
 
 const Work = () => {
     // State to track image loading status
@@ -113,7 +114,9 @@ const Work = () => {
     };
 
     return (
-        <section id="work" className='px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-portfolio-50 to-portfolio-100 relative overflow-hidden'>
+        <div>
+            <Hero />
+            <section id="work" className='px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-portfolio-50 to-portfolio-100 relative overflow-hidden'>
             <div className='max-w-7xl mx-auto'>
                 <div className='text-center mb-12 sm:mb-16 md:mb-20'>
                     <h2 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-chakra text-portfolio-700 mb-4 sm:mb-6'>
@@ -177,6 +180,7 @@ const Work = () => {
                 }
             `}</style>
         </section>
+        </div>
     )
 }
 
