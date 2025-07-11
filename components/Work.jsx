@@ -27,7 +27,7 @@ const Work = () => {
         switch (contentBlock.type) {
             case 'paragraph':
                 return (
-                    <p className='text-sm sm:text-base md:text-lg text-justify px-2 sm:px-0 leading-relaxed'>
+                    <p className='text-sm sm:text-base md:text-lg text-justify px-2 sm:px-0 leading-relaxed '>
                         {contentBlock.text}
                         {contentBlock.links && contentBlock.links.map((link, index) => (
                             <a 
@@ -62,7 +62,7 @@ const Work = () => {
                 ).filter(Boolean);
 
                 return (
-                    <div className={`flex flex-col ${imagesToRender.length > 1 ? 'lg:flex-row' : ''} items-center justify-center gap-4 mt-8`}>
+                    <div className={`flex flex-col ${imagesToRender.length > 1 ? 'lg:flex-row' : ''} items-center justify-center gap-4 my-8`}>
                         {imagesToRender.map((image, index) => (
                             <div key={index} className="relative">
                                 {(!imageLoaded[image.key] || imageError[image.key]) && (
@@ -92,7 +92,7 @@ const Work = () => {
 
             case 'video':
                 return (
-                    <div className="flex justify-center items-center mt-8 sm:mt-12 px-2 sm:px-0">
+                    <div className="flex justify-center items-center my-8 sm:mt-12 px-2 sm:px-0">
                         <div className="w-full max-w-2xl">
                             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                                 <iframe
