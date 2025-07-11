@@ -102,12 +102,12 @@ export default function Footer() {
 
   return (
     <footer id="footer" className="border-t border-border bg-gradient-to-br from-light-tan/20 via-light-tan/30 to-light-tan/40 relative overflow-hidden">
-      {/* Background decoration */}
+      
       <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent pointer-events-none"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative">
 
-        {/* Mobile-Optimized Brand Section */}
+        
         <div className="mb-8 lg:hidden">
           <div className="flex items-start space-x-4 mb-4">
             <div className="relative flex-shrink-0">
@@ -128,9 +128,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Desktop Grid - Hidden on Mobile */}
+        
         <div className="hidden lg:grid grid-cols-4 gap-12 mb-8">
-          {/* Brand Section - Desktop */}
+          
           <div className="text-left">
             <div className="flex items-center justify-start space-x-3 mb-4">
               <div className="relative flex-shrink-0">
@@ -151,7 +151,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Contact Info - Desktop */}
+          
           <div className="text-left font-signika">
             <h3 className="font-semibold text-primary mb-4 text-base sm:text-lg flex items-center justify-start">
               <svg className="w-4 h-4 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -180,7 +180,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Social Links - Desktop */}
+          
           <div className="text-left">
             <h3 className="font-semibold text-primary mb-4 text-base sm:text-lg flex items-center justify-start font-signika">
               <svg className="w-4 h-4 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -207,7 +207,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links - Desktop */}
+          
           <div className="text-left">
             <h3 className="font-semibold text-primary mb-4 text-base sm:text-lg flex items-center justify-start font-signika">
               <svg className="w-4 h-4 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -230,13 +230,13 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Mobile-Optimized Two-Column Layout */}
+        
         <div className="lg:hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
 
-            {/* Contact & Social Combined */}
+            
             <div className="space-y-6">
-              {/* Contact Info */}
+              
               <div className="text-left font-signika">
                 <h3 className="font-semibold text-primary mb-4 text-lg flex items-center justify-center">
                   <svg className="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -265,7 +265,7 @@ export default function Footer() {
                 </div>
               </div>
 
-              {/* Social Links */}
+              
               <div className="text-center">
                 <h3 className="font-semibold text-primary mb-4 text-lg flex items-center font-signika just">
                   <svg className="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -293,7 +293,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Quick Links */}
+            
             <div className="text-left">
               <h3 className="font-semibold text-primary mb-4 text-lg flex items-center font-signika">
                 <svg className="w-5 h-5 mr-2 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -319,7 +319,7 @@ export default function Footer() {
 
         <div className="border-t border-border my-8"></div>
 
-        {/* Bottom Footer */}
+        
         <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center space-y-4 sm:space-y-0">
           <div className="w-full sm:w-auto text-center sm:text-left">
             <p className="text-dark-brown font-quantico text-sm">

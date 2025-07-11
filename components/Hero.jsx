@@ -86,11 +86,11 @@ const Hero = () => {
                           
                             <div className="absolute inset-0 rounded-t-3xl bg-gradient-to-br from-medium-tan/5 to-transparent" />
                             
-                            {/* Corner decorations */}
+                            
                             <div className="absolute top-3 left-3 w-6 h-6 border-l-2 border-t-2 border-medium-tan/60 rounded-tl-lg" />
                             <div className="absolute top-3 right-3 w-6 h-6 border-r-2 border-t-2 border-medium-tan/60 rounded-tr-lg" />
                             
-                            {/* Content - Adjusted spacing */}
+                            
                             <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
                                 <div className="mb-4">
                                     <h1 className="text-3xl lg:text-4xl text-medium-tan font-chakra font-bold mb-2 tracking-wide">
@@ -106,12 +106,12 @@ const Hero = () => {
                                     </p>
                                 </div>
                                 
-                                {/* Subtle accent line */}
+                                
                                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-0.5 bg-medium-tan/60 rounded-full" />
                             </div>  
                         </div>
                         
-                        {/* Floating elements */}
+                        
                         <div className="absolute -top-2 -left-2 w-4 h-4 bg-medium-tan/60 rounded-full animate-pulse" />
                         <div className="absolute -top-4 right-12 w-2 h-2 bg-medium-tan/40 rounded-full animate-pulse delay-500" />
                         <div className="absolute top-8 -right-3 w-3 h-3 bg-medium-tan/50 rounded-full animate-pulse delay-1000" />

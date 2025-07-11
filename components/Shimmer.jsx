@@ -15,7 +15,7 @@ const Shimmer = ({ width = 500, height = 300, className = '' }) => {
 
 export default Shimmer
 
-// Add this CSS to your global styles or component styles
+
 const shimmerStyles = `
 @keyframes shimmer {
     0% {

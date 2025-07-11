@@ -34,14 +34,14 @@ const GamingCareer = () => {
     return (
         <div className="px-4 py-8 font-signika">
             <div className="max-w-7xl mx-auto">
-                {/* Header Section */}
+                
                 <div className="text-center mb-12 sm:mb-16 md:mb-20">
                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-portfolio-700 mb-4 sm:mb-6 font-quantico">
                         My Setup
                     </h2>
                 </div>
 
-                {/* Setup Section */}
+                
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24">
                     <div className="w-full max-w-[640px] lg:w-1/2 border-4 border-border relative overflow-hidden rounded-lg shadow-lg aspect-video group">
                         <img
@@ -102,7 +102,7 @@ const GamingCareer = () => {
 
                 <div className="border-t-2 border-dark-brown opacity-20 lg:mx-48 mx-10 my-10" />
 
-                {/* Gaming Career Section */}
+                
                 <div className="max-w-7xl mx-auto text-center mt-12 sm:mt-16 md:mt-20">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-portfolio-700 mb-4 sm:mb-6 font-quantico">
                         CSGO and CS2 Career
@@ -131,7 +131,7 @@ const GamingCareer = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Tab Navigation */}
+                    
                     <div className="flex justify-center mb-8">
                         <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-1">
                             <button
@@ -155,7 +155,7 @@ const GamingCareer = () => {
                         </div>
                     </div>
 
-                    {/* Video Grid */}
+                    
                     <div className="mb-12 sm:mb-16">
                         <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
                             {(activeTab === 'csgo' ? csgoClips : cs2Clips).map((clip, index) => (

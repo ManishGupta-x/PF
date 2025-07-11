@@ -10,7 +10,7 @@ const About = () => {
           {aboutData.header.title}
         </h2>
         <div className={aboutData.layout.mainWrapperClasses}>
-          {/* Text Content */}
+          
           <div className={aboutData.layout.textContainerClasses}>
             <p className={aboutData.typography.paragraphClasses}>
               {aboutData.content.paragraphs.map((paragraph, index) => (
@@ -27,10 +27,10 @@ const About = () => {
             </p>
           </div>
           
-          {/* Image Container with Decorative Elements */}
+          
           <div className={aboutData.layout.imageContainerClasses}>
             <div className={aboutData.layout.imageWrapperClasses}>
-              {/* Render Decorative Elements */}
+              
               {aboutData.decorations.map((decoration, index) => (
                 <div key={index}>
                   {decoration.type === 'circle' && (
@@ -44,7 +44,7 @@ const About = () => {
                 </div>
               ))}
               
-              {/* Main Image */}
+              
               <Image
                 src={aboutData.image.src}
                 alt={aboutData.image.alt}

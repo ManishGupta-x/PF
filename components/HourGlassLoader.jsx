@@ -30,7 +30,7 @@ const HourglassLoader = ({ size = 56, className = "" }) => {
           </defs>
           
           <g transform="translate(2,2)">
-            {/* Orbital motion circles */}
+            
             <g
               transform="rotate(-90,26,26)"
               strokeLinecap="round"
@@ -77,7 +77,7 @@ const HourglassLoader = ({ size = 56, className = "" }) => {
               />
             </g>
             
-            {/* Hourglass model */}
+            
             <g 
               transform="translate(13.75,9.25)" 
               className="animate-loader-flip"
@@ -86,13 +86,13 @@ const HourglassLoader = ({ size = 56, className = "" }) => {
                 animation: 'loader-flip var(--dur) cubic-bezier(0.83, 0, 0.17, 1) infinite'
               }}
             >
-              {/* Main hourglass shape */}
+              
               <path
                 d="M 1.5 2 L 23 2 C 23 2 22.5 8.5 19 12 C 16 15.5 13.5 13.5 13.5 16.75 C 13.5 20 16 18 19 21.5 C 22.5 25 23 31.5 23 31.5 L 1.5 31.5 C 1.5 31.5 2 25 5.5 21.5 C 8.5 18 11 20 11 16.75 C 11 13.5 8.5 15.5 5.5 12 C 2 8.5 1.5 2 1.5 2 Z"
                 fill="hsl(var(--hue),90%,85%)"
               />
 
-              {/* Sand particles and lines */}
+              
               <g strokeLinecap="round" stroke="hsl(35,90%,90%)">
                 <line
                   y2="20.75"
@@ -163,7 +163,7 @@ const HourglassLoader = ({ size = 56, className = "" }) => {
                   }}
                 />
 
-                {/* Sand mounds */}
+                
                 <g strokeWidth="0" fill="hsl(35,90%,90%)">
                   <path
                     d="M 12.25 15 L 15.392 13.486 C 21.737 11.168 22.5 2 22.5 2 L 2 2.013 C 2 2.013 2.753 11.046 9.009 13.438 L 12.25 15 Z"
@@ -183,7 +183,7 @@ const HourglassLoader = ({ size = 56, className = "" }) => {
                 </g>
               </g>
 
-              {/* Glare effects */}
+              
               <g strokeWidth="2" strokeLinecap="round" opacity="0.7" fill="none">
                 <path
                   d="M 19.437 3.421 C 19.437 3.421 19.671 6.454 17.914 8.846 C 16.157 11.238 14.5 11.5 14.5 11.5"
@@ -202,7 +202,7 @@ const HourglassLoader = ({ size = 56, className = "" }) => {
                 />
               </g>
 
-              {/* Hourglass frame */}
+              
               <rect height="2" width="24.5" fill="hsl(var(--hue),90%,50%)" />
               <rect
                 height="1"

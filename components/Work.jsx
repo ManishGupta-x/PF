@@ -2,14 +2,14 @@
 
 import Image from 'next/image'
 import React, { useState } from 'react'
-import Shimmer from './Shimmer' // Adjust the import path as needed
+import Shimmer from './Shimmer' 
 import { workData, createInitialImageState } from '@/lib/data' // Adjust the import path as needed
 
 const Work = () => {
-    // State to track image loading status
+    
     const [imageLoaded, setImageLoaded] = useState(createInitialImageState())
 
-    // State to track image error status
+    
     const [imageError, setImageError] = useState(createInitialImageState())
 
     const handleImageLoad = (imageName) => {
@@ -22,7 +22,7 @@ const Work = () => {
         setImageLoaded(prev => ({ ...prev, [imageName]: false }))
     }
 
-    // Helper function to render content blocks
+    
     const renderContent = (contentBlock, projectImages) => {
         switch (contentBlock.type) {
             case 'paragraph':
@@ -125,7 +125,7 @@ const Work = () => {
                 </div>
             </div>
 
-            {/* Render Projects */}
+            
             {workData.projects.map((project, projectIndex) => (
                 <div key={project.id} className='max-w-[95%] sm:max-w-[90%] mx-auto flex flex-col mt-12 sm:mt-16'>
                     <h2 className='text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold font-chakra text-portfolio-700 mb-6 sm:mb-8 underline px-2 sm:px-0'>
@@ -138,7 +138,7 @@ const Work = () => {
                         )}
                     </h2>
 
-                    {/* Render Content */}
+                    
                     {project.content.map((contentBlock, index) => (
                         <div key={index}>
                             {contentBlock.type === 'video' ? 
@@ -148,14 +148,14 @@ const Work = () => {
                         </div>
                     ))}
 
-                    {/* Tech Stack */}
+                    
                     <span className='font-medium text-brown flex justify-center italic mt-4'>
                         Tech Stack : {project.techStack}
                     </span>
                 </div>
             ))}
 
-            {/* Footer */}
+            
             <div className='text-center mt-12 sm:mt-16 px-4'>
                 <h2 className='text-sm sm:text-base md:text-lg text-portfolio-600 font-quantico opacity-85 leading-relaxed'>
                     {workData.footer.text}

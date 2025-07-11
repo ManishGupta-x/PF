@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Terminal, X, Minimize2, Maximize2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { processCommand, getTerminalPrompt, getURLContext } from '@/lib/terminalCommands'; // Adjust import path
+import { processCommand, getTerminalPrompt, getURLContext } from '@/lib/terminalCommands'; 
 
 const TerminalModal = () => {
     const router = useRouter();
@@ -19,12 +19,12 @@ const TerminalModal = () => {
     const terminalRef = useRef(null);
     const typingTimeoutRef = useRef(null);
 
-    // Get current context and prompt - use window.location.pathname for accurate path detection
+    
     const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
     const context = getURLContext(currentPath);
     const prompt = getTerminalPrompt(currentPath);
 
-    // Initialize terminal with welcome message
+    
     useEffect(() => {
         const welcomeMessages = [
           
@@ -45,7 +45,7 @@ const TerminalModal = () => {
         }
     }, [history, typingText]);
 
-    // Typing effect for responses
+    
     const typeResponse = (text, onComplete) => {
         setIsTyping(true);
         setTypingText('');
@@ -56,10 +56,10 @@ const TerminalModal = () => {
                 setTypingText(prev => prev + text[index]);
                 setCurrentTypingIndex(index + 1);
 
-                // Variable typing speed for more natural feel
+                
                 const delay = text[index] === '\n' ? 20 :
                     text[index] === ' ' ? 10 :
-                        Math.random() * 15 + 5; // 5-20ms per character (much faster)
+                        Math.random() * 15 + 5; 
 
                 typingTimeoutRef.current = setTimeout(() => typeChar(index + 1), delay);
             } else {
@@ -73,7 +73,7 @@ const TerminalModal = () => {
         typeChar(0);
     };
 
-    // Clear typing timeout on unmount
+    
     useEffect(() => {
         return () => {
             if (typingTimeoutRef.current) {
@@ -86,10 +86,10 @@ const TerminalModal = () => {
         const trimmedCmd = cmd.trim();
         if (!trimmedCmd) return;
 
-        // Don't allow new commands while typing
+        
         if (isTyping) return;
 
-        // Add command to history display
+        
         const newHistory = [...history, {
             type: 'command',
             content: `${prompt}${trimmedCmd}`
@@ -98,14 +98,14 @@ const TerminalModal = () => {
         setHistoryIndex(-1);
         setCommand('');
 
-        // Update history with command immediately
+        
         setHistory(newHistory);
 
         try {
-            // Process command
+            
             const response = await processCommand(trimmedCmd, context, contactState, setContactState, currentPath, router.push);
 
-            // Handle special responses
+            
             if (response === "CLEAR_TERMINAL") {
                 setHistory([
                     { type: 'system', content: 'Type "help" for available commands' },
@@ -118,15 +118,15 @@ const TerminalModal = () => {
                 return;
             }
 
-            // Type the response with animation
+            
             typeResponse(response, () => {
-                // Handle navigation responses
+                
                 if (response.startsWith('NAVIGATE:')) {
                     const targetPath = response.replace('NAVIGATE:', '');
-                    setIsOpen(false); // Close terminal before navigation
+                    setIsOpen(false); 
                     setTimeout(() => {
                         router.push(targetPath);
-                    }, 100); // Small delay to ensure terminal closes smoothly
+                    }, 100); 
                     setHistory(prev => [...prev, {
                         type: 'response',
                         content: `Navigated to dev.manishguptaji.co.in${targetPath}`
@@ -158,7 +158,7 @@ const TerminalModal = () => {
     };
 
     const handleKeyDown = (e) => {
-        // Don't allow input while typing
+        
         if (isTyping) {
             e.preventDefault();
             return;
@@ -187,7 +187,7 @@ const TerminalModal = () => {
             }
         } else if (e.key === 'Tab') {
             e.preventDefault();
-            // Basic tab completion for common commands
+            
             const commonCommands = ['help', 'about', 'work', 'skills', 'contact', 'clear', 'exit', 'cd'];
             const matches = commonCommands.filter(cmd => cmd.startsWith(command.toLowerCase()));
             if (matches.length === 1) {
@@ -202,7 +202,7 @@ const TerminalModal = () => {
 
     return (
         <>
-            {/* Floating Terminal Button */}
+            
             <button
                 onClick={() => setIsOpen(true)}
                 className="fixed bottom-20 right-4 z-50 bg-dark-brown hover:bg-accent-brown text-cream p-3 rounded-full shadow-portfolio-lg transition-all duration-300 hover:scale-110 group
@@ -213,7 +213,7 @@ const TerminalModal = () => {
                 <Terminal className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300 sm:w-6 sm:h-6" />
             </button>
 
-            {/* Terminal Modal */}
+            
             {isOpen && (
                 <div className="fixed inset-0 z-50 flex items-end justify-center backdrop-blur-md p-4 pb-28 
                         sm:items-center sm:p-6"
@@ -229,7 +229,7 @@ const TerminalModal = () => {
                                 : 'h-5/6 min-h-96 max-h-[calc(100vh-3rem)] sm:h-[90vh] sm:max-h-[80vh] '
                             }`}
                     >
-                        {/* Terminal Header */}
+                        
                         <div className="flex items-center justify-between bg-dark-brown text-cream px-3 py-2 rounded-t-lg
                             sm:px-4 sm:py-2">
                             <div className="flex items-center gap-2">
@@ -258,10 +258,10 @@ const TerminalModal = () => {
                             </div>
                         </div>
 
-                        {/* Terminal Content */}
+                        
                         {!isMinimized && (
                             <div className="flex flex-col h-full font-quantico">
-                                {/* Terminal Output */}
+                                
                                 <div
                                     ref={terminalRef}
                                     className="flex-1 bg-cream p-3 overflow-y-auto text-xs text-dark-brown
@@ -297,7 +297,7 @@ const TerminalModal = () => {
                                         </div>
                                     ))}
 
-                                    {/* Typing Animation */}
+                                    
                                     {isTyping && (
                                         <div className="mb-1 break-words">
                                             <div className="text-dark-brown whitespace-pre-line ml-2">
@@ -307,7 +307,7 @@ const TerminalModal = () => {
                                         </div>
                                     )}
 
-                                    {/* Contact Form Status Indicator */}
+                                    
                                     {contactState && contactState.mode === 'interactive' && (
                                         <div className="text-blue-600 text-xs opacity-70 mt-2">
                                             📝 Contact form active - Step {contactState.step + 1}/5
@@ -315,7 +315,7 @@ const TerminalModal = () => {
                                     )}
                                 </div>
 
-                                {/* Command Input */}
+                                
                                 <div className="bg-cream border-t border-dark-brown p-3 sm:p-4">
                                     <div className="flex md:items-center items-start gap-2 md:flex-row flex-col ">
                                         <span className="text-dark-brown font-mono font-bold text-xs sm:text-sm flex-shrink-0">
@@ -339,7 +339,7 @@ const TerminalModal = () => {
                                         />
                                     </div>
 
-                                    {/* Helper Text */}
+                                    
                                     <div className="text-xs text-brown opacity-60 mt-2">
                                         <div className="sm:hidden">
                                             {isTyping ? "⌨️ Typing..." : "Tip: Type \"help\" for commands"}

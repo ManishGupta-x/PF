@@ -18,12 +18,12 @@ const ContactForm = () => {
     const validateForm = () => {
         const newErrors = {};
 
-        // Name validation
+        
         if (!formData.name.trim()) {
             newErrors.name = 'Name is required';
         }
 
-        // Email OR Phone validation - at least one is required
+        
         const hasEmail = formData.email.trim();
         const hasPhone = formData.phone.trim();
 
@@ -31,18 +31,18 @@ const ContactForm = () => {
             newErrors.email = 'Either email or phone number is required';
             newErrors.phone = 'Either email or phone number is required';
         } else {
-            // If email is provided, validate its format
+            
             if (hasEmail && !/\S+@\S+\.\S+/.test(formData.email)) {
                 newErrors.email = 'Please enter a valid email address';
             }
 
-            // If phone is provided, validate its format
+            
             if (hasPhone && !/^\+?[\d\s\-\(\)]+$/.test(formData.phone)) {
                 newErrors.phone = 'Please enter a valid phone number';
             }
         }
 
-        // Message validation
+        
         if (!formData.message.trim()) {
             newErrors.message = 'Message is required';
         } else if (formData.message.trim().length < 10) {
@@ -60,7 +60,7 @@ const ContactForm = () => {
             [name]: value
         }));
 
-        // Clear error when user starts typing
+        
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -68,7 +68,7 @@ const ContactForm = () => {
             }));
         }
 
-        // Clear the "either/or" error when user types in email or phone
+        
         if ((name === 'email' || name === 'phone') && value.trim()) {
             setErrors(prev => ({
                 ...prev,
@@ -87,10 +87,10 @@ const ContactForm = () => {
         setSubmitStatus(null);
 
         try {
-            // Replace 'YOUR_GOOGLE_APPS_SCRIPT_URL' with your actual deployed URL
+            
             const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBpEMCwMH6JV1h76KDqfYW9Fef6yTms1F8-s4KiA2IVFrb22BtgnxVcw7qTUd3MhsjSA/exec';
 
-            // Send form data to Google Apps Script
+            
             const response = await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors', // This prevents CORS errors
@@ -105,8 +105,8 @@ const ContactForm = () => {
                 })
             });
 
-            // With no-cors mode, we can't read the response, so we assume success
-            // The data will still be saved to Google Sheets
+            
+            
             console.log('Form submitted to Google Sheets');
 
             setSubmitStatus('success');
@@ -131,9 +131,9 @@ const ContactForm = () => {
 
                 <div className="bg-light-tan/40 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-dark-brown/60 font-signika">
                     <div className="space-y-6">
-                        {/* Form Fields Grid */}
+                        
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {/* Name Field */}
+                            
                             <div>
                                 <label htmlFor="name" className="block text-sm font-medium text-amber-900 mb-2">
                                     <User className="inline w-4 h-4 mr-2" />
@@ -160,7 +160,7 @@ const ContactForm = () => {
                                 )}
                             </div>
 
-                            {/* Phone Field */}
+                            
                             <div>
                                 <label htmlFor="phone" className="block text-sm font-medium text-amber-900 mb-2">
                                     <Phone className="inline w-4 h-4 mr-2" />
@@ -187,7 +187,7 @@ const ContactForm = () => {
                             </div>
                         </div>
 
-                        {/* Email Field - Full Width */}
+                        
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-amber-900 mb-2">
                                 <Mail className="inline w-4 h-4 mr-2" />
@@ -215,7 +215,7 @@ const ContactForm = () => {
 
                        
 
-                        {/* Message Field - Full Width */}
+                        
                         <div>
                             <label htmlFor="message" className="block text-sm font-medium text-amber-900 mb-2">
                                 <MessageSquare className="inline w-4 h-4 mr-2" />
@@ -241,7 +241,7 @@ const ContactForm = () => {
                             )}
                         </div>
 
-                        {/* Submit Button */}
+                        
                         <button
                             type="button"
                             onClick={handleSubmit}
@@ -265,7 +265,7 @@ const ContactForm = () => {
                         </button>
                     </div>
 
-                    {/* Status Messages */}
+                    
                     {submitStatus === 'success' && (
                         <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                             <div className="flex items-center text-green-800">

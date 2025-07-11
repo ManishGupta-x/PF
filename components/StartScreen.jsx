@@ -33,7 +33,7 @@ const StartScreen = ({ onComplete }) => {
     <div className={`fixed inset-0 flex items-center justify-center bg-cream z-50 overflow-hidden transition-opacity duration-1000 ${
       animationPhase === 'exiting' ? 'opacity-0' : 'opacity-100'
     }`}>
-      {/* Background Pattern */}
+      
       <div className={`absolute inset-0 transition-all duration-1000 ${
         animationPhase === 'entering' ? 'opacity-0 scale-110' : 
         animationPhase === 'displaying' ? 'opacity-5 scale-100' : 
@@ -47,7 +47,7 @@ const StartScreen = ({ onComplete }) => {
         }}></div>
       </div>
 
-      {/* Desktop decorative elements */}
+      
       <div className="hidden md:block">
         <div className={`absolute top-20 left-20 w-32 h-32 rounded-full bg-gradient-to-br from-light-tan to-medium-tan transition-all duration-1000 ${
           animationPhase === 'entering' ? 'opacity-0 -translate-x-20 -translate-y-20 scale-0' :
@@ -92,7 +92,7 @@ const StartScreen = ({ onComplete }) => {
         }`}></div>
       </div>
 
-      {/* Mobile decorative elements - smaller and fewer */}
+      
       <div className="md:hidden">
         <div className={`absolute top-10 left-6 w-16 h-16 rounded-full bg-gradient-to-br from-light-tan to-medium-tan transition-all duration-1000 ${
           animationPhase === 'entering' ? 'opacity-0 -translate-x-10 -translate-y-10 scale-0' :
@@ -126,7 +126,7 @@ const StartScreen = ({ onComplete }) => {
         }`}></div>
       </div>
 
-      {/* Main text - responsive sizing */}
+      
       <div className='relative z-10 flex flex-wrap justify-center px-4'>
         {letters.map((letter, index) => (
           <span
@@ -151,7 +151,7 @@ const StartScreen = ({ onComplete }) => {
         ))}
       </div>
 
-      {/* Floating dots - responsive positioning */}
+      
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
         <div className={`absolute -top-8 md:-top-20 -left-16 md:-left-32 w-1.5 md:w-2 h-1.5 md:h-2 rounded-full bg-brown transition-all duration-1000 delay-1000 ${
           animationPhase === 'entering' ? 'opacity-0 scale-0' :

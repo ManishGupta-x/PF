@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-// Cookie utility functions
+
 const setCookie = (name, value, days = 1) => {
   const expires = new Date();
   expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
@@ -46,29 +46,29 @@ export default function RootLayout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user has visited before
+    
     const hasVisited = getCookie('portfolio_visited');
     
     if (hasVisited) {
-      // User has visited before, skip start screen
+      
       setShowStartScreen(false);
       setShowMainContent(true);
       setIsLoading(false);
     } else {
-      // First-time visitor, show start screen
+      
       setShowStartScreen(true);
       setIsLoading(false);
     }
   }, []);
 
   const handleStartScreenComplete = () => {
-    // Set cookie to remember the visit (expires in 1 day)
+    
     setCookie('portfolio_visited', 'true', 1);
     setShowStartScreen(false);
     setShowMainContent(true);
   };
 
-  // Show nothing while checking cookie
+  
   if (isLoading) {
     return (
       <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
@@ -104,12 +104,12 @@ export default function RootLayout({ children }) {
       <body className="antialiased bg-background text-foreground font-sans">
         <FloatingCoffeeButton />
         <TerminalModal />
-        {/* Start Screen - Only show for first-time visitors */}
+        
         {showStartScreen && (
           <StartScreen onComplete={handleStartScreenComplete} />
         )}
         
-        {/* Fixed Header - Always visible once content shows */}
+        
         <div className={`transition-opacity duration-1000 ${
           showMainContent 
             ? 'opacity-100' 
@@ -118,14 +118,14 @@ export default function RootLayout({ children }) {
           <Header />
         </div>
         
-        {/* Main Content with proper top padding to account for fixed header */}
+        
         <div className={`min-h-screen flex flex-col pt-16 transition-all duration-1000 ${
           showMainContent 
             ? 'opacity-100 translate-y-0' 
             : 'opacity-0 translate-y-8 pointer-events-none'
         }`}>
           
-          {/* Main Content with Fade Up Animation */}
+          
           <main className={`flex-1 transition-all duration-1000 ${
             showMainContent 
               ? 'opacity-100 translate-y-0' 
@@ -134,7 +134,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
           
-          {/* Footer with Fade Up Animation */}
+          
           <div className={`transition-all duration-1000 ${
             showMainContent 
               ? 'opacity-100 translate-y-0' 

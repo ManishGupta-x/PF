@@ -10,14 +10,14 @@ export default function Header() {
   const [isHomePage, setIsHomePage] = useState(true);
   const { scrollY } = useScroll();
 
-  // Check if current page is home page
+  
   useEffect(() => {
     const checkHomePage = () => {
       setIsHomePage(window.location.pathname === '/');
     };
     
     checkHomePage();
-    // Listen for route changes
+    
     window.addEventListener('popstate', checkHomePage);
     
     return () => {
@@ -25,31 +25,31 @@ export default function Header() {
     };
   }, []);
 
-  // Track scroll position and direction
+  
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
     
-    // Add background blur/opacity when scrolled
+    
     setIsScrolled(latest > 50);
     
-    // Improved scroll logic with better thresholds
+    
     if (latest > previous && latest > 150) {
-      // Scrolling down - hide header
+      
       setHidden(true);
     } else if (latest < previous && (previous - latest > 10 || latest < 100)) {
-      // Scrolling up - show header only if:
-      // 1. Scrolled up by more than 10px, OR
-      // 2. Near the top of the page (less than 100px)
+      
+      
+      
       setHidden(false);
     }
-    // If none of the above conditions are met, keep current state
+    
   });
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Updated navLinks to redirect to home page with hash
+  
   const navLinks = [
     { href: "/#about", label: "About" },
     { href: "/#skills", label: "Skills" },
@@ -57,7 +57,7 @@ export default function Header() {
     { href: "/#contact", label: "Contact" },
   ];
 
-  // Animation variants for mobile menu
+  
   const menuVariants = {
     closed: {
       opacity: 0,
@@ -80,7 +80,7 @@ export default function Header() {
     }
   };
 
-  // Animation variants for menu items
+  
   const itemVariants = {
     closed: {
       opacity: 0,
@@ -98,7 +98,7 @@ export default function Header() {
     }
   };
 
-  // Animation variants for the hamburger icon
+  
   const hamburgerVariants = {
     closed: {
       rotate: 0,
@@ -114,7 +114,7 @@ export default function Header() {
     }
   };
 
-  // Header animation variants
+  
   const headerVariants = {
     visible: {
       y: 0,
@@ -134,7 +134,7 @@ export default function Header() {
     }
   };
 
-  // Floating navbar animation variants
+  
   const floatingNavVariants = {
     visible: {
       y: 0,
@@ -181,7 +181,7 @@ export default function Header() {
             }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            {/* Logo Section */}
+            
             <div className="flex items-center space-x-3">
               <motion.div 
                 className="w-10 h-10 rounded-full overflow-hidden shadow-md border-2 border-accent-brown flex-shrink-0"
@@ -209,10 +209,10 @@ export default function Header() {
               </motion.span>
             </div>
 
-            {/* Desktop Navigation */}
+            
             <nav className="hidden md:flex items-center space-x-8">
               {isHomePage ? (
-                // Show navigation links only on home page
+                
                 navLinks.map((link, index) => (
                   <motion.a
                     key={link.href}
@@ -227,7 +227,7 @@ export default function Header() {
                   </motion.a>
                 ))
               ) : (
-                // Show "Back to Portfolio" link on other pages
+                
                 <motion.a
                   href="/"
                   className="text-dark-brown hover:text-primary transition-colors duration-200 font-medium font-signika text-lg flex items-center"
@@ -243,7 +243,7 @@ export default function Header() {
               )}
             </nav>
 
-            {/* Action Buttons */}
+            
             <div className="flex items-center space-x-4">
               <motion.div 
                 className="bg-dark-brown p-2 rounded-md"
@@ -263,7 +263,7 @@ export default function Header() {
                 </a>
               </motion.div>
 
-              {/* Mobile Menu Button */}
+              
               <motion.button
                 onClick={toggleMobileMenu}
                 className="md:hidden p-2 rounded-md hover:bg-muted transition-colors duration-200"
@@ -334,7 +334,7 @@ export default function Header() {
             </div>
           </motion.div>
 
-          {/* Mobile Navigation Menu */}
+          
           <AnimatePresence>
             {isMobileMenuOpen && (
               <motion.div
@@ -346,7 +346,7 @@ export default function Header() {
               >
                 <nav className="py-4 space-y-2">
                   {isHomePage ? (
-                    // Show navigation links only on home page
+                    
                     navLinks.map((link, index) => (
                       <motion.a
                         key={link.href}
@@ -360,7 +360,7 @@ export default function Header() {
                       </motion.a>
                     ))
                   ) : (
-                    // Show "Back to Portfolio" link on other pages
+                    
                     <motion.a
                       href="/"
                       onClick={() => setIsMobileMenuOpen(false)}
@@ -416,7 +416,7 @@ export default function Header() {
             >
               <div className="flex items-center space-x-6">
                 {isHomePage ? (
-                  // Show navigation links only on home page
+                  
                   navLinks.map((link, index) => (
                     <motion.a
                       key={link.href}
@@ -432,7 +432,7 @@ export default function Header() {
                     </motion.a>
                   ))
                 ) : (
-                  // Show "Back to Portfolio" link on other pages
+                  
                   <motion.a
                     href="/"
                     className="text-cream hover:text-amber-100 transition-colors duration-200 font-medium text-sm px-3 py-2 rounded-full hover:bg-amber-900 flex items-center"
@@ -471,7 +471,7 @@ export default function Header() {
               <div className="flex items-center justify-center">
                 <div className="flex items-center space-x-4 ">
                   {isHomePage ? (
-                    // Show navigation links only on home page
+                    
                     navLinks.map((link, index) => (
                       <motion.a
                         key={link.href}
@@ -487,7 +487,7 @@ export default function Header() {
                       </motion.a>
                     ))
                   ) : (
-                    // Show "Back to Portfolio" link on other pages
+                    
                     <motion.a
                       href="/"
                       className="text-cream hover:text-amber-100 transition-colors duration-200 font-medium text-sm px-3 py-2 rounded-full hover:bg-amber-900 whitespace-nowrap flex items-center"

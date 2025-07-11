@@ -8,9 +8,9 @@ const FloatingCoffeeButton = () => {
   const [copied, setCopied] = useState(false);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
 
-  const upiId = "9891703245@ybl"; // Replace with your actual UPI ID
+  const upiId = "9891703245@ybl"; 
 
-  // Handle window resize for responsive behavior
+  
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -20,7 +20,7 @@ const FloatingCoffeeButton = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Close tooltip when clicking outside
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isOpen && !event.target.closest('.tooltip-container') && !event.target.closest('.coffee-button')) {
@@ -42,34 +42,34 @@ const FloatingCoffeeButton = () => {
     }
   };
 
-  // Responsive positioning and sizing with higher z-index
+  
   const getTooltipClasses = () => {
-    if (windowWidth < 640) { // Mobile
+    if (windowWidth < 640) { 
       return "fixed bottom-20 left-4 right-4 z-[9999]";
-    } else if (windowWidth < 1024) { // Tablet
+    } else if (windowWidth < 1024) { 
       return "fixed bottom-20 right-4 z-[9999] w-80 max-w-sm";
-    } else { // Desktop
+    } else { 
       return "fixed bottom-20 right-6 z-[9999] w-80 max-w-sm";
     }
   };
 
   const getButtonClasses = () => {
-    if (windowWidth < 640) { // Mobile
+    if (windowWidth < 640) { 
       return "fixed bottom-6 right-4 z-[9998]";
-    } else { // Tablet and Desktop
+    } else { 
       return "fixed bottom-6 right-6 z-[9998]";
     }
   };
 
   const getArrowPosition = () => {
-    if (windowWidth < 640) { // Mobile - center arrow
+    if (windowWidth < 640) { 
       return "absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full";
-    } else { // Tablet and Desktop - right positioned
+    } else { 
       return "absolute bottom-0 right-8 transform translate-y-full";
     }
   };
 
-  // Animation variants
+  
   const tooltipVariants = {
     hidden: {
       opacity: 0,
@@ -86,7 +86,7 @@ const FloatingCoffeeButton = () => {
       scale: 1,
       transition: {
         duration: 0.3,
-        ease: [0.34, 1.56, 0.64, 1], // spring-like easing
+        ease: [0.34, 1.56, 0.64, 1], 
         staggerChildren: 0.1
       }
     },
@@ -153,7 +153,7 @@ const FloatingCoffeeButton = () => {
 
   return (
     <>
-      {/* Coffee Button */}
+      
       <div className={getButtonClasses()}>
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
@@ -185,7 +185,7 @@ const FloatingCoffeeButton = () => {
         </motion.button>
       </div>
 
-      {/* Large Tooltip with Framer Motion */}
+      
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -196,7 +196,7 @@ const FloatingCoffeeButton = () => {
             exit="exit"
           >
             <div className="bg-cream rounded-2xl shadow-2xl border border-light-tan overflow-hidden">
-              {/* Header */}
+              
               <motion.div
                 className="relative bg-gradient-to-r from-accent-brown to-dark-brown p-4 text-white"
                 variants={contentVariants}
@@ -225,12 +225,12 @@ const FloatingCoffeeButton = () => {
                 </div>
               </motion.div>
 
-              {/* Content */}
+              
               <motion.div
                 className="p-4 space-y-3"
                 variants={contentVariants}
               >
-                {/* Project Description */}
+                
                 <motion.div
                   className="bg-light-tan rounded-lg p-3 border border-medium-tan"
                   whileHover={{ scale: 1.02 }}
@@ -262,7 +262,7 @@ const FloatingCoffeeButton = () => {
                   </div>
                 </motion.div>
 
-                {/* UPI Payment */}
+                
                 <motion.div
                   className="bg-medium-tan rounded-lg p-3 border border-brown"
                   whileHover={{ scale: 1.02 }}
@@ -288,7 +288,7 @@ const FloatingCoffeeButton = () => {
                   </div>
                 </motion.div>
 
-                {/* Thank you message */}
+                
                 <motion.div
                   className="text-center"
                   variants={contentVariants}
@@ -299,7 +299,7 @@ const FloatingCoffeeButton = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Tooltip Arrow */}
+              
               <div className={getArrowPosition()}>
                 <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-cream"></div>
               </div>
