@@ -42,22 +42,22 @@ const FloatingCoffeeButton = () => {
     }
   };
 
-  // Responsive positioning and sizing
+  // Responsive positioning and sizing with higher z-index
   const getTooltipClasses = () => {
     if (windowWidth < 640) { // Mobile
-      return "fixed bottom-20 left-4 right-4 z-50";
+      return "fixed bottom-20 left-4 right-4 z-[9999]";
     } else if (windowWidth < 1024) { // Tablet
-      return "fixed bottom-20 right-4 z-50 w-80 max-w-sm";
+      return "fixed bottom-20 right-4 z-[9999] w-80 max-w-sm";
     } else { // Desktop
-      return "fixed bottom-20 right-6 z-50 w-80 max-w-sm";
+      return "fixed bottom-20 right-6 z-[9999] w-80 max-w-sm";
     }
   };
 
   const getButtonClasses = () => {
     if (windowWidth < 640) { // Mobile
-      return "fixed bottom-6 right-4 z-50";
+      return "fixed bottom-6 right-4 z-[9998]";
     } else { // Tablet and Desktop
-      return "fixed bottom-6 right-6 z-50";
+      return "fixed bottom-6 right-6 z-[9998]";
     }
   };
 
@@ -153,7 +153,7 @@ const FloatingCoffeeButton = () => {
 
   return (
     <>
-     
+      {/* Coffee Button */}
       <div className={getButtonClasses()}>
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
@@ -203,7 +203,7 @@ const FloatingCoffeeButton = () => {
               >
                 <motion.button
                   onClick={() => setIsOpen(false)}
-                  className="absolute top-2 right-2 p-1 hover:bg-white hover:bg-opacity-20 rounded-full transition-colors"
+                  className="absolute top-2 right-2 p-1 hover:bg-brown hover:bg-opacity-20 rounded-full transition-colors"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
