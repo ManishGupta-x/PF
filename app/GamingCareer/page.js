@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import { pcSpecs, csgoClips, cs2Clips } from '@/lib/data'; 
+import { pcSpecs, csgoClips, cs2Clips,tournamentClips } from '@/lib/data'; 
+
 
 const GamingCareer = () => {
     const [hoveredSpec, setHoveredSpec] = useState(null);
@@ -30,6 +31,19 @@ const GamingCareer = () => {
             </div>
         </div>
     );
+
+    const getClipsForActiveTab = () => {
+        switch (activeTab) {
+            case 'csgo':
+                return csgoClips;
+            case 'cs2':
+                return cs2Clips;
+            case 'tournament':
+                return tournamentClips;
+            default:
+                return csgoClips;
+        }
+    };
 
     return (
         <div className="px-4 py-8 font-signika">
@@ -136,7 +150,7 @@ const GamingCareer = () => {
                         <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-1">
                             <button
                                 onClick={() => setActiveTab('csgo')}
-                                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-md font-semibold transition-all duration-300 text-sm sm:text-base cursor-pointer ${activeTab === 'csgo'
+                                className={`px-3 sm:px-4 py-2 sm:py-3 rounded-md font-semibold transition-all duration-300 text-xs sm:text-sm cursor-pointer ${activeTab === 'csgo'
                                     ? 'bg-amber-800 text-white shadow-md'
                                     : 'text-gray-700 hover:bg-gray-100'
                                     }`}
@@ -145,12 +159,21 @@ const GamingCareer = () => {
                             </button>
                             <button
                                 onClick={() => setActiveTab('cs2')}
-                                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-md font-semibold transition-all duration-300 ml-1 text-sm sm:text-base cursor-pointer ${activeTab === 'cs2'
+                                className={`px-3 sm:px-4 py-2 sm:py-3 rounded-md font-semibold transition-all duration-300 ml-1 text-xs sm:text-sm cursor-pointer ${activeTab === 'cs2'
                                     ? 'bg-amber-800 text-white shadow-md'
                                     : 'text-gray-700 hover:bg-gray-100'
                                     }`}
                             >
                                 CS2 Highlights
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('tournament')}
+                                className={`px-3 sm:px-4 py-2 sm:py-3 rounded-md font-semibold transition-all duration-300 ml-1 text-xs sm:text-sm cursor-pointer ${activeTab === 'tournament'
+                                    ? 'bg-amber-800 text-white shadow-md'
+                                    : 'text-gray-700 hover:bg-gray-100'
+                                    }`}
+                            >
+                                Tournament Matches
                             </button>
                         </div>
                     </div>
@@ -158,7 +181,7 @@ const GamingCareer = () => {
                     
                     <div className="mb-12 sm:mb-16">
                         <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-                            {(activeTab === 'csgo' ? csgoClips : cs2Clips).map((clip, index) => (
+                            {getClipsForActiveTab().map((clip, index) => (
                                 <VideoCard key={clip.videoId} clip={clip} index={index} />
                             ))}
                         </div>
