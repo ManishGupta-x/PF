@@ -120,11 +120,17 @@ export default function RootLayout({ children }) {
         {/* Theme and viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ede0d4" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Manish Gupta - Software Engineer & Full Stack Developer" />
+        <meta property="og:description" content="Software Engineer and Full Stack Developer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB. Member of Technical Staff at DropMyOrder." />
+        <meta property="og:url" content="https://dev.manishguptaji.co.in" />
+        <meta property="og:site_name" content="Manish Gupta Portfolio" />
         <meta property="og:image" content="https://dev.manishguptaji.co.in/og-image.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Manish Gupta - Software Engineer & Full Stack Developer" />
         <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:locale" content="en_US" />
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
