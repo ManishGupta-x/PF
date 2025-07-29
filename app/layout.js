@@ -28,7 +28,7 @@ export const metadata = {
     'Full Stack Developer',
     'C++ Developer',
     'Manish Gupta C++ Developer',
-    'Manish Gupta Javascript Developer' ,
+    'Manish Gupta Javascript Developer',
     'Manish Gupta React.js Developer',
     'Manish Gupta Next.js Developer',
     'Manish Gupta Node.js Developer',
@@ -87,7 +87,7 @@ export const metadata = {
     title: 'Manish Gupta - Software Engineer & Full Stack Developer',
     description: 'Software Engineer specializing in full-stack development with expertise in C/C++, JavaScript, and modern web technologies.',
     images: ['/og-image.jpg'],
-    creator: '@Manishg2204022' 
+    creator: '@Manishg2204022'
   },
   robots: {
     index: true,
@@ -101,7 +101,7 @@ export const metadata = {
     },
   },
   verification: {
-    google: 'your-google-site-verification-code', 
+    google: 'your-google-site-verification-code',
   },
   alternates: {
     canonical: 'https://dev.manishguptaji.co.in',
@@ -116,21 +116,25 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        
+
         {/* Theme and viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ede0d4" />
-        
+        <meta property="og:image" content="https://dev.manishguptaji.co.in/og-image.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Manish Gupta - Software Engineer & Full Stack Developer" />
+        <meta property="og:image:type" content="image/jpeg" />
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        
+
         {/* Google Fonts - Optimized loading */}
-        <link 
+        <link
           href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Geo:ital@0;1&family=Iceland&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&family=Signika:wght@300..700&family=Silkscreen:wght@400;700&display=swap"
           rel="stylesheet"
         />
-        
+
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <>
@@ -153,7 +157,7 @@ export default function RootLayout({ children }) {
             />
           </>
         )}
-        
+
         {/* Structured Data */}
         <script
           type="application/ld+json"
@@ -172,7 +176,7 @@ export default function RootLayout({ children }) {
               "knowsAbout": [
                 "C++",
                 "JavaScript",
-                "TypeScript", 
+                "TypeScript",
                 "React.js",
                 "Next.js",
                 "Node.js",
@@ -202,11 +206,11 @@ export default function RootLayout({ children }) {
             })
           }}
         />
-        
-      
+
+
       </head>
       <body className="antialiased bg-background text-foreground font-sans">
- 
+
         <ClientWrapper>
           {children}
         </ClientWrapper>
