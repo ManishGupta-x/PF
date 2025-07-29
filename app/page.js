@@ -5,6 +5,15 @@ import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import Work from "@/components/Work";
 
+export const metadata = {
+  title: 'Home',
+  openGraph: {
+    title: 'Manish Gupta - Full Stack Developer & Gaming Professional',
+    description: 'Welcome to my portfolio',
+    url: 'https://dev.manishgupta.co.in'
+  }
+}
+
 export default function Home() {
   return (
     <div className=" ">
