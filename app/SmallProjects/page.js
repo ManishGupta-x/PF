@@ -1,3 +1,4 @@
+"use client";
 import Hero from '@/components/Hero'
 import React from 'react'
 import { 
@@ -7,15 +8,6 @@ import {
   renderFooterStars 
 } from '@/lib/data' // Adjust the import path as needed
 
-export const metadata = {
-  title: 'Small Projects',
-  description: 'Collection of Manish Gupta\'s small development projects, coding experiments, and innovative web solutions.',
-  openGraph: {
-    title: 'Small Projects - Manish Gupta',
-    description: 'Development projects and coding experiments.',
-    url: 'https://dev.manishgupta.co.in/SmallProjects'
-  }
-}
 
 const SmallProjectsPage = () => {
   return (

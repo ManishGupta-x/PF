@@ -4,22 +4,10 @@ import { pcSpecs, csgoClips, cs2Clips, tournamentClips } from '@/lib/data';
 import { useChessStats } from '@/hooks/useChessStats';
 
 
-export const metadata = {
-    title: 'Gaming Career',
-    description: 'Manish Gupta\'s professional gaming career',
-    openGraph: {
-        title: 'Gaming Career - Manish Gupta',
-        description: 'Gaming Highlights ',
-        url: 'https://dev.manishgupta.co.in/GamingCareer'
-    }
-}
-
 const GamingCareer = () => {
     const [hoveredSpec, setHoveredSpec] = useState(null);
     const [activeTab, setActiveTab] = useState('csgo');
     const [gameMode, setGameMode] = useState('cs'); // 'cs' or 'chess'
-
-
 
     // Fetch chess stats from API
     const { stats: chessStats, loading: chessLoading, error: chessError, lastUpdated, refreshStats } = useChessStats();

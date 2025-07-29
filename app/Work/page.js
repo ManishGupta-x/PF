@@ -6,15 +6,7 @@ import Shimmer from '@/components/Shimmer' // Adjust the import path as needed
 import { workData, createInitialImageState } from '@/lib/data' // Adjust the import path as needed
 import Hero from '@/components/Hero';
 
-export const metadata = {
-  title: 'Work Experience',
-  description: 'Explore Manish Gupta\'s professional work experience, development projects, and technical expertise in full-stack development.',
-  openGraph: {
-    title: 'Work Experience - Manish Gupta',
-    description: 'Professional work experience and development projects.',
-    url: 'https://dev.manishgupta.co.in/Work'
-  }
-}
+
 
 const Work = () => {
     
