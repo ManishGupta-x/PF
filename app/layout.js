@@ -144,102 +144,25 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
 
-        {/* Google Analytics */}
-        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
-                    page_title: document.title,
-                    page_location: window.location.href,
-                  });
-                `,
-              }}
-            />
-          </>
-        )}
-
-        {/* Enhanced Structured Data - Combined Schema */}
+        {/* Google Analytics - Fixed to always render */}
         <script
-          type="application/ld+json"
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-PLACEHOLDER'}`}
+        />
+        <script
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "Person",
-                "name": "Manish Gupta",
-                "url": "https://dev.manishguptaji.co.in",
-                "jobTitle": "Software Engineer",
-                "description": "Software Engineer and Full Stack Developer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB with 500+ coding challenges solved.",
-                "image": "https://dev.manishguptaji.co.in/og-image.jpg",
-                "worksFor": {
-                  "@type": "Organization",
-                  "name": "DropMyOrder",
-                  "url": "https://dropmyorder.com"
-                },
-                "alumniOf": {
-                  "@type": "Organization",
-                  "name": "Maharaja Agrasen Institute of Technology",
-                  "sameAs": "https://www.mait.ac.in/"
-                },
-                "knowsAbout": [
-                  "C++",
-                  "JavaScript",
-                  "TypeScript", 
-                  "React.js",
-                  "Next.js",
-                  "Node.js",
-                  "Express.js",
-                  "MongoDB",
-                  "MySQL",
-                  "Python",
-                  "Django",
-                  "REST APIs",
-                  "WebSockets",
-                  "Tailwind CSS",
-                  "Data Structures and Algorithms",
-                  "System Design",
-                  "Database Architecture",
-                  "Full Stack Development",
-                  "Software Engineering"
-                ],
-                "sameAs": [
-                  "https://github.com/ManishGupta-x",
-                  "https://linkedin.com/in/manishgupta",
-                  "mailto:manishgupta220402@gmail.com"
-                ],
-                "address": {
-                  "@type": "PostalAddress",
-                  "addressCountry": "IN",
-                  "addressRegion": "Delhi"
-                }
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "name": "Manish Gupta Portfolio",
-                "url": "https://dev.manishguptaji.co.in",
-                "description": "Portfolio website of Manish Gupta - Software Engineer, Full Stack Developer, and Member of Technical Staff at DropMyOrder",
-                "author": {
-                  "@type": "Person",
-                  "name": "Manish Gupta"
-                },
-                "inLanguage": "en-US",
-                "copyrightYear": "2025",
-                "copyrightHolder": {
-                  "@type": "Person",
-                  "name": "Manish Gupta"
-                }
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              ${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? 
+                `gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                  page_title: document.title,
+                  page_location: window.location.href,
+                });` : 
+                '// GA not configured'
               }
-            ])
+            `,
           }}
         />
       </head>
