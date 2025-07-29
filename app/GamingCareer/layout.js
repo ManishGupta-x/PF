@@ -4,7 +4,7 @@ export const metadata = {
     openGraph: {
         title: 'Gaming Career - Manish Gupta',
         description: 'Gaming Highlights ',
-        url: 'https://dev.manishgupta.co.in/GamingCareer'
+        url: 'https://dev.manishguptaji.co.in/GamingCareer'
     }
 }
 

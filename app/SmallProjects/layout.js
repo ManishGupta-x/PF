@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'Small Projects - Manish Gupta',
     description: 'Development projects and coding experiments.',
-    url: 'https://dev.manishgupta.co.in/SmallProjects'
+    url: 'https://dev.manishguptaji.co.in/SmallProjects'
   }
 }
 

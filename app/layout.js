@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 // SEO Metadata
 export const metadata = {
-  metadataBase: new URL('https://dev.manishgupta.co.in'),
+  metadataBase: new URL('https://dev.manishguptaji.co.in'),
   title: {
     default: 'Manish Gupta - Software Engineer ',
     template: '%s | Manish Gupta'
@@ -64,12 +64,12 @@ export const metadata = {
     'Music Streaming Service',
     'Portfolio Website'
   ],
-  authors: [{ name: 'Manish Gupta', url: 'https://dev.manishgupta.co.in' }],
+  authors: [{ name: 'Manish Gupta', url: 'https://dev.manishguptaji.co.in' }],
   creator: 'Manish Gupta',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://dev.manishgupta.co.in',
+    url: 'https://dev.manishguptaji.co.in',
     siteName: 'Manish Gupta Portfolio',
     title: 'Manish Gupta - Software Engineer ',
     description: 'Software Engineer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB. ',
@@ -104,7 +104,7 @@ export const metadata = {
     google: 'your-google-site-verification-code', 
   },
   alternates: {
-    canonical: 'https://dev.manishgupta.co.in',
+    canonical: 'https://dev.manishguptaji.co.in',
   }
 }
 
@@ -162,7 +162,7 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "Person",
               "name": "Manish Gupta",
-              "url": "https://dev.manishgupta.co.in",
+              "url": "https://dev.manishguptaji.co.in",
               "jobTitle": "Software Engineer",
               "description": "Software Engineer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB ",
               "worksFor": {

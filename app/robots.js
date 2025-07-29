@@ -5,6 +5,6 @@ export default function robots() {
       allow: '/',
       disallow: ['/private/', '/admin/', '/api/'],
     },
-    sitemap: 'https://dev.manishgupta.co.in/sitemap.xml',
+    sitemap: 'https://dev.manishguptaji.co.in/sitemap.xml',
   }
 }

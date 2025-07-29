@@ -6,7 +6,7 @@ export const metadata = {
   openGraph: {
     title: 'Technical Skills - Manish Gupta',
     description: 'Technical expertise in modern web development technologies.',
-    url: 'https://dev.manishgupta.co.in/Skills'
+    url: 'https://dev.manishguptaji.co.in/Skills'
   }
 }
 

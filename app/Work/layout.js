@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'Work Experience - Manish Gupta',
     description: 'Professional work experience and development projects.',
-    url: 'https://dev.manishgupta.co.in/Work'
+    url: 'https://dev.manishguptaji.co.in/Work'
   }
 }
 

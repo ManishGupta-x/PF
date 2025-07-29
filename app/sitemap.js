@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://dev.manishgupta.co.in'
+  const baseUrl = 'https://dev.manishguptaji.co.in'
   
   return [
     {

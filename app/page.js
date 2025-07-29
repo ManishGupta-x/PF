@@ -10,7 +10,7 @@ export const metadata = {
   openGraph: {
     title: 'Manish Gupta - Full Stack Developer & Gaming Professional',
     description: 'Welcome to my portfolio',
-    url: 'https://dev.manishgupta.co.in'
+    url: 'https://dev.manishguptaji.co.in'
   }
 }
 
