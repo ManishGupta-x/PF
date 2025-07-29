@@ -18,10 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL('https://dev.manishguptaji.co.in'),
   title: {
-    default: 'Manish Gupta - Software Engineer ',
+    default: 'Manish Gupta - Software Engineer & Full Stack Developer',
     template: '%s | Manish Gupta'
   },
-  description: 'Manish Gupta - Software Engineer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB.',
+  description: 'Manish Gupta - Software Engineer and Full Stack Developer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB. Member of Technical Staff at DropMyOrder with 500+ coding challenges solved.',
   keywords: [
     'Manish Gupta',
     'Software Engineer',
@@ -71,8 +71,8 @@ export const metadata = {
     locale: 'en_US',
     url: 'https://dev.manishguptaji.co.in',
     siteName: 'Manish Gupta Portfolio',
-    title: 'Manish Gupta - Software Engineer ',
-    description: 'Software Engineer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB. ',
+    title: 'Manish Gupta - Software Engineer & Full Stack Developer',
+    description: 'Software Engineer and Full Stack Developer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB. Member of Technical Staff at DropMyOrder.',
     images: [
       {
         url: '/og-image.jpg',
@@ -101,7 +101,7 @@ export const metadata = {
     },
   },
   verification: {
-    google: 'your-google-site-verification-code',
+    google: 'your-google-site-verification-code', // Replace with actual verification code
   },
   alternates: {
     canonical: 'https://dev.manishguptaji.co.in',
@@ -120,6 +120,8 @@ export default function RootLayout({ children }) {
         {/* Theme and viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ede0d4" />
+        
+        {/* Explicit Open Graph meta tags */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Manish Gupta - Software Engineer & Full Stack Developer" />
         <meta property="og:description" content="Software Engineer and Full Stack Developer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB. Member of Technical Staff at DropMyOrder." />
@@ -131,6 +133,7 @@ export default function RootLayout({ children }) {
         <meta property="og:image:alt" content="Manish Gupta - Software Engineer & Full Stack Developer" />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:locale" content="en_US" />
+        
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -164,59 +167,83 @@ export default function RootLayout({ children }) {
           </>
         )}
 
-        {/* Structured Data */}
+        {/* Enhanced Structured Data - Combined Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Manish Gupta",
-              "url": "https://dev.manishguptaji.co.in",
-              "jobTitle": "Software Engineer",
-              "description": "Software Engineer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB ",
-              "worksFor": {
-                "@type": "Organization",
-                "name": "DropMyOrder"
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Manish Gupta",
+                "url": "https://dev.manishguptaji.co.in",
+                "jobTitle": "Software Engineer",
+                "description": "Software Engineer and Full Stack Developer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB with 500+ coding challenges solved.",
+                "image": "https://dev.manishguptaji.co.in/og-image.jpg",
+                "worksFor": {
+                  "@type": "Organization",
+                  "name": "DropMyOrder",
+                  "url": "https://dropmyorder.com"
+                },
+                "alumniOf": {
+                  "@type": "Organization",
+                  "name": "Maharaja Agrasen Institute of Technology",
+                  "sameAs": "https://www.mait.ac.in/"
+                },
+                "knowsAbout": [
+                  "C++",
+                  "JavaScript",
+                  "TypeScript", 
+                  "React.js",
+                  "Next.js",
+                  "Node.js",
+                  "Express.js",
+                  "MongoDB",
+                  "MySQL",
+                  "Python",
+                  "Django",
+                  "REST APIs",
+                  "WebSockets",
+                  "Tailwind CSS",
+                  "Data Structures and Algorithms",
+                  "System Design",
+                  "Database Architecture",
+                  "Full Stack Development",
+                  "Software Engineering"
+                ],
+                "sameAs": [
+                  "https://github.com/ManishGupta-x",
+                  "https://linkedin.com/in/manishgupta",
+                  "mailto:manishgupta220402@gmail.com"
+                ],
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressCountry": "IN",
+                  "addressRegion": "Delhi"
+                }
               },
-              "knowsAbout": [
-                "C++",
-                "JavaScript",
-                "TypeScript",
-                "React.js",
-                "Next.js",
-                "Node.js",
-                "Express.js",
-                "MongoDB",
-                "MySQL",
-                "Python",
-                "Django",
-                "REST APIs",
-                "WebSockets",
-                "Tailwind CSS",
-                "Data Structures and Algorithms",
-                "System Design",
-                "Database Architecture",
-                "Full Stack Development",
-                "Software Engineering"
-              ],
-              "sameAs": [
-                "https://github.com/ManishGupta-x",
-                "https://linkedin.com/in/manishgupta",
-                "mailto:manishgupta220402@gmail.com"
-              ],
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "IN"
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Manish Gupta Portfolio",
+                "url": "https://dev.manishguptaji.co.in",
+                "description": "Portfolio website of Manish Gupta - Software Engineer, Full Stack Developer, and Member of Technical Staff at DropMyOrder",
+                "author": {
+                  "@type": "Person",
+                  "name": "Manish Gupta"
+                },
+                "inLanguage": "en-US",
+                "copyrightYear": "2025",
+                "copyrightHolder": {
+                  "@type": "Person",
+                  "name": "Manish Gupta"
+                }
               }
-            })
+            ])
           }}
         />
-
-
       </head>
       <body className="antialiased bg-background text-foreground font-sans">
-
         <ClientWrapper>
           {children}
         </ClientWrapper>
