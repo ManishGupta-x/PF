@@ -24,6 +24,11 @@ export const metadata = {
   description: 'Manish Gupta - Software Engineer and Full Stack Developer specializing in C/C++, JavaScript, React.js, Next.js, Node.js, and MongoDB. Member of Technical Staff at DropMyOrder with 500+ coding challenges solved.',
   keywords: [
     'Manish Gupta',
+    'Manish Gupta dev',
+    'Manish Gupta Portfolio',
+    'Manish Gupta Software Engineer',
+    'Manish Gupta Full Stack Developer',
+    'Manish Gupta Developer',
     'Software Engineer',
     'Full Stack Developer',
     'C++ Developer',
