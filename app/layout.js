@@ -66,7 +66,7 @@ export const metadata = {
     'Discord.js',
     'LSB Steganography',
     'Food Service Ecosystem',
-    'Music Streaming Service',
+    'Music Streaming Service',  
     'Portfolio Website'
   ],
   authors: [{ name: 'Manish Gupta', url: 'https://dev.manishguptaji.co.in' }],

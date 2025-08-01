@@ -7,6 +7,7 @@ import StartScreen from "@/components/StartScreen";
 import HourglassLoader from "@/components/HourGlassLoader";
 import FloatingCoffeeButton from "@/components/FloatingCoffeeButton";
 import TerminalModal from "@/components/TerminalModal";
+import FloatingResume from "./FloatingResume";
 
 const setCookie = (name, value, days = 1) => {
   const expires = new Date();
@@ -76,8 +77,15 @@ export default function ClientWrapper({ children }) {
 
   return (
     <>
-      <FloatingCoffeeButton />
-      <TerminalModal />
+     {
+      !showStartScreen && (
+        <>
+          <FloatingCoffeeButton />
+          <TerminalModal />
+          <FloatingResume />
+        </>
+      )
+     }
       
       {showStartScreen && (
         <StartScreen onComplete={handleStartScreenComplete} />
