@@ -4,8 +4,8 @@ const FloatingResume = ({
   resumeUrl = 'https://drive.google.com/file/d/1LCIeO9p8W49yqbNcLmb-CreENAlBRFMw/view?usp=sharing',
   position = { bottom: '20px', left: '20px' },
   size = 60,
-  backgroundColor = '#2563eb',
-  hoverColor = '#1d4ed8',
+  backgroundColor = '#8b4513',
+  hoverColor = '#6b3410',
   textColor = '#ffffff',
   className = ''
 }) => {
@@ -78,3 +78,4 @@ const FloatingResume = ({
 };
 
 export default FloatingResume;
+FloatingResume.displayName = 'FloatingResume';
