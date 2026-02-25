@@ -389,7 +389,7 @@ const GamingCareer = () => {
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24">
                     <div className="w-full max-w-[640px] lg:w-1/2 border-4 border-border relative overflow-hidden rounded-lg shadow-lg aspect-video group">
                         <img
-                            src="/hero.jpg"
+                            src="/pc.jpeg"
                             alt="Gaming Career"
                             width={640}
                             height={442}

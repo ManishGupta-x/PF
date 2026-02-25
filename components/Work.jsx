@@ -2,14 +2,14 @@
 
 import Image from 'next/image'
 import React, { useState } from 'react'
-import Shimmer from './Shimmer' 
+import Shimmer from './Shimmer'
 import { workData, createInitialImageState } from '@/lib/data' // Adjust the import path as needed
 
 const Work = () => {
-    
+
     const [imageLoaded, setImageLoaded] = useState(createInitialImageState())
 
-    
+
     const [imageError, setImageError] = useState(createInitialImageState())
 
     const handleImageLoad = (imageName) => {
@@ -22,19 +22,27 @@ const Work = () => {
         setImageLoaded(prev => ({ ...prev, [imageName]: false }))
     }
 
-    
+
+    const parseBold = (text) => {
+        if (!text || !text.includes('**')) return text;
+        const parts = text.split(/\*\*(.*?)\*\*/g);
+        return parts.map((part, i) =>
+            i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+        );
+    };
+
     const renderContent = (contentBlock, projectImages) => {
         switch (contentBlock.type) {
             case 'paragraph':
                 return (
                     <p className='text-sm sm:text-base md:text-lg text-justify px-2 sm:px-0 leading-relaxed '>
-                        {contentBlock.text}
+                        {parseBold(contentBlock.text)}
                         {contentBlock.links && contentBlock.links.map((link, index) => (
-                            <a 
+                            <a
                                 key={index}
-                                className='text-blue-600 hover:underline break-words' 
-                                href={link.url} 
-                                target='_blank' 
+                                className='text-blue-600 hover:underline break-words'
+                                href={link.url}
+                                target='_blank'
                                 rel='noopener noreferrer'
                             >
                                 {link.text}
@@ -42,11 +50,11 @@ const Work = () => {
                         ))}
                         {contentBlock.continuation}
                         {contentBlock.additionalLinks && contentBlock.additionalLinks.map((link, index) => (
-                            <a 
+                            <a
                                 key={index}
-                                className='text-blue-600 hover:underline break-words' 
-                                href={link.url} 
-                                target='_blank' 
+                                className='text-blue-600 hover:underline break-words'
+                                href={link.url}
+                                target='_blank'
                                 rel='noopener noreferrer'
                             >
                                 {link.text}
@@ -57,7 +65,7 @@ const Work = () => {
                 );
 
             case 'images':
-                const imagesToRender = contentBlock.imageKeys.map(key => 
+                const imagesToRender = contentBlock.imageKeys.map(key =>
                     projectImages.find(img => img.key === key)
                 ).filter(Boolean);
 
@@ -66,19 +74,18 @@ const Work = () => {
                         {imagesToRender.map((image, index) => (
                             <div key={index} className="relative">
                                 {(!imageLoaded[image.key] || imageError[image.key]) && (
-                                    <Shimmer 
-                                        width={image.width} 
-                                        height={image.height} 
-                                        className={`mt-8 ${image.hasBorder ? 'border-2 border-border' : ''}`} 
+                                    <Shimmer
+                                        width={image.width}
+                                        height={image.height}
+                                        className={`mt-8 ${image.hasBorder ? 'border-2 border-border' : ''}`}
                                     />
                                 )}
                                 {!imageError[image.key] && (
-                                    <Image 
+                                    <Image
                                         src={image.src}
-                                        alt={image.alt} 
-                                        className={`mt-8 rounded-lg shadow-lg ${image.hasBorder ? 'border-2 border-border' : ''} transition-opacity duration-300 ${
-                                            imageLoaded[image.key] ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
-                                        }`}
+                                        alt={image.alt}
+                                        className={`mt-8 rounded-lg shadow-lg ${image.hasBorder ? 'border-2 border-border' : ''} transition-opacity duration-300 ${imageLoaded[image.key] ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                                            }`}
                                         width={image.width}
                                         height={image.height}
                                         onLoad={() => handleImageLoad(image.key)}
@@ -125,7 +132,7 @@ const Work = () => {
                 </div>
             </div>
 
-            
+
             {workData.projects.map((project, projectIndex) => (
                 <div key={project.id} className='max-w-[95%] sm:max-w-[90%] mx-auto flex flex-col mt-12 sm:mt-16'>
                     <h2 className='text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold font-chakra text-portfolio-700 mb-6 sm:mb-8 underline px-2 sm:px-0'>
@@ -138,24 +145,24 @@ const Work = () => {
                         )}
                     </h2>
 
-                    
+
                     {project.content.map((contentBlock, index) => (
-                        <div key={index}>
-                            {contentBlock.type === 'video' ? 
-                                renderContent({...contentBlock, src: project.video.src, title: project.video.title}, project.images) :
-                                renderContent(contentBlock, project.images)
+                        <div key={index} className="mb-5">
+                            {contentBlock.type === 'video' ?
+                                renderContent({ ...contentBlock, src: project.video?.src, title: project.video?.title }, project.images) :
+                                renderContent(contentBlock, project.images || [])
                             }
                         </div>
                     ))}
 
-                    
+
                     <span className='font-medium text-brown flex justify-center italic mt-4'>
                         Tech Stack : {project.techStack}
                     </span>
                 </div>
             ))}
 
-            
+
             <div className='text-center mt-12 sm:mt-16 px-4'>
                 <h2 className='text-sm sm:text-base md:text-lg text-portfolio-600 font-quantico opacity-85 leading-relaxed'>
                     {workData.footer.text}
@@ -165,8 +172,8 @@ const Work = () => {
                 </h2>
             </div>
 
-            <div className='border-border border-b mt-6 max-w-[95%] sm:max-w-[90%] mx-auto'/>
-            
+            <div className='border-border border-b mt-6 max-w-[95%] sm:max-w-[90%] mx-auto' />
+
             <style jsx>{`
                 @keyframes shimmer {
                     0% { transform: translateX(-100%); }
