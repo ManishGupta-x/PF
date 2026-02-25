@@ -1,11 +1,12 @@
 "use client";
 import React from 'react'
+import Image from 'next/image'
 import { achievements, skillCategories } from '@/lib/data' // Adjust the import path as needed
 
 
 const Skills = () => {
     return (
-        <div> 
+        <div>
             <section id="skills" className='px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-br from-portfolio-50 to-portfolio-100 relative overflow-hidden'>
 
                 <div className='max-w-7xl mx-auto'>
@@ -78,13 +79,17 @@ const Skills = () => {
 
                                             <div className='w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mb-2 sm:mb-3 flex items-center justify-center'>
                                                 {skill.icon.startsWith('http') ? (
-                                                    <img
+                                                    <Image
                                                         src={skill.icon}
                                                         alt={skill.name}
+                                                        width={48}
+                                                        height={48}
                                                         className='w-full h-full object-contain group-hover:scale-110 transition-transform duration-300'
                                                         onError={(e) => {
-                                                            e.target.style.display = 'none';
-                                                            e.target.nextSibling.style.display = 'flex';
+                                                            e.currentTarget.style.display = 'none';
+                                                            if (e.currentTarget.nextSibling) {
+                                                                e.currentTarget.nextSibling.style.display = 'flex';
+                                                            }
                                                         }}
                                                     />
                                                 ) : (

@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Chakra_Petch, Geo, Iceland, Kanit, Oswald, Quantico, Signika, Silkscreen } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from "@/components/ClientWrapper";
 
@@ -11,6 +11,62 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const chakraPetch = Chakra_Petch({
+  variable: "--font-chakra-petch",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const geo = Geo({
+  variable: "--font-geo",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const iceland = Iceland({
+  variable: "--font-iceland",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const kanit = Kanit({
+  variable: "--font-kanit",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const quantico = Quantico({
+  variable: "--font-quantico",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+const signika = Signika({
+  variable: "--font-signika",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const silkscreen = Silkscreen({
+  variable: "--font-silkscreen",
+  subsets: ["latin"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -66,7 +122,7 @@ export const metadata = {
     'Discord.js',
     'LSB Steganography',
     'Food Service Ecosystem',
-    'Music Streaming Service',  
+    'Music Streaming Service',
     'Portfolio Website'
   ],
   authors: [{ name: 'Manish Gupta', url: 'https://dev.manishguptaji.co.in' }],
@@ -115,7 +171,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${chakraPetch.variable} ${geo.variable} ${iceland.variable} ${kanit.variable} ${oswald.variable} ${quantico.variable} ${signika.variable} ${silkscreen.variable}`}>
       <head>
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -125,7 +181,7 @@ export default function RootLayout({ children }) {
         {/* Theme and viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ede0d4" />
-        
+
         {/* Explicit Open Graph meta tags */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Manish Gupta - Software Engineer & Full Stack Developer" />
@@ -138,16 +194,10 @@ export default function RootLayout({ children }) {
         <meta property="og:image:alt" content="Manish Gupta - Software Engineer & Full Stack Developer" />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:locale" content="en_US" />
-        
+
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-        {/* Google Fonts - Optimized loading */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Geo:ital@0;1&family=Iceland&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&family=Signika:wght@300..700&family=Silkscreen:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
 
         {/* Google Analytics - Fixed to always render */}
         <script
@@ -160,11 +210,11 @@ export default function RootLayout({ children }) {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              ${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? 
+              ${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?
                 `gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
                   page_title: document.title,
                   page_location: window.location.href,
-                });` : 
+                });` :
                 '// GA not configured'
               }
             `,

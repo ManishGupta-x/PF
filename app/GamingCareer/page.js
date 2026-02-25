@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { pcSpecs, csgoClips, cs2Clips, tournamentClips } from '@/lib/data';
 import { useChessStats } from '@/hooks/useChessStats';
 
@@ -128,9 +129,11 @@ const GamingCareer = () => {
                             Rank
                         </h3>
                         <div className="relative">
-                            <img
+                            <Image
                                 src="/LEM.png"
                                 alt="Legendary Eagle Master Rank"
+                                width={192}
+                                height={192}
                                 className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain filter drop-shadow-lg"
                             />
                             <p className="font-signika absolute lg:bottom-7 bottom-2 left-1/2 transform -translate-x-1/2 text-xs text-portfolio-700 font-medium whitespace-nowrap">
@@ -388,11 +391,12 @@ const GamingCareer = () => {
 
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24">
                     <div className="w-full max-w-[640px] lg:w-1/2 border-4 border-border relative overflow-hidden rounded-lg shadow-lg aspect-video group">
-                        <img
+                        <Image
                             src="/pc.jpeg"
                             alt="Gaming Career"
                             width={640}
                             height={442}
+                            priority
                             className="w-full h-full object-cover shadow-lg transition-transform duration-300 group-hover:scale-105"
                         />
                     </div>
