@@ -88,6 +88,8 @@ ok('tool usage links to its case study', /<h4>Astro<\/h4><p class="xp-used"><a h
   ok('hero lines finish visible', heroOpacity === '1', heroOpacity);
   ok('thread rendered', (await p.$$eval('.thread path', e => e.length)) > 25);
   ok('thread geometry is finite', await p.$$eval('.thread path', e => e.every(x => !/NaN|Infinity/.test(x.getAttribute('d')))));
+  const start = await p.$eval('.thread path', e => e.getAttribute('d').match(/M ([\d.-]+) ([\d.-]+)/).slice(1).map(Number));
+  ok('thread starts under the middle of the navbar', Math.abs(start[0] - 720) < 10 && start[1] === 0, start.join(','));
   const off0 = await p.$$eval('.thread path', e => e.map(x => parseFloat(getComputedStyle(x).strokeDashoffset)));
   const overPaths = await p.$$eval('.thread--over path', e => e.map(x => parseFloat(getComputedStyle(x).strokeDashoffset)));
   const underEnd = await p.$$eval('.thread:not(.thread--over) path', e => parseFloat(getComputedStyle(e[e.length - 1]).strokeDashoffset));

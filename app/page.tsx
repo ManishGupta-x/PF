@@ -61,13 +61,14 @@ export default function Home() {
       <Thread />
 
       <section className="hero s-dark">
+        <i className="t hero-t" data-t="" data-load="" data-pts="50,0 50,100" />
         <div className="hero-mid">
           <div className="hero-title">
             <i
               className="t-fill"
               data-t=""
               data-load=""
-              data-pts="55,15 66,3 84,-6 97,6 95,24 80,29 72,18 79,7 91,16 87,34 66,40 42,47 20,46 6,52"
+              data-pts="70,-5 84,-6 97,6 95,24 80,29 72,18 79,7 91,16 87,34 66,40 42,47 20,46 6,52"
               data-pts-m="98,-8 90,6 96,28 80,36 60,30 40,46 8,50"
             />
             <i className="t-fill" data-t="" data-load="" data-over="" data-pts="6,52 -1,66 8,82 26,92 44,86" data-pts-m="8,50 0,66 8,84 30,92 48,86" />
