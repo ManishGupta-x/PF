@@ -1,50 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        formats: ['image/webp', 'image/avif'],
-        minimumCacheTTL: 60,
-        deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-        imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'raw.githubusercontent.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'cdn.discordapp.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'res.cloudinary.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'drive.google.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'avatars.githubusercontent.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'lh3.googleusercontent.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'i.imgur.com',
-            }
-        ],
+        formats: ['image/avif', 'image/webp'],
+        remotePatterns: [{ protocol: 'https', hostname: 'i.ytimg.com' }],
     },
-    compress: true,
     poweredByHeader: false,
-    generateEtags: false,
-    httpAgentOptions: {
-        keepAlive: true,
+    // Old routes stay reachable after the redesign.
+    async redirects() {
+        return [
+            { source: '/Work', destination: '/#work', permanent: true },
+            { source: '/Skills', destination: '/#capabilities', permanent: true },
+            { source: '/SmallProjects', destination: '/#work', permanent: true },
+        ];
     },
-    experimental: {
-        optimizePackageImports: ['lucide-react']
-    }
 };
 
 export default nextConfig;
