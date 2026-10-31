@@ -2,7 +2,7 @@ export const links = {
   email: 'manishgupta220402@gmail.com',
   github: 'https://github.com/ManishGupta-X',
   linkedin: 'https://www.linkedin.com/in/manish-gupta-8861ba224/',
-  resume: 'https://drive.google.com/file/d/1LCIeO9p8W49yqbNcLmb-CreENAlBRFMw/view?usp=sharing',
+  resume: 'https://drive.google.com/file/d/1m-s1q6Kk_KxTueWkdT7KF3bHzmPpPiqc/view?usp=sharing',
   chess: 'https://www.chess.com/member/nightmare_22',
   clips: 'https://allstar.gg/u/Nightmare_fuel?game=7302&view=Clips',
   location: 'New Delhi, India',
