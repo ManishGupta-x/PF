@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { loadGsap, prefersReducedMotion, smoothPath, type Point } from '@/lib/motion';
+import { loadGsap, prefersReducedMotion, scrollStops, smoothPath, type Point } from '@/lib/motion';
 
 const NS = 'http://www.w3.org/2000/svg';
 const MOBILE = 760;
@@ -86,6 +86,8 @@ export default function Thread() {
         paths.forEach((p, i) => gsap.set(p, { strokeDasharray: `${lengths[i] + 1} ${lengths[i] + 40}`, strokeDashoffset: lengths[i] + 20 }));
         const vh = innerHeight;
         const maxScroll = Math.max(document.documentElement.scrollHeight - vh, 1);
+        const scrolled = segs.flatMap((s, i) => (s.onLoad ? [] : [{ i, y: points[s.to][1] - vh * HEAD_LINE, len: lengths[i] }]));
+        const stops = new Map(scrollStops(scrolled).map((stop, k) => [scrolled[k].i, stop]));
         let cursor = 0;
         const intro = gsap.timeline({ paused: true });
         const drawn = paths.map(() => 0);
@@ -109,9 +111,8 @@ export default function Thread() {
             intro.to(path, { strokeDashoffset: 0, duration: dur, ease: 'power1.inOut', onUpdate: tip, onComplete: () => toggle(true) });
             return;
           }
-          const y = points[s.to][1] - vh * HEAD_LINE;
           const start = Math.min(cursor, maxScroll - 2);
-          const stop = Math.min(Math.max(start + Math.min(len * 0.35, 220), y), maxScroll);
+          const stop = Math.min(Math.max(start + 1, stops.get(i)!), maxScroll);
           cursor = stop;
           gsap.to(path, {
             strokeDashoffset: 0,

@@ -53,6 +53,54 @@ ok('tool usage links to its case study', /<h4>Astro<\/h4><p class="xp-used"><a h
   const underEnd = await p.$$eval('.thread:not(.thread--over) path', e => parseFloat(getComputedStyle(e[e.length - 1]).strokeDashoffset));
   ok('hero segments drawn, later segments still hidden', off0[0] < 1 && off0[1] < 1 && overPaths[0] < 1 && underEnd > 1);
 
+  // The navbar is solid and takes the colour of the section beneath it
+  for (const [sel, background, tone] of [['#capabilities', 'rgb(5, 5, 5)', 'dark'], ['#about', 'rgb(241, 238, 230)', 'ivory']]) {
+    await p.$eval(sel, e => window.scrollTo({ top: e.getBoundingClientRect().top + scrollY + 200, behavior: 'instant' }));
+    await p.waitForTimeout(500);
+    const nav = await p.$eval('.nav', e => ({ tone: e.dataset.tone, background: getComputedStyle(e).backgroundColor, blend: getComputedStyle(e).mixBlendMode }));
+    ok(`navbar matches the ${tone} section beneath it`, nav.tone === tone && nav.background === background && nav.blend === 'normal', JSON.stringify(nav));
+  }
+  await p.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+
+  // A fast scroller reaches the end of a stage with its contents and the thread already there
+  {
+    const fast = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+    await fast.goto(BASE, { waitUntil: 'load' });
+    await fast.waitForTimeout(1500);
+    const bottom = await fast.$eval('.stage--eco', e => e.getBoundingClientRect().bottom + scrollY - innerHeight);
+    await fast.mouse.move(700, 450);
+    for (let y = await fast.evaluate(() => scrollY); y < bottom; y += 400) {
+      await fast.evaluate(top => scrollTo({ top, behavior: 'instant' }), y);
+      await fast.waitForTimeout(50);
+    }
+    await fast.evaluate(top => scrollTo({ top, behavior: 'instant' }), bottom);
+    await fast.waitForTimeout(800);
+    const seen = await fast.$$eval('.o-delivery, .del-step, .o-staff, .staff-row, .staff-flag', els => els.every(e => getComputedStyle(e).visibility === 'visible' && parseFloat(getComputedStyle(e).opacity) > 0.5));
+    ok('a stage is complete by the time a fast scroller reaches its end', seen);
+    const tip = await fast.evaluate(() => {
+      const moved = new DOMMatrix(getComputedStyle(document.querySelector('.thread-head')).transform).f || Number(document.querySelector('.thread-head').getAttribute('transform').match(/ ([\d.-]+)\)/)[1]);
+      return { y: moved, row: document.querySelector('.o-delivery').getBoundingClientRect().top - document.getElementById('main').getBoundingClientRect().top };
+    });
+    ok('the thread keeps up with a fast scroller', tip.y > tip.row - 100, `tip ${Math.round(tip.y)} / phones ${Math.round(tip.row)}`);
+    await fast.context().close();
+
+    // Pause holds, even while the sequence is catching up with the page
+    const held = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+    await held.goto(BASE, { waitUntil: 'load' });
+    await held.waitForTimeout(1500);
+    await held.$eval('.stage--eco', e => window.scrollTo({ top: e.getBoundingClientRect().top + scrollY - 500, behavior: 'instant' }));
+    await held.waitForTimeout(300);
+    await held.$eval('.stage--eco', e => window.scrollTo({ top: e.getBoundingClientRect().top + scrollY + 200, behavior: 'instant' }));
+    await held.waitForTimeout(60);
+    await held.$eval('.stage--eco .demo-btn', e => e.click());
+    await held.waitForTimeout(100);
+    const pausedAt = await held.textContent('.stage--eco .demo-step');
+    await held.$eval('.stage--eco', e => window.scrollTo({ top: e.getBoundingClientRect().bottom + scrollY - innerHeight, behavior: 'instant' }));
+    await held.waitForTimeout(1200);
+    ok('pause holds while scrolling', (await held.textContent('.stage--eco .demo-btn')) === 'Resume' && (await held.textContent('.stage--eco .demo-step')) === pausedAt);
+    await held.context().close();
+  }
+
   // Every demo plays to its final state, then offers replay
   for (const sel of ['.stage--eco', '.stage--saas', '.stage--back2', '.stage--jarvis', '.stage--servicehub', '.board-demo']) {
     await p.$eval(sel, e => window.scrollTo({ top: e.getBoundingClientRect().top + scrollY - 200, behavior: 'instant' }));

@@ -35,6 +35,36 @@ export function useGsap(setup: (g: Gsap) => void, deps: DependencyList = []) {
 
 export type Point = [number, number];
 
+// Scroll position where each segment of a winding line should finish. A segment that doubles
+// back reaches no new depth, so it shares the scroll up to the next new depth with its
+// neighbours, and the tip can't fall behind the page however much the line winds.
+export function scrollStops(segs: { y: number; len: number }[]) {
+  const stops: number[] = [];
+  let cursor = 0;
+  let deepest = -Infinity;
+  let run: number[] = [];
+  const close = (target: number) => {
+    const total = run.reduce((sum, i) => sum + segs[i].len, 0) || 1;
+    const stop = Math.max(target, cursor + Math.min(total * 0.12, 120));
+    let done = 0;
+    run.forEach(i => {
+      done += segs[i].len;
+      stops[i] = cursor + (stop - cursor) * (done / total);
+    });
+    cursor = stop;
+    run = [];
+  };
+  segs.forEach((s, i) => {
+    run.push(i);
+    if (s.y > deepest) {
+      deepest = s.y;
+      close(s.y);
+    }
+  });
+  if (run.length) close(cursor);
+  return stops;
+}
+
 // Spline through points; tangents take direction from the neighbours and length from
 // the segment, so unevenly spaced points don't overshoot.
 export function smoothPath(p: Point[], from = 0, to = p.length - 1) {

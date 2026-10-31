@@ -76,8 +76,9 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 .badge { display: inline-block; border: 1px solid var(--accent-text); color: var(--accent-text); font: 500 13px/1.4 var(--mono); padding: 6px 12px; letter-spacing: .04em; text-transform: uppercase; }
 
 /* Nav: difference blending flips it over both section colours with no scroll logic. */
-.nav { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 20px var(--gut); color: var(--ivory); mix-blend-mode: difference; pointer-events: none; }
-.nav a, .nav button { pointer-events: auto; }
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 20px var(--gut); color: var(--ivory); background: var(--black); border-bottom: 1px solid transparent; transition: background-color .2s, color .2s, border-color .2s; }
+.nav[data-tone='ivory'] { color: var(--black); background: var(--ivory); }
+.nav[data-scrolled='true'] { border-bottom-color: color-mix(in srgb, currentColor 16%, transparent); }
 .nav-logo { font: 800 24px/1 var(--display); letter-spacing: -.06em; text-decoration: none; }
 .nav-links { display: flex; gap: clamp(20px, 3.4vw, 54px); }
 .nav-links a, .nav-menu { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; padding: 8px 0; }
@@ -276,15 +277,15 @@ hr { border: 0; border-top: 1px dashed currentColor; margin: .45em 0; width: 100
 .note { position: absolute; font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .note { transform: translateX(-50%); }
 .note--build { left: 56%; bottom: calc(100% + 8px); }
-.note--listen { left: 34%; top: calc(100% + 8px); }
+.note--speak { left: 34%; top: calc(100% + 8px); }
 .note--play { left: 53.6%; top: calc(100% + 8px); }
 /* Hairlines only: labels stay outside the photograph. */
 .leader { position: absolute; width: 1px; background: #f1eee699; }
 .leader::after { content: ''; position: absolute; left: -3px; width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--ivory); }
 .leader--build { left: 56%; top: 0; height: 26%; }
 .leader--build::after { bottom: -7px; }
-.leader--listen { left: 34%; bottom: 0; height: 51%; }
-.leader--listen::after { top: -7px; }
+.leader--speak { left: 34%; bottom: 0; height: 51%; }
+.leader--speak::after { top: -7px; }
 .leader--play { left: 53.6%; bottom: 0; height: 40%; }
 .leader--play::after { top: -7px; }
 

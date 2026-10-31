@@ -233,10 +233,10 @@ export default function Home() {
           <div className="desk-photo z">
             <Image src={desk} alt="A dark, red-lit desk with two monitors, a microphone, keyboard, mouse, chair and PC tower." sizes="(max-width: 760px) 100vw, 80vw" />
             <i className="leader leader--build" aria-hidden="true" />
-            <i className="leader leader--listen" aria-hidden="true" />
+            <i className="leader leader--speak" aria-hidden="true" />
             <i className="leader leader--play" aria-hidden="true" />
             <span className="note note--build" aria-hidden="true">build</span>
-            <span className="note note--listen" aria-hidden="true">listen</span>
+            <span className="note note--speak" aria-hidden="true">speak</span>
             <span className="note note--play" aria-hidden="true">play</span>
           </div>
           <figcaption className="z">

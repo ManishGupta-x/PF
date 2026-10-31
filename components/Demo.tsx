@@ -31,6 +31,7 @@ type Props = {
 export default function Demo({ label, finalStep, build, className = '', note = 'Illustrated workflow · Sample data', children }: Props) {
   const root = useRef<HTMLElement>(null);
   const timeline = useRef<gsap.core.Timeline | null>(null);
+  const catchUp = useRef<gsap.core.Tween | null>(null);
   const [state, setState] = useState<'off' | 'ready' | 'playing' | 'paused' | 'done'>('off');
   const [step, setStep] = useState(finalStep);
 
@@ -40,18 +41,26 @@ export default function Demo({ label, finalStep, build, className = '', note = '
       onComplete: () => {
         setStep(finalStep);
         setState('done');
+        pacing.kill();
       },
     });
     build(tl, gsap.utils.selector(root.current), setStep);
     timeline.current = tl;
     setState('ready');
-    ScrollTrigger.create({
+    let started = false;
+    // Plays in its own time, but never falls behind the page: a fast scroller shouldn't reach empty space.
+    const pacing = ScrollTrigger.create({
       trigger: root.current,
       start: 'top 62%',
-      once: true,
+      end: () => `+=${Math.max((root.current!.offsetHeight - innerHeight * 0.38) * 0.8, innerHeight * 0.5)}`,
       onEnter: () => {
+        if (started) return;
+        started = true;
         tl.play();
         setState('playing');
+      },
+      onUpdate: self => {
+        if (started && !tl.paused() && self.progress > tl.progress()) catchUp.current = gsap.to(tl, { progress: self.progress, duration: 0.4, ease: 'power1.out', overwrite: true });
       },
     });
   });
@@ -60,6 +69,7 @@ export default function Demo({ label, finalStep, build, className = '', note = '
     const tl = timeline.current;
     if (!tl) return;
     if (state === 'playing') {
+      catchUp.current?.kill();
       tl.pause();
       setState('paused');
     } else if (state === 'done' || state === 'ready') {
