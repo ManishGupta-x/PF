@@ -92,7 +92,7 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 /* Signature on landing: Intro.tsx holds the strokes and their timing. */
 .intro { display: none; }
 .js-intro .intro { display: grid; place-items: center; position: fixed; inset: 0; z-index: 200; overflow: clip; background: var(--black); animation: intro-out .55s 3.2s forwards; }
-.intro svg { width: 100%; max-height: 100%; overflow: visible; fill: none; stroke: var(--orange); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; animation: intro-fly .55s 3.2s ease-in forwards; }
+.intro svg { width: 100%; max-height: 100%; overflow: visible; fill: none; stroke: var(--orange); stroke-width: 2.9; stroke-linecap: round; stroke-linejoin: round; animation: intro-fly .55s 3.2s ease-in forwards; }
 .intro path { stroke-dasharray: 1 2; stroke-dashoffset: 1.01; animation: sign linear forwards; animation-timing-function: cubic-bezier(.4, .1, .6, .9); }
 @keyframes sign { to { stroke-dashoffset: 0; } }
 @keyframes intro-fly { to { transform: perspective(1000px) translateZ(260px); } }
@@ -495,7 +495,7 @@ hr { border: 0; border-top: 1px dashed currentColor; margin: .45em 0; width: 100
   .t { display: none; }
   .loop-start { display: block; }
   .case-t1, .case-t2, .case-t3, .case-t4, .tunnel-t { display: block; left: calc(100% - 9px); }
-  .intro svg { width: 140vw; max-width: none; max-height: none; margin-left: -34vw; justify-self: start; stroke-width: 5; }
+  .intro svg { width: 172vw; max-width: none; max-height: none; margin-left: -38vw; justify-self: start; stroke-width: 5.5; }
   .tunnel { --sway: 4vw; }
   .js-motion [data-stop] { width: 84vw; }
   .js-motion .tunnel-heading { left: 50%; width: auto; }
