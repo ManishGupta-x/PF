@@ -60,7 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="footer s-dark">
           <p>© {new Date().getFullYear()} Manish Gupta / {links.location}</p>
           <nav aria-label="Footer">
-            <Link href="/GamingCareer">Gaming Career</Link>
+            <Link href="/expertise">Expertise</Link>
+            <Link href="/GamingCareer">Beyond the editor</Link>
             <a href={links.github} target="_blank" rel="noreferrer">GitHub</a>
             <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
             <a href={links.resume} target="_blank" rel="noreferrer">Resume</a>

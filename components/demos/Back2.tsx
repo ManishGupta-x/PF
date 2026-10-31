@@ -35,8 +35,8 @@ export default function Back2() {
     <Demo
       className="stage stage--back2"
       label="An explanatory sequence with fictional players: ten players join a queue, two teams form, captains ban maps in turn until Mirage is left, and a match-ready panel appears beside a server status drawing."
-      finalStep="Queue, teams, veto, ready. All names and states are fictional."
-      note="Illustration. Fictional players and sample states."
+      finalStep="Queue → Teams → Map veto → Match ready."
+      note="Illustrated workflow · Sample players"
       build={build}
     >
       <T x={70} y={-9} />

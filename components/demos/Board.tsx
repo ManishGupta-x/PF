@@ -44,7 +44,7 @@ export default function Board() {
       className="board-demo"
       label="A chessboard plays the first moves of the Caro-Kann: 1. e4 c6 2. d4 d5, then holds the final position."
       finalStep="1. e4 c6 2. d4 d5"
-      note="Illustrative opening, not one of my games."
+      note="Opening study / Caro-Kann Defence"
       build={build}
     >
       <svg viewBox="-24 -4 828 828" className="board">

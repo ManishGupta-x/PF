@@ -28,7 +28,7 @@ type Props = {
 
 // One readable, finite sequence. The markup is the final state; the timeline only hides and
 // replays parts of it, so reduced motion and failed scripts still show the complete story.
-export default function Demo({ label, finalStep, build, className = '', note = 'Illustration. Sample data.', children }: Props) {
+export default function Demo({ label, finalStep, build, className = '', note = 'Illustrated workflow · Sample data', children }: Props) {
   const root = useRef<HTMLElement>(null);
   const timeline = useRef<gsap.core.Timeline | null>(null);
   const [state, setState] = useState<'off' | 'ready' | 'playing' | 'paused' | 'done'>('off');

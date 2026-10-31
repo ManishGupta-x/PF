@@ -5,8 +5,8 @@ import { gaming, links } from '@/lib/content';
 import desk from '@/public/images/desk.jpeg';
 
 export const metadata: Metadata = {
-  title: 'Gaming Career',
-  description: 'Counter-Strike since 2021, chess, tournament clips and the desk behind them.',
+  title: 'Beyond the Editor',
+  description: 'Counter-Strike, chess, music, and the communities behind the projects. The personal side of Manish Gupta.',
   alternates: { canonical: '/GamingCareer' },
 };
 
@@ -42,14 +42,14 @@ export default async function GamingCareer() {
       content: (
         <>
           <div className="g-intro">
-            <p className="lede">I have played CS:GO since 2021 and CS2 since its release in 2023. It has never been only about the aim. It is how I meet people, make friends and hear about lives very different from mine.</p>
+            <p className="lede">I’ve played CS:GO since 2021 and CS2 since its release in 2023. What keeps me coming back is the mix of strategy, teamwork, and people I would never have met otherwise.</p>
             <dl className="g-facts">
-              <div><dt>{gaming.hours} hours</dt><dd>Accumulated across Counter-Strike. Self-reported, not a live counter.</dd></div>
-              <div><dt>{gaming.rank}</dt><dd>A rank listed in my gaming history, not a verified current CS2 rank.</dd></div>
+              <div><dt>{gaming.hours} hours</dt><dd>Counter-Strike playtime, and plenty of reasons for one more match.</dd></div>
+              <div><dt>{gaming.rank}</dt><dd>From my CS:GO rank history.</dd></div>
             </dl>
           </div>
           <Clips groups={[{ label: 'CS:GO', clips: gaming.clips.csgo }, { label: 'CS2', clips: gaming.clips.cs2 }]} />
-          <p><a className="link" href={links.clips} target="_blank" rel="noreferrer">More clips on Allstar <span aria-hidden="true">↗</span></a></p>
+          <p><a className="link" href={links.clips} target="_blank" rel="noreferrer">Watch more on Allstar <span aria-hidden="true">↗</span></a></p>
         </>
       ),
     },
@@ -59,7 +59,7 @@ export default async function GamingCareer() {
       content: (
         <>
           <div className="g-intro">
-            <p className="lede">I stumbled into chess through Samay Raina and picked up a lot from GothamChess. It sharpens how I think about decisions, and a bad evening of it can make me play one more game out of pure spite.</p>
+            <p className="lede">Samay Raina introduced me to the chess community; GothamChess helped me find my footing. I enjoy the patience, the patterns, and the moment a position finally makes sense.</p>
             <dl className="g-facts">
               <div><dt>{gaming.openings.black}</dt><dd>With Black.</dd></div>
               <div><dt>{gaming.openings.white}</dt><dd>With White.</dd></div>
@@ -69,7 +69,7 @@ export default async function GamingCareer() {
             <>
               <table className="g-table">
                 <caption>
-                  From the Chess.com public API, fetched {chess.fetched.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' })}.
+                  Chess.com ratings · Updated {chess.fetched.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' })}.
                 </caption>
                 <thead><tr><th scope="col">Mode</th><th scope="col">Rating</th><th scope="col">Best</th><th scope="col">W / L / D</th></tr></thead>
                 <tbody>
@@ -94,7 +94,7 @@ export default async function GamingCareer() {
       label: 'Tournament Matches',
       content: (
         <>
-          <p className="lede g-intro-single">Highlights from tournament play. Video loads only when you press play.</p>
+          <p className="lede g-intro-single">Team play, pressure, and a few rounds worth revisiting.</p>
           <Clips groups={[{ label: 'Tournament', clips: gaming.clips.tournament }]} />
         </>
       ),
@@ -104,9 +104,9 @@ export default async function GamingCareer() {
   return (
     <>
       <header className="case-hero s-dark">
-        <p className="eyebrow z">Gaming Career</p>
+        <p className="eyebrow z">Beyond the editor</p>
         <h1 className="display display--case z" data-hero-line="">One more match.</h1>
-        <p className="lede z" data-hero-fade="">The longer version of the Counter-Strike, the chess, and the people I met along the way.</p>
+        <p className="lede z" data-hero-fade="">Counter-Strike, chess, and the communities that make both worth coming back to.</p>
       </header>
       <section className="g-body s-ivory" aria-label="Gaming career details">
         <GamingTabs tabs={tabs} />
@@ -116,7 +116,7 @@ export default async function GamingCareer() {
         <div className="g-setup-grid">
           <Image src={desk} alt="A dark, red-lit desk with two monitors, a microphone, keyboard, mouse, chair and PC tower." sizes="(max-width: 760px) 100vw, 55vw" placeholder="blur" />
           <table className="g-table g-table--dark">
-            <caption>From my earlier parts list. Parts may have changed since.</caption>
+            <caption>Setup reference / Hardware listed in my previous portfolio.</caption>
             <tbody>
               {gaming.specs.map(([k, v]) => <tr key={k}><th scope="row">{k}</th><td>{v}</td></tr>)}
             </tbody>

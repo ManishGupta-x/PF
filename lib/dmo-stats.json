@@ -1,0 +1,112 @@
+{
+  "asOf": "2026-10-31",
+  "from": "2026-04-01",
+  "salesCrore": 1.88,
+  "orders": 44769,
+  "ordersPerDay": 209,
+  "inStorePerDay": 177,
+  "averageOrder": 299,
+  "busiestDay": {
+    "date": "2026-06-11",
+    "orders": 303
+  },
+  "salesGrowthPct": 24.1,
+  "outletGrowth": [
+    {
+      "name": "Grand Hotel",
+      "place": "The Mall",
+      "pct": 27.9
+    },
+    {
+      "name": "Chennai Maratha",
+      "place": "The Mall",
+      "pct": 29.7
+    },
+    {
+      "name": "Chennai Maratha",
+      "place": "Sanjauli",
+      "pct": 20.1
+    },
+    {
+      "name": "GuptaJees",
+      "place": "Sanjauli",
+      "pct": 13.5
+    }
+  ],
+  "channels": [
+    {
+      "label": "Dine-in",
+      "pct": 66.7
+    },
+    {
+      "label": "Takeaway",
+      "pct": 18
+    },
+    {
+      "label": "Online",
+      "pct": 15.3
+    }
+  ],
+  "months": [
+    {
+      "month": "2026-01",
+      "salesLakh": 25.1,
+      "ordersPerDay": 189,
+      "onlinePct": 6.7
+    },
+    {
+      "month": "2026-02",
+      "salesLakh": 21,
+      "ordersPerDay": 188,
+      "onlinePct": 8.9
+    },
+    {
+      "month": "2026-03",
+      "salesLakh": 24.1,
+      "ordersPerDay": 192,
+      "onlinePct": 8.8
+    },
+    {
+      "month": "2026-04",
+      "salesLakh": 24.9,
+      "ordersPerDay": 198,
+      "onlinePct": 10
+    },
+    {
+      "month": "2026-05",
+      "salesLakh": 28.4,
+      "ordersPerDay": 208,
+      "onlinePct": 14.7
+    },
+    {
+      "month": "2026-06",
+      "salesLakh": 34.9,
+      "ordersPerDay": 248,
+      "onlinePct": 13.4
+    },
+    {
+      "month": "2026-07",
+      "salesLakh": 25.4,
+      "ordersPerDay": 206,
+      "onlinePct": 15.5
+    },
+    {
+      "month": "2026-08",
+      "salesLakh": 25.3,
+      "ordersPerDay": 204,
+      "onlinePct": 18.5
+    },
+    {
+      "month": "2026-09",
+      "salesLakh": 22.7,
+      "ordersPerDay": 199,
+      "onlinePct": 18.5
+    },
+    {
+      "month": "2026-10",
+      "salesLakh": 26.7,
+      "ordersPerDay": 202,
+      "onlinePct": 16.5
+    }
+  ]
+}

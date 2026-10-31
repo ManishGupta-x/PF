@@ -8,11 +8,15 @@ import Saas from '@/components/demos/Saas';
 import Back2 from '@/components/demos/Back2';
 import Jarvis from '@/components/demos/Jarvis';
 import Board from '@/components/demos/Board';
-import { capabilities, links, projects } from '@/lib/content';
+import ServiceHub from '@/components/demos/ServiceHub';
+import ToolChips from '@/components/ToolChips';
+import { links, projects } from '@/lib/content';
+import { areas } from '@/lib/expertise';
 import desk from '@/public/images/desk.jpeg';
-import portrait from '@/public/images/portrait.jpg';
+import portrait from '@/public/images/manish-editorial.webp';
+import ProjectArt from '@/components/ProjectArt';
 
-const [eco, saas, back2, jarvis] = projects;
+const [eco, saas, back2, jarvis, servicehub] = projects;
 
 // Mobile thread anchor: an in-flow point in the right gutter, or a small wave inward (w)
 // lifted into the empty padding at the top of a section, so the line never crosses text.
@@ -40,8 +44,9 @@ const Chapter = ({ p, tone, title, children, pull, exit }: { p: (typeof projects
     </h3>
     {pull && <div className="pull z">{pull}</div>}
     {children}
+    <ProjectArt slug={p.slug} />
     <p className="chapter-cta z">
-      <Link href={`/work/${p.slug}`} className="cta">Explore the case study <span aria-hidden="true">↗</span></Link>
+      <Link href={`/work/${p.slug}`} className="cta">View case study <span aria-hidden="true">↗</span></Link>
     </p>
     {exit}
     <M />
@@ -65,17 +70,17 @@ export default function Home() {
             />
             <i className="t-fill" data-t="" data-load="" data-over="" data-pts="6,52 -1,66 8,82 26,92 44,86" data-pts-m="8,50 0,66 8,84 30,92 48,86" />
             <i className="t-fill" data-t="" data-load="" data-pts="44,86 60,72 78,68 94,74 86,100 66,118 61,150" data-pts-m="48,86 70,72 94,80 104,104 102,130" />
-            <h1 className="display display--hero">
+            <h1 className="display display--hero display--experience">
               <span className="line-block" data-hero-line="">I BUILD</span>
-              <span className="line-block" data-hero-line="">PRODUCTS</span>
-              <span className="line-block" data-hero-line="">THAT CONNECT.</span>
+              <span className="line-block" data-hero-line="">EXPERIENCES WORTH</span>
+              <span className="line-block" data-hero-line="">INTERACTING WITH.</span>
             </h1>
           </div>
         </div>
         <div className="hero-foot z" data-hero-fade="">
           <div>
-            <p className="lede">I’m Manish Gupta, a software engineer building restaurant ecosystems, offline-first products, real-time platforms, and B2B SaaS.</p>
-            <p className="eyebrow eyebrow--orange">Currently building at DropMyOrder</p>
+            <p className="lede">I’m Manish Gupta. I build software for restaurant operations, field service, and online communities.</p>
+            <p className="eyebrow eyebrow--orange">Software engineer</p>
           </div>
           <div className="hero-actions">
             <p className="aside">“If it repeats, I’ll probably automate it.”</p>
@@ -97,7 +102,7 @@ export default function Home() {
         <P x={8} y={66} />
         <Lines lines={['FROM A SINGLE', 'ORDER TO A', 'CONNECTED', 'SYSTEM.']} className="z" />
         <p className="lede z approach-copy" data-reveal="">
-          My work spans the interfaces people use and the systems connecting those workflows. One order can start on a customer’s phone and end up in a warehouse stock count, and I want every step in between to feel like the same product.
+          I connect the experiences people see with the systems teams rely on behind the scenes. From ordering and billing to stock and service requests, I build the tools that keep work moving.
         </p>
         <ol className="nodes z" aria-label="Customer, then outlet, then warehouse, then operations">
           {['Customer', 'Outlet', 'Warehouse', 'Operations'].map(n => (
@@ -113,17 +118,22 @@ export default function Home() {
       <section id="capabilities" className="capabilities s-dark">
         <M side="w" />
         <M />
-        <Lines lines={['WHAT I BRING', 'TO THE THREAD.']} className="z display--md" />
-        <div className="cap-grid z">
-          {capabilities.map((c, i) => (
-            <div key={c.title} className={`cap cap--${i}`}>
-              <h3 className="eyebrow">{c.title}</h3>
-              <ul data-stagger="">{c.rows.map(r => <li key={r}>{r}</li>)}</ul>
-            </div>
+        <Lines lines={['PRODUCT CRAFT.', 'SYSTEM DESIGN.']} className="z display--md" />
+        <p className="lede z cap-intro" data-reveal="">Five areas I keep returning to, each one tied to a product I have worked on.</p>
+        <ol className="cap-rows z" data-stagger="">
+          {areas.map(a => (
+            <li key={a.number} className="cap-row">
+              <span className="eyebrow">{a.number}</span>
+              <h3>{a.title}</h3>
+              <p>{a.short}</p>
+              <ToolChips names={a.tools.slice(0, 4)} />
+            </li>
           ))}
-        </div>
-        <P x={72} y={9} />
-        <P x={50} y={42} />
+        </ol>
+        <p className="cap-cta z"><Link href="/expertise" className="cta">Explore my expertise <span aria-hidden="true">↗</span></Link></p>
+        <P x={72} y={5} />
+        <P x={98.6} y={20} />
+        <P x={98.6} y={88} />
         <P x={50} y={100} />
         <M />
       </section>
@@ -131,15 +141,16 @@ export default function Home() {
       <section id="work" aria-label="Selected work" className="work">
         <h2 className="sr">Selected work</h2>
 
-        <Chapter p={eco} tone="s-ivory" title={['DROPMYORDER', 'ECOSYSTEM']} exit={<P x={98.6} y={92} />} pull={<p className="pull-text">Engineering work at DropMyOrder, my current company.</p>}>
+        <Chapter p={eco} tone="s-ivory" title={['DROPMYORDER', 'ECOSYSTEM']} exit={<P x={98.6} y={99} />} pull={<p className="pull-text">Built for the pace of a restaurant.</p>}>
           <Ecosystem />
+          <p className="chapter-link z"><a className="link" href="https://dropmyorder.com/" target="_blank" rel="noreferrer">In Shimla? Order on dropmyorder.com <span aria-hidden="true">↗</span></a></p>
         </Chapter>
 
-        <Chapter p={saas} tone="s-dark" title={['DMO SAAS']} exit={<P x={1.3} y={97} />} pull={<p className="badge">In development. Not launched.</p>}>
+        <Chapter p={saas} tone="s-dark" title={['DMO SAAS']} exit={<P x={1.3} y={97} />} pull={<p className="badge">In development</p>}>
           <Saas />
           <div className="roadmap z">
             <div>
-              <h4 className="eyebrow">In the code today</h4>
+              <h4 className="eyebrow">Built so far</h4>
               <ul>{saas.verified.map(v => <li key={v}>{v}</li>)}</ul>
             </div>
             <div>
@@ -154,7 +165,7 @@ export default function Home() {
           tone="s-ivory"
           title={['BACK2CSGO']}
           exit={<P x={98.6} y={94} />}
-          pull={<p className="pull-text">5,000+ hours in Counter-Strike. Then I started building around it. <small>My own playtime, self-reported. Not a platform number.</small></p>}
+          pull={<p className="pull-text">5,000+ hours in Counter-Strike. A player’s perspective, brought to the product.</p>}
         >
           <Back2 />
           <p className="chapter-link z"><a className="link" href="https://back2csgo.com/" target="_blank" rel="noreferrer">back2csgo.com <span aria-hidden="true">↗</span></a></p>
@@ -165,9 +176,19 @@ export default function Home() {
           tone="s-dark"
           title={['JARVIS']}
           exit={<P x={98.6} y={97} />}
-          pull={<p className="pull-text">Music led me to build Jarvis. Gaming led me to build Back2CSGO. <small>Early project, 2019. Archived here.</small></p>}
+          pull={<p className="pull-text">My first real product started with a playlist. <small>Discord music application / 2019</small></p>}
         >
           <Jarvis />
+        </Chapter>
+
+        <Chapter
+          p={servicehub}
+          tone="s-ivory"
+          title={['SERVICE HUB']}
+          exit={<P x={98.6} y={95} />}
+          pull={<p className="pull-text">From a service request to a job well done. <small>Client, dispatch, technician, and training—connected.</small></p>}
+        >
+          <ServiceHub />
         </Chapter>
       </section>
 
@@ -179,18 +200,19 @@ export default function Home() {
         <Lines lines={['CURIOUS BY', 'DEFAULT.', 'ENGINEER BY', 'PRACTICE.']} className="z" />
         <div className="about-grid">
           <div className="about-copy z" data-reveal="">
-            <p className="lede">I’ve been coding since 2018. I started with C++ and competitive programming, moved to full-stack web development, and now build at DropMyOrder.</p>
-            <p>Music and gaming have stayed close the whole way. One became Jarvis, and the other became Back2CSGO.</p>
+            <p className="lede">I started coding in 2018 with C++ and competitive programming. Today, I’m a software engineer at DropMyOrder, working across web, desktop, mobile, and real-time applications.</p>
+            <p>I care about clear interfaces, thoughtful architecture, and the details that make software useful. Music and gaming keep the curiosity going—and sometimes become projects of their own.</p>
           </div>
-          <div className="about-portrait z" data-parallax="16">
-            <Image src={portrait} alt="Manish Gupta, wearing round glasses and a floral shirt, looking at the camera." sizes="(max-width: 760px) 70vw, 26vw" placeholder="blur" />
-          </div>
+          <figure className="about-portrait z" data-parallax="16">
+            <Image src={portrait} alt="Manish Gupta smiling in round glasses, a dark puffer jacket and a white turtleneck, in a monochrome portrait." sizes="(max-width: 760px) 85vw, 30vw" placeholder="blur" />
+            <figcaption><span className="portrait-dot" aria-hidden="true" /> Manish / away from the editor</figcaption>
+          </figure>
           <div className="monogram" aria-hidden="true">
             <i
               className="t-fill"
               data-t=""
-              data-pts="-14,102 3,94 3,94 9,14 9,14 28,72 28,72 46,14 46,14 52,92 70,102 102,90 106,44 96,24 78,8 60,22 54,50 62,80 80,90 96,74 96,52 96,52 78,52 78,52 92,38 114,34"
-              data-pts-m="112,108 3,94 3,94 9,14 9,14 28,72 28,72 46,14 46,14 52,92 70,102 102,90 106,44 96,24 78,8 60,22 54,50 62,80 80,90 96,74 96,52 96,52 78,52 78,52 92,38 122,30"
+              data-pts="-14,102 -4,102 5,90 10,68 16,38 24,12 30,6 32,14 31,36 32,58 34,76 37,72 43,48 50,22 57,8 61,8 61,20 57,44 53,68 53,84 57,92 62,84 65,60 72,32 83,12 95,5 104,9 104,16 97,20 86,19 75,28 69,46 67,66 72,84 82,91 92,84 98,70 99,58 92,53 84,55 88,60 98,58 105,62"
+              data-pts-m="112,108 50,110 -4,104 5,90 10,68 16,38 24,12 30,6 32,14 31,36 32,58 34,76 37,72 43,48 50,22 57,8 61,8 61,20 57,44 53,68 53,84 57,92 62,84 65,60 72,32 83,12 95,5 104,9 104,16 97,20 86,19 75,28 69,46 67,66 72,84 82,91 92,84 98,70 99,58 92,53 84,55 88,60 98,58 105,62"
             />
           </div>
         </div>
@@ -204,7 +226,7 @@ export default function Home() {
         <P x={98.6} y={30} />
         <Lines lines={['SOMEWHERE', 'BETWEEN A BUILD,', 'A BEAT, AND', 'ONE MORE MATCH.']} className="z display--md" />
         <p className="lede z interlude-bio" data-reveal="">
-          I started coding in 2018 with C++ and competitive programming. These days, I build connected products at DropMyOrder. Away from the editor, you’ll find me in Counter-Strike, thinking over a chessboard, or listening to music. Sometimes those interests become projects of their own.
+          Away from the editor, I’m usually listening to music, playing chess, or queuing for Counter-Strike. Some interests stay hobbies. Others become the next thing I build.
         </p>
         <figure className="desk">
           <i className="t desk-in" data-t="" />
@@ -219,7 +241,7 @@ export default function Home() {
           </div>
           <figcaption className="z">
             <span>“The setup behind the commits and the clutches.”</span>
-            <Link href="/GamingCareer" className="link">Gaming Career <span aria-hidden="true">↗</span></Link>
+            <Link href="/GamingCareer" className="link">Beyond the editor <span aria-hidden="true">↗</span></Link>
           </figcaption>
           <i className="t desk-out" data-t="" />
         </figure>
@@ -238,7 +260,7 @@ export default function Home() {
           <div className="story-copy" data-reveal="">
             <h3 className="eyebrow">The board</h3>
             <p className="display display--sm">“Caro-Kann with Black. Stonewall with White.”</p>
-            <p>Solid structures and patient plans. It is the same question I ask of most systems: what breaks if I move this?</p>
+            <p>I like positions that reward patience. Caro-Kann with Black, Stonewall with White—and usually a reason to play one more game.</p>
             <a className="link" href={links.chess} target="_blank" rel="noreferrer">My Chess.com profile <span aria-hidden="true">↗</span></a>
           </div>
         </div>
@@ -249,16 +271,16 @@ export default function Home() {
             <span className="lobby" aria-hidden="true">
               {['kestrel', 'nomad', 'vanta', 'ember', 'rook'].map(n => <span key={n}><i />{n}</span>)}
             </span>
-            <span className="mini-copy">Gaming is how I meet people and build friendships. It also gave me a match lobby I wanted to build.</span>
-            <span className="link">To Back2CSGO <span aria-hidden="true">↑</span></span>
+            <span className="mini-copy">Counter-Strike brought friendships, a community, and a matchmaking experience I could help shape.</span>
+            <span className="link">Explore Back2CSGO <span aria-hidden="true">↑</span></span>
           </a>
           <a href={`#${jarvis.slug}`} className="mini">
             <span className="eyebrow">The playlist</span>
             <svg viewBox="0 0 400 60" className="line mini-wave" aria-hidden="true">
               <path d="M0 30 H70 L80 18 L90 42 L100 8 L112 52 L124 14 L136 46 L148 22 L160 38 L172 26 L184 34 L196 30 H400" />
             </svg>
-            <span className="mini-copy">A headphone cable turned into a waveform, and the waveform turned into my first real project.</span>
-            <span className="link">To Jarvis <span aria-hidden="true">↑</span></span>
+            <span className="mini-copy">A love of music became a Discord bot, shared playlists, and my first lessons in shipping for a community.</span>
+            <span className="link">Explore Jarvis <span aria-hidden="true">↑</span></span>
           </a>
         </div>
         <M />
@@ -273,7 +295,7 @@ export default function Home() {
           <div className="z">
             <Lines lines={['HAVE', 'SOMETHING', 'WORTH', 'BUILDING?']} />
             <p className="contact-mail">
-              <a href={`mailto:${links.email}`} className="cta cta--lg">Email me <span aria-hidden="true">↗</span></a>
+              <a href={`mailto:${links.email}`} className="cta cta--lg">Let’s talk <span aria-hidden="true">↗</span></a>
             </p>
             <p className="contact-address"><a href={`mailto:${links.email}`}>{links.email}</a></p>
             <ul className="contact-links">

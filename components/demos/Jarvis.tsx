@@ -34,7 +34,7 @@ export default function Jarvis() {
       className="stage stage--jarvis"
       label="An explanatory sequence in original artwork: a Discord-style message asks to play a fictional track, it joins a queue, playback starts with a waveform and an audio filter, and the playlist is saved to MongoDB."
       finalStep="From a message to a saved playlist."
-      note="Original artwork. Fictional tracks. Not a live demo."
+      note="Illustrated workflow · Sample tracks"
       build={build}
     >
       <div className="obj o-phones" style={at(3, 6, 12, -8)}><Headphones /></div>
@@ -50,10 +50,11 @@ export default function Jarvis() {
       <T x={18} y={45} />
       <T x={41} y={47} />
       <T x={75} y={50} />
+      <T x={88.7} y={54} />
 
       <div className="obj o-chat" style={at(33, 5, 28, -1)}>
         <div className="paper-card chat">
-          <p className="tiny dim">#MUSIC / DISCORD-INSPIRED ARTWORK</p>
+          <p className="tiny dim">#MUSIC / DISCORD</p>
           <div className="chat-user"><i>S</i><p><b>sample_listener</b><br />-play slow monsoon</p></div>
           <div className="chat-bot"><i>J</i><p><b>Jarvis</b> <small>BOT</small><br />Added to queue: Slow Monsoon<br /><span className="dim">Sample Artist / 03:35</span></p></div>
         </div>

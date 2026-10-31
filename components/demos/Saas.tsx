@@ -31,7 +31,7 @@ export default function Saas() {
     <Demo
       className="stage stage--saas"
       label="An explanatory sequence: a sample bill on the counter is priced by the shared engine, stored in SQLite in the browser, synced to the API which checks it with the same engine, and then appears in the back office and rider app."
-      finalStep="One sample bill, one engine, every surface."
+      finalStep="One bill. One engine. Connected workflows."
       build={build}
     >
       <T x={62} y={-9} />
@@ -46,10 +46,11 @@ export default function Saas() {
       <T x={54} y={43} />
       <T x={30} y={49} />
       <T x={8} y={50} />
+      <T x={1} y={54} />
 
       <div className="obj o-bill" style={at(4, 4, 22, -2)}>
         <div className="paper-card paper-card--tall">
-          <p className="tiny dim spread"><span>DMO-POS / INSTALLED WEB APP</span><span>SAMPLE</span></p>
+          <p className="tiny dim spread"><span>DMO-POS / WEB COUNTER</span><span>SAMPLE</span></p>
           <p className="spread bill-line"><span>Paneer roll × 2</span><span>₹300</span></p>
           <p className="spread bill-line"><span>Lassi × 2</span><span>₹100</span></p>
           <hr />

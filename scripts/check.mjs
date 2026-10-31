@@ -1,4 +1,5 @@
 // End-to-end checks. Needs Chrome and a running server: npm run build && npm start -- -p 3100, then npm run check.
+import { readFileSync } from 'node:fs';
 import { chromium } from 'playwright-core';
 const BASE = 'http://localhost:3100';
 const b = await chromium.launch({ channel: 'chrome', headless: true });
@@ -10,21 +11,30 @@ const watch = (p, sink) => {
 };
 
 // Routes, redirects and metadata
-for (const path of ['/', '/work/dropmyorder-ecosystem', '/work/dmo-saas', '/work/back2csgo', '/work/jarvis', '/GamingCareer', '/robots.txt', '/sitemap.xml']) {
+for (const path of ['/', '/expertise', '/work/dropmyorder-ecosystem', '/work/dmo-saas', '/work/back2csgo', '/work/jarvis', '/work/service-hub', '/GamingCareer', '/robots.txt', '/sitemap.xml']) {
   const r = await fetch(BASE + path);
   ok(`route ${path}`, r.status === 200, String(r.status));
 }
 ok('unknown case study is 404', (await fetch(BASE + '/work/nope')).status === 404);
-for (const [from, to] of [['/Work', '/#work'], ['/Skills', '/#capabilities'], ['/SmallProjects', '/#work']]) {
+for (const [from, to] of [['/Work', '/#work'], ['/Skills', '/expertise'], ['/SmallProjects', '/#work']]) {
   const r = await fetch(BASE + from, { redirect: 'manual' });
   ok(`redirect ${from}`, r.status === 308 && r.headers.get('location') === to, `${r.status} ${r.headers.get('location')}`);
 }
 const html = await (await fetch(BASE + '/')).text();
-ok('hero headline is server-rendered', html.includes('THAT CONNECT.'));
+ok('hero headline is server-rendered', html.includes('INTERACTING WITH.'));
 ok('project copy is server-rendered', html.includes('Bad internet? The restaurant still needs to bill.') && html.includes('5,000+ hours'));
 ok('old 4,000+ figure is gone', !/4,?000\+|4k\+/i.test(html) && !/4,?000\+|4k\+/i.test(await (await fetch(BASE + '/GamingCareer')).text()));
 ok('no local Windows path leaks', !/C:\\|Downloads/.test(html));
 ok('og tags present', html.includes('property="og:image"') && html.includes('twitter:card'));
+ok('home links to the expertise page', html.includes('href="/expertise"'));
+const expertise = await (await fetch(BASE + '/expertise')).text();
+ok('expertise tools are server-rendered with inline icons', ['Astro', 'Next.js', 'PostgreSQL', 'SQL'].every(t => expertise.includes(`<h4>${t}</h4>`)) && (expertise.match(/<li class="xp-tool"><svg/g) ?? []).length >= 35);
+const dmo = await (await fetch(BASE + '/work/dropmyorder-ecosystem')).text();
+const dmoStats = JSON.parse(readFileSync(new URL('../lib/dmo-stats.json', import.meta.url), 'utf8'));
+ok('DropMyOrder results are server-rendered from the stats file', dmo.includes(`₹${dmoStats.salesCrore} Cr`) && dmo.includes('Grand Hotel Shimla') && dmo.includes('Real numbers.'));
+ok('stats never carry a backend host or customer data', !/dropmyorder\.com|customer_|phone/i.test(JSON.stringify(dmoStats)));
+ok('other case studies have no results section', !(await (await fetch(BASE + '/work/jarvis')).text()).includes('results-title'));
+ok('tool usage links to its case study', /<h4>Astro<\/h4><p class="xp-used"><a href="\/work\/dmo-saas"/.test(expertise));
 
 // Desktop, full motion
 {
@@ -44,7 +54,7 @@ ok('og tags present', html.includes('property="og:image"') && html.includes('twi
   ok('hero segments drawn, later segments still hidden', off0[0] < 1 && off0[1] < 1 && overPaths[0] < 1 && underEnd > 1);
 
   // Every demo plays to its final state, then offers replay
-  for (const sel of ['.stage--eco', '.stage--saas', '.stage--back2', '.stage--jarvis', '.board-demo']) {
+  for (const sel of ['.stage--eco', '.stage--saas', '.stage--back2', '.stage--jarvis', '.stage--servicehub', '.board-demo']) {
     await p.$eval(sel, e => window.scrollTo({ top: e.getBoundingClientRect().top + scrollY - 200, behavior: 'instant' }));
     const done = await p.waitForFunction(s => document.querySelector(s + ' .demo-btn')?.textContent === 'Replay', sel, { timeout: 30000 }).then(() => true, () => false);
     const hidden = await p.$$eval(`${sel} .demo-art *`, els => els.filter(e => !e.closest('.net-off,.queued') && getComputedStyle(e).visibility === 'hidden').length);
@@ -65,8 +75,12 @@ ok('og tags present', html.includes('property="og:image"') && html.includes('twi
   ok('click selects a module', (await p.textContent('.module-role')) === 'Outlet back office');
   await p.keyboard.press('ArrowDown');
   const focusId = await p.evaluate(() => document.activeElement?.id);
-  ok('arrow key moves module selection and focus', focusId === 'tab-warehouse' && (await p.textContent('.module-role')) === 'Warehouse and superadmin', focusId);
+  ok('arrow key moves module selection and focus', focusId === 'tab-warehouse' && (await p.textContent('.module-role')) === 'Warehouse & central administration', focusId);
   ok('selection highlights the matching objects', (await p.$eval('[data-hl]', e => e.dataset.hl)) === 'warehouse');
+  for (const [id, role] of [['delivery', 'Delivery riders'], ['workforce', 'Outlet & warehouse staff']]) {
+    await p.click(`#tab-${id}`);
+    ok(`${id} module has its own objects on the stage`, (await p.textContent('.module-role')) === role && (await p.$(`[data-hl="${id}"] [data-m="${id}"]`)) !== null);
+  }
 
   // Contact: email stays direct; endpoint works by keyboard and by drag, drag springs back
   ok('email is a direct mailto', (await p.getAttribute('.contact-mail a', 'href')) === 'mailto:manishgupta220402@gmail.com');
@@ -106,6 +120,15 @@ ok('og tags present', html.includes('property="og:image"') && html.includes('twi
 // Keyboard order and focus visibility
 {
   const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+  const backendCalls = [];
+  p.on('request', r => { if (/dropmyorder\.com/i.test(r.url())) backendCalls.push(r.url()); });
+  await p.goto(BASE + '/work/dropmyorder-ecosystem', { waitUntil: 'load' });
+  await p.waitForTimeout(1000);
+  ok('the page calls no DropMyOrder server', backendCalls.length === 0, backendCalls.join(' | '));
+  const quiet = p.locator('.viz-cols li:not(.is-labelled)').first();
+  await quiet.focus();
+  await p.waitForTimeout(300);
+  ok('keyboard focus reveals a chart value', (await quiet.locator('.viz-val').evaluate(e => getComputedStyle(e).opacity)) === '1');
   await p.goto(BASE, { waitUntil: 'load' });
   await p.waitForTimeout(800);
   await p.keyboard.press('Tab');
@@ -123,7 +146,7 @@ for (const width of [320, 390, 760]) {
   const errs = [];
   const p = await (await b.newContext({ viewport: { width, height: 800 }, isMobile: true, hasTouch: true })).newPage();
   watch(p, errs);
-  for (const path of ['/', '/work/dropmyorder-ecosystem', '/GamingCareer']) {
+  for (const path of ['/', '/expertise', '/work/dropmyorder-ecosystem', '/work/service-hub', '/GamingCareer']) {
     await p.goto(BASE + path, { waitUntil: 'load' });
     await p.waitForTimeout(1200);
     const over = await p.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
@@ -169,7 +192,7 @@ for (const width of [320, 390, 760]) {
   await p.goto(BASE + '/GamingCareer', { waitUntil: 'load' });
   await p.waitForTimeout(800);
   ok('no video iframe before a click', (await p.$$('iframe')).length === 0);
-  ok('5,000+ hours shown as self-reported', (await p.textContent('.g-facts')).includes('5,000+ hours') && (await p.textContent('.g-facts')).includes('Self-reported'));
+  ok('Counter-Strike playtime and historical rank are clearly scoped', (await p.textContent('.g-facts')).includes('5,000+ hours') && (await p.textContent('.g-facts')).includes('CS:GO rank history'));
   await p.click('.video-frame button');
   await p.waitForSelector('iframe');
   ok('click loads one nocookie embed', (await p.$$eval('iframe', e => e.length === 1 && e[0].src.includes('youtube-nocookie.com'))));
@@ -177,7 +200,7 @@ for (const width of [320, 390, 760]) {
   await p.keyboard.press('ArrowRight');
   ok('tabs move by keyboard', (await p.getAttribute('#g-tab-chess', 'aria-selected')) === 'true');
   const caption = await p.$eval('#g-panel-chess', e => e.querySelector('caption')?.textContent ?? 'omitted');
-  ok('chess data is timestamped or omitted', /fetched \d+ \w+ \d{4}/.test(caption) || caption === 'omitted', caption);
+  ok('chess data is timestamped or omitted', /Updated \d+ \w+ \d{4}/.test(caption) || caption === 'omitted', caption);
   await p.context().close();
 }
 

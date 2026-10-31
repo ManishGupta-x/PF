@@ -20,18 +20,25 @@ const build: Build = (tl, q, step) => {
     .from(q('.o-receipt'), { clipPath: 'inset(0 0 100% 0)', y: '-2em', duration: 1.1, ease: 'none' }, '+=0.3')
     .to(q('.queued'), { autoAlpha: 1, duration: 0.25 })
     .from(q('.sync-done'), { autoAlpha: 0, duration: 0 }, '<')
-    .call(step, ['Connection back. The queued bill moves on.'], '+=1')
+    .call(step, ['Back online. The queued bill synchronizes.'], '+=1')
     .to(q('.net-off'), { autoAlpha: 0, duration: 0.15 })
     .to(q('.net-on'), { autoAlpha: 1, duration: 0.15 }, '<')
     .from(q('.packet'), { left: '0%', duration: 1, ease: 'power1.inOut' }, '+=0.2')
     .to(q('.queued'), { autoAlpha: 0, duration: 0.2 })
     .to(q('.sync-done'), { autoAlpha: 1, duration: 0.2 }, '<')
-    .call(step, ['Separately, a warehouse stock request reaches outlet inventory.'], '+=0.5')
+    .call(step, ['A warehouse stock request updates outlet inventory.'], '+=0.5')
     .from(q('.o-boxes'), { autoAlpha: 0, y: 18, duration: 0.45 })
     .from(q('.o-req'), { autoAlpha: 0, y: 16, duration: 0.45 }, '-=0.1')
     .from(q('.o-inv'), { autoAlpha: 0, y: 18, duration: 0.45 }, '+=0.3')
     .from(q('.inv-fill'), { scaleX: 0.25, duration: 0.9, ease: 'power2.out' })
-    .from(q('.inv-added'), { autoAlpha: 0, duration: 0.3 }, '-=0.3');
+    .from(q('.inv-added'), { autoAlpha: 0, duration: 0.3 }, '-=0.3')
+    .call(step, ['A rider scans the pickup and records the delivery.'], '+=0.5')
+    .from(q('.o-delivery'), { autoAlpha: 0, y: 24, duration: 0.5, ease: 'power2.out' })
+    .from(q('.del-step'), { autoAlpha: 0, x: -10, stagger: 0.35, duration: 0.3 })
+    .call(step, ['Staff count the closing stock on their phones.'], '+=0.5')
+    .from(q('.o-staff'), { autoAlpha: 0, y: 24, duration: 0.5, ease: 'power2.out' })
+    .from(q('.staff-row'), { autoAlpha: 0, x: -10, stagger: 0.14, duration: 0.3 })
+    .from(q('.staff-flag'), { autoAlpha: 0, y: 6, duration: 0.3 }, '+=0.2');
 };
 
 export default function Ecosystem() {
@@ -57,8 +64,8 @@ export default function Ecosystem() {
     <>
       <Demo
         className="stage stage--eco"
-        label="An explanatory sequence: a sample order moves from the customer site to the outlet POS; the connection drops while the POS prints a receipt and queues the bill; on reconnection the bill syncs; a warehouse stock request then connects to outlet inventory."
-        finalStep="From one sample order to outlet inventory."
+        label="An explanatory sequence: a sample order moves from the customer site to the outlet POS; the connection drops while the POS prints a receipt and queues the bill; on reconnection the bill syncs; a warehouse stock request then connects to outlet inventory; a rider's phone scans the pickup and records the delivery; and a staff phone records the closing stock count."
+        finalStep="Customer order → Outlet workflow → Stock update → Delivery → Closing count."
         build={build}
       >
         <div className="eco-objs" data-hl={touched ? mod.id : undefined}>
@@ -75,8 +82,13 @@ export default function Ecosystem() {
           <T x={63} y={44} />
           <T x={42} y={49} />
           <T x={18} y={44} />
-          <T x={30} y={58} />
-          <T x={88} y={58} />
+          <T x={3} y={50} />
+          <T x={5} y={68} />
+          <T x={24} y={82} />
+          <T x={46} y={74} />
+          <T x={50} y={58} />
+          <T x={88} y={56} />
+          <T x={92} y={78} />
 
           <div className="obj o-cust" data-m="customer" style={at(5, 7, 19, -3)}>
             <div className="tablet">
@@ -167,6 +179,32 @@ export default function Ecosystem() {
               <p className="spread"><span>Tomato crate</span><span>4 <span className="inv-added">→ <b>16</b></span></span></p>
               <div className="inv-bar"><i className="inv-fill" /></div>
             </div>
+          </div>
+
+          <div className="obj o-delivery" data-m="delivery" style={at(14, 58, 21, -1.5)}>
+            <div className="phone">
+              <p className="tiny dim">DELIVERY BOY / SAMPLE</p>
+              <p className="phone-tabs"><span>PICKUP</span><b>EN ROUTE</b><span>DELIVERED</span></p>
+              <p className="spread"><b>S-1042</b><span>3 items</span></p>
+              <svg viewBox="0 0 40 40" className="line phone-qr"><path d="M2 12V2h10M28 2h10v10M38 28v10H28M12 38H2V28" /><path d="M10 10h7v7h-7zM23 10h7v7h-7zM10 23h7v7h-7zM23 23h3v3h-3zM28 28h2v2h-2z" /><path d="M0 20h40" stroke="var(--orange-ink)" /></svg>
+              <p className="tiny del-step">✓ QR SCANNED / PICKED UP</p>
+              <p className="tiny del-step">✓ DELIVERED / UPI</p>
+              <p className="tiny del-step dim">SAVED ON THIS PHONE, THEN SYNCED</p>
+            </div>
+            <p className="obj-tag">05 / DELIVERY BOY</p>
+          </div>
+
+          <div className="obj o-staff" data-m="workforce" style={at(60, 58, 21, 1.5)}>
+            <div className="phone">
+              <p className="tiny dim">DMO WORKFORCE / SAMPLE</p>
+              <p className="tiny"><b>CLOSING STOCK / KITCHEN</b></p>
+              <p className="staff-row"><span>Tomato crate</span><b>16</b></p>
+              <p className="staff-row"><span>Rice</span><b>12 kg</b></p>
+              <p className="staff-row"><span>Paneer</span><b>40 kg</b></p>
+              <p className="staff-flag">! Far above yesterday’s closing. Did you mean 40 gm?</p>
+              <p className="phone-cta">SUBMIT COUNT →</p>
+            </div>
+            <p className="obj-tag">06 / DMO WORKFORCE</p>
           </div>
         </div>
       </Demo>

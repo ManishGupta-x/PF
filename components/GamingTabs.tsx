@@ -1,14 +1,15 @@
 'use client';
 import Image from 'next/image';
+import { videoCover } from '@/lib/video-thumbnails';
 import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 
 type Clip = { title: string; id: string };
 
 // Nothing from YouTube's player loads until the visitor asks for it.
-export function Video({ clip }: { clip: Clip }) {
+export function Video({ clip, series = 'Highlights', index = 1 }: { clip: Clip; series?: string; index?: number }) {
   const [on, setOn] = useState(false);
   return (
-    <figure className="video">
+    <figure className={`video${on ? ' video--playing' : ''}`}>
       <div className="video-frame">
         {on ? (
           <iframe
@@ -19,8 +20,12 @@ export function Video({ clip }: { clip: Clip }) {
           />
         ) : (
           <button type="button" onClick={() => setOn(true)} aria-label={`Play ${clip.title}`}>
-            <Image src={`https://i.ytimg.com/vi/${clip.id}/hqdefault.jpg`} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" unoptimized />
-            <span aria-hidden="true">▶ PLAY</span>
+            <span className="video-cover" aria-hidden="true">
+              <Image className="video-cover-image" src={videoCover(clip.title, series)} alt="" fill sizes={series === 'Tournament' ? '100vw' : '(max-width: 760px) 100vw, 33vw'} quality={90} />
+              <span className="video-cover-meta"><span>{series}</span><span className="video-cover-index">{String(index).padStart(2, '0')}</span></span>
+              <span className="video-cover-title">{clip.title}</span>
+              <span className="video-play">▶ Watch highlight <span className="video-play-arrow">↗</span></span>
+            </span>
           </button>
         )}
       </div>
@@ -40,8 +45,8 @@ export function Clips({ groups }: { groups: { label: string; clips: Clip[] }[] }
           ))}
         </div>
       )}
-      <div className="video-grid">
-        {groups[group].clips.map(c => <Video key={c.id} clip={c} />)}
+      <div className={`video-grid${groups[group].clips.length === 1 ? ' video-grid--single' : ''}`}>
+        {groups[group].clips.map((c, i) => <Video key={c.id} clip={c} series={groups[group].label} index={i + 1} />)}
       </div>
     </>
   );

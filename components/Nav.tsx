@@ -5,7 +5,7 @@ import { links } from '@/lib/content';
 
 const ITEMS = [
   ['Work', '/#work'],
-  ['Capabilities', '/#capabilities'],
+  ['Expertise', '/#capabilities'],
   ['About', '/#about'],
   ['Contact', '/#contact'],
 ];
