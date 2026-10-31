@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     siteName: 'Manish Gupta',
     title: site.title,
     description: site.description,
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'I build products that connect. Manish Gupta.' }],
+    images: [{ url: '/og-image.jpg?v=2', width: 1200, height: 630, alt: 'I build experiences worth interacting with. Manish Gupta.' }],
   },
-  twitter: { card: 'summary_large_image', title: site.title, description: site.description, images: ['/og-image.jpg'], creator: '@Manishg2204022' },
+  twitter: { card: 'summary_large_image', title: site.title, description: site.description, images: ['/og-image.jpg?v=2'], creator: '@Manishg2204022' },
 };
 
 const person = {

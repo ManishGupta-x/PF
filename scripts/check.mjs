@@ -307,6 +307,18 @@ for (const width of [1440, 390]) {
   }
 }
 
+// Nothing is left below the footer when the page gets shorter
+for (const path of ['/', '/work/dmo-saas']) {
+  const p = await (await b.newContext({ viewport: { width: 1864, height: 845 } })).newPage();
+  await p.goto(BASE + path, { waitUntil: 'load' });
+  await p.waitForTimeout(1500);
+  await p.setViewportSize({ width: 1280, height: 845 });
+  await p.waitForTimeout(1500);
+  const gap = await p.evaluate(() => document.documentElement.scrollHeight - (document.querySelector('.footer').getBoundingClientRect().bottom + scrollY));
+  ok(`${path} has no space below the footer after the window shrinks`, gap <= 1, `${Math.round(gap)}px`);
+  await p.context().close();
+}
+
 // Keyboard order and focus visibility
 {
   const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();

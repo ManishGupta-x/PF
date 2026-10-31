@@ -30,7 +30,8 @@ function measure(main: HTMLElement) {
     points.push(...local);
     segs.push({ from, to: points.length - 1, over: 'over' in el.dataset, onLoad: 'load' in el.dataset, el });
   });
-  return { points, segs: segs.filter(s => s.to > s.from), size: [main.clientWidth, main.scrollHeight] };
+  // offsetHeight, not scrollHeight: the SVGs live inside main, so scrollHeight would never let them shrink.
+  return { points, segs: segs.filter(s => s.to > s.from), size: [main.clientWidth, main.offsetHeight] };
 }
 
 export default function Thread() {
