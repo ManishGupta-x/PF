@@ -9,6 +9,14 @@ export async function loadGsap() {
   return { gsap, ScrollTrigger };
 }
 
+// Resolves once the landing signature is written; at once on any visit that doesn't have one.
+export const whenSigned = () =>
+  new Promise<void>(resolve => {
+    const html = document.documentElement;
+    if (!html.classList.contains('js-intro') || 'signed' in html.dataset) resolve();
+    else addEventListener('signed', () => resolve(), { once: true });
+  });
+
 type Gsap = Awaited<ReturnType<typeof loadGsap>>;
 
 // GSAP loads lazily, so server-rendered markup is the complete final state: under

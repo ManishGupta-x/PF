@@ -36,6 +36,46 @@ ok('stats never carry a backend host or customer data', !/dropmyorder\.com|custo
 ok('other case studies have no results section', !(await (await fetch(BASE + '/work/jarvis')).text()).includes('results-title'));
 ok('tool usage links to its case study', /<h4>Astro<\/h4><p class="xp-used"><a href="\/work\/dmo-saas"/.test(expertise));
 
+// The landing signature writes itself once per tab session, then hands over to the hero
+{
+  const errs = [];
+  const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
+  const p = await ctx.newPage();
+  watch(p, errs);
+  const shown = () => p.$eval('.intro', e => getComputedStyle(e).display !== 'none' && getComputedStyle(e).visibility !== 'hidden');
+  const heroOpacity = () => p.$eval('[data-hero-line]', e => parseFloat(getComputedStyle(e).opacity));
+  await p.goto(BASE, { waitUntil: 'load' });
+  await p.waitForTimeout(1000);
+  ok('a first landing shows the signature over a waiting hero', (await shown()) && (await heroOpacity()) === 0);
+  await p.waitForFunction(() => document.documentElement.dataset.signed !== undefined, null, { timeout: 8000 }).catch(() => {});
+  ok('the signature is fully written', await p.$$eval('.intro path', e => e.length === 4 && e.every(x => parseFloat(getComputedStyle(x).strokeDashoffset) === 0)));
+  await p.waitForTimeout(2000);
+  ok('it clears and the hero and thread take over', !(await shown()) && (await heroOpacity()) === 1 && (await p.$eval('.thread--over path', e => parseFloat(getComputedStyle(e).strokeDashoffset))) < 1);
+  await p.reload({ waitUntil: 'load' });
+  await p.waitForTimeout(300);
+  ok('a reload in the same tab skips it', !(await shown()));
+  ok('signature console clean', errs.length === 0, errs.join(' | '));
+  await ctx.close();
+  const q = await (await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })).newPage();
+  await q.goto(BASE, { waitUntil: 'load' });
+  await q.waitForTimeout(800);
+  await q.mouse.wheel(0, 200);
+  await q.keyboard.press('Shift');
+  await q.waitForTimeout(1500);
+  ok('any input skips it and the hero still arrives', (await q.$eval('.intro', e => getComputedStyle(e).visibility)) === 'hidden' && (await q.$eval('[data-hero-line]', e => parseFloat(getComputedStyle(e).opacity))) === 1);
+  await q.context().close();
+  const calm = await (await b.newContext({ reducedMotion: 'reduce' })).newPage();
+  await calm.goto(BASE, { waitUntil: 'load' });
+  ok('reduced motion never shows it', (await calm.$eval('.intro', e => getComputedStyle(e).display)) === 'none');
+  await calm.context().close();
+  const bare = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+  await bare.route('**/_next/static/chunks/**', r => r.abort());
+  await bare.goto(BASE, { waitUntil: 'load' });
+  await bare.waitForTimeout(5000);
+  ok('it clears even if the scripts never load', (await bare.$eval('.intro', e => getComputedStyle(e).visibility)) === 'hidden' && (await bare.$eval('[data-hero-line]', e => getComputedStyle(e).opacity)) === '1');
+  await bare.context().close();
+}
+
 // Desktop, full motion
 {
   const errs = [];

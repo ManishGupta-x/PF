@@ -4,6 +4,7 @@ import Script from 'next/script';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Motion from '@/components/Motion';
+import Intro from '@/components/Intro';
 import { links, site } from '@/lib/content';
 import './globals.css';
 import './route-polish.css';
@@ -49,13 +50,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Hides the hero lines only until GSAP takes over; removed after 3s if it never does. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js-motion');setTimeout(function(){if(!('motionReady' in d.dataset))d.classList.remove('js-motion')},3000)})()`,
+            __html: `(function(){var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js-motion');try{if(!sessionStorage.getItem('signed')){sessionStorage.setItem('signed','1');d.classList.add('js-intro')}}catch(e){}setTimeout(function(){if(!('motionReady' in d.dataset))d.classList.remove('js-motion')},3000)})()`,
           }}
         />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} />
       </head>
       <body>
         <a href="#main" className="skip">Skip to content</a>
+        <Intro />
         <Nav />
         <main id="main">{children}</main>
         <footer className="footer s-dark">

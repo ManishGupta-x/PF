@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useGsap } from '@/lib/motion';
+import { useGsap, whenSigned } from '@/lib/motion';
 
 const LENS = 1100;
 
@@ -31,17 +31,20 @@ export default function Motion() {
     const html = document.documentElement;
     html.dataset.motionReady = '';
 
+    const entrance = gsap.timeline({ paused: true });
     const lines = gsap.utils.toArray<HTMLElement>('[data-hero-line]');
     if (lines.length) {
-      gsap.fromTo(
+      entrance.fromTo(
         lines,
         { y: 48, opacity: 0, filter: 'blur(10px)' },
         { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1, stagger: 0.1, ease: 'power3.out', clearProps: 'filter,transform' },
+        0,
       );
     }
     gsap.utils.toArray<HTMLElement>('[data-hero-fade]').forEach(el =>
-      gsap.fromTo(el, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.7, ease: 'power2.out' }),
+      entrance.fromTo(el, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0.7),
     );
+    whenSigned().then(() => entrance.play());
 
     gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach(el =>
       gsap.from(el, {

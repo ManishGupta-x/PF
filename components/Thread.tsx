@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { loadGsap, prefersReducedMotion, scrollStops, smoothPath, type Point } from '@/lib/motion';
+import { loadGsap, prefersReducedMotion, scrollStops, smoothPath, whenSigned, type Point } from '@/lib/motion';
 
 const NS = 'http://www.w3.org/2000/svg';
 const MOBILE = 760;
@@ -132,8 +132,12 @@ export default function Thread() {
 
         if (introPlayed) intro.progress(1);
         else {
-          intro.delay(0.35).play();
-          introPlayed = true;
+          // A rebuild while the signature is still being written waits too, so the line stays undrawn.
+          whenSigned().then(() => {
+            if (cancelled) return;
+            intro.delay(0.35).play();
+            introPlayed = true;
+          });
         }
       });
       ScrollTrigger.refresh();
