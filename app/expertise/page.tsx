@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Thread from '@/components/Thread';
+import { ExpertiseHero, ExpertiseProjects } from '@/components/ExpertiseVisual';
+import styles from '@/components/ExpertiseVisual.module.css';
 import ToolChips from '@/components/ToolChips';
 import { projects } from '@/lib/content';
 import { areas, projectsUsing, shortTitle, toolkit } from '@/lib/expertise';
@@ -16,15 +18,9 @@ export const metadata: Metadata = {
 
 export default function Expertise() {
   return (
-    <>
+    <div className={styles.page}>
       <Thread />
-      <header className="case-hero s-dark">
-        <i className="t case-t1" data-t="" />
-        <p className="eyebrow z"><Link href="/#capabilities" className="back">← Home</Link> / Expertise</p>
-        <h1 className="display display--case z" data-hero-line="">The thinking behind the stack.</h1>
-        <p className="lede z" data-hero-fade="">Five areas of product and systems work, followed by the tools I use, each linked to the projects behind it.</p>
-        <i className="t case-t2 xp-t2" data-t="" />
-      </header>
+      <ExpertiseHero />
 
       <section className="case-body s-ivory" aria-labelledby="areas-title">
         <i className="t case-t3" data-t="" />
@@ -52,6 +48,8 @@ export default function Expertise() {
           ))}
         </div>
       </section>
+
+      <ExpertiseProjects />
 
       <section className="xp-toolkit s-dark" aria-labelledby="toolkit-title">
         <i className="t case-t3" data-t="" />
@@ -89,6 +87,6 @@ export default function Expertise() {
         <p className="eyebrow z">Next</p>
         <Link href="/#work" className="display display--case z case-next-link">See the work <span aria-hidden="true">↗</span></Link>
       </nav>
-    </>
+    </div>
   );
 }

@@ -204,7 +204,7 @@ export default function Home() {
             <p>I care about clear interfaces, thoughtful architecture, and the details that make software useful. Music and gaming keep the curiosity going—and sometimes become projects of their own.</p>
           </div>
           <figure className="about-portrait z" data-parallax="16">
-            <Image src={portrait} alt="Manish Gupta smiling in round glasses, a dark puffer jacket and a white turtleneck, in a monochrome portrait." sizes="(max-width: 760px) 85vw, 30vw" placeholder="blur" />
+            <Image src={portrait} alt="Manish Gupta smiling in round glasses, a dark puffer jacket and a white turtleneck, in a monochrome portrait." sizes="(max-width: 760px) 85vw, 30vw" />
             <figcaption><span className="portrait-dot" aria-hidden="true" /> Manish / away from the editor</figcaption>
           </figure>
           <div className="monogram" aria-hidden="true">
@@ -231,7 +231,7 @@ export default function Home() {
         <figure className="desk">
           <i className="t desk-in" data-t="" />
           <div className="desk-photo z">
-            <Image src={desk} alt="A dark, red-lit desk with two monitors, a microphone, keyboard, mouse, chair and PC tower." sizes="(max-width: 760px) 100vw, 80vw" placeholder="blur" />
+            <Image src={desk} alt="A dark, red-lit desk with two monitors, a microphone, keyboard, mouse, chair and PC tower." sizes="(max-width: 760px) 100vw, 80vw" />
             <i className="leader leader--build" aria-hidden="true" />
             <i className="leader leader--listen" aria-hidden="true" />
             <i className="leader leader--play" aria-hidden="true" />

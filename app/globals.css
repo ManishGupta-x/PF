@@ -10,10 +10,22 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; scrollbar-width: thin; scrollbar-color: var(--orange) var(--black); }
+@supports not (scrollbar-color: red blue) {
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--orange); }
+}
 body { margin: 0; background: var(--black); color: var(--ivory); font: 400 16px/1.6 var(--mono); overflow-x: clip; }
 img, svg { display: block; max-width: 100%; }
 img { height: auto; }
+/* Every image shimmers in its section's colours until it loads; Motion.tsx sets data-loaded. */
+img:not([data-loaded]) {
+  --tone: color-mix(in srgb, var(--fg, var(--ivory)) 4%, var(--bg, var(--black)));
+  background: linear-gradient(100deg, var(--tone) 20%, color-mix(in srgb, var(--orange) 20%, var(--tone)) 50%, var(--tone) 80%) 0 0 / 200% 100%;
+  animation: shimmer 1.3s linear infinite;
+}
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
 a { color: inherit; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
@@ -423,7 +435,7 @@ hr { border: 0; border-top: 1px dashed currentColor; margin: .45em 0; width: 100
 .clip-filter button[aria-pressed='true'] { background: var(--fg); color: var(--bg); }
 .video-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 20px; width: 100%; }
 .video figcaption { font-size: 13px; margin-top: 8px; }
-.video-frame { position: relative; aspect-ratio: 16 / 9; background: var(--black); overflow: hidden; }
+.video-frame { position: relative; aspect-ratio: 16 / 9; background: var(--black); overflow: hidden; --fg: var(--ivory); --bg: var(--black); }
 .video-frame button { position: absolute; inset: 0; width: 100%; }
 .video-frame img { object-fit: cover; opacity: 1; transition: scale .4s; }
 .video-frame button:hover img { scale: 1.025; }
@@ -501,6 +513,7 @@ hr { border: 0; border-top: 1px dashed currentColor; margin: .45em 0; width: 100
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  img { animation: none !important; }
 }
 
 

@@ -150,11 +150,11 @@ export const projects: Project[] = [
     ],
     shots: [
       {
-        src: '/images/dropmyorder-site.png',
-        alt: 'The public DropMyOrder customer website, showing a restaurant banner, dish categories and outlet cards.',
-        caption: 'Customer ordering: restaurant discovery, menu categories, and outlet selection.',
-        width: 1853,
-        height: 916,
+        src: '/images/dropmyorder/live-home.webp',
+        alt: 'The current DropMyOrder website with the From Queen of Hills hero, outlet cards, food categories and popular dishes.',
+        caption: 'Customer discovery / Captured from dropmyorder.com on 31 October 2026.',
+        width: 2560,
+        height: 1440,
       },
     ],
     links: [{ label: 'In Shimla? Order on dropmyorder.com', href: 'https://dropmyorder.com/' }],
@@ -376,7 +376,13 @@ export const projects: Project[] = [
       { group: 'API & data', items: ['TypeScript', 'Prisma', 'PostgreSQL', 'Zod'] },
       { group: 'Workspace', items: ['pnpm workspaces', 'Shared API', 'Reusable design system'] },
     ],
-    links: [],
+    links: [
+      { label: 'Public prototype', href: 'https://servicehub-site-beta.vercel.app/' },
+      { label: 'Operations console', href: 'https://servicehub-admin-pi.vercel.app/' },
+      { label: 'Client portal', href: 'https://servicehub-client-one.vercel.app/' },
+      { label: 'Technician app', href: 'https://servicehub-tech.vercel.app/' },
+      { label: 'Learning app', href: 'https://servicehub-learn.vercel.app/' },
+    ],
   },
 ];
 

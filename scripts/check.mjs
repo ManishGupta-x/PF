@@ -117,6 +117,69 @@ ok('tool usage links to its case study', /<h4>Astro<\/h4><p class="xp-used"><a h
   await p.context().close();
 }
 
+// Images shimmer while loading, stop once loaded, and never show a blurred placeholder
+{
+  ok('no blurred image placeholders', !/feGaussianBlur/.test(html + dmo));
+  const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+  const held = [];
+  await p.route('**/_next/image**', route => { held.push(route); });
+  await p.goto(BASE, { waitUntil: 'domcontentloaded' });
+  const portrait = p.locator('.about-portrait img');
+  await portrait.scrollIntoViewIfNeeded();
+  await p.waitForTimeout(1500);
+  ok('an image still loading shimmers', (await portrait.evaluate(e => getComputedStyle(e).animationName)) === 'shimmer');
+  await p.unroute('**/_next/image**');
+  await Promise.all(held.map(route => route.continue().catch(() => {})));
+  await p.waitForFunction(() => document.querySelector('.about-portrait img')?.dataset.loaded !== undefined, null, { timeout: 15000 }).catch(() => {});
+  ok('a loaded image stops shimmering', (await portrait.evaluate(e => getComputedStyle(e).animationName)) === 'none');
+  const calm = await (await b.newContext({ reducedMotion: 'reduce' })).newPage();
+  await calm.route('**/_next/image**', () => {});
+  await calm.goto(BASE, { waitUntil: 'domcontentloaded' });
+  await calm.waitForTimeout(800);
+  ok('reduced motion keeps images still', (await calm.locator('img').first().evaluate(e => getComputedStyle(e).animationName)) === 'none');
+  await calm.context().close();
+  await p.context().close();
+}
+
+// The thread stays out of reading text, and phones don't download full-size captures
+for (const width of [1440, 390]) {
+  for (const path of ['/expertise', '/work/dropmyorder-ecosystem', '/work/dmo-saas', '/work/back2csgo', '/work/jarvis', '/work/service-hub']) {
+    const p = await (await b.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' })).newPage();
+    let heaviest = 0;
+    p.on('response', async r => { if (r.request().resourceType() === 'image') heaviest = Math.max(heaviest, (await r.body().catch(() => Buffer.alloc(0))).length); });
+    await p.goto(BASE + path, { waitUntil: 'load' });
+    await p.waitForTimeout(1200);
+    const thread = await p.evaluate(() => {
+      const lines = [...document.querySelectorAll('.thread path')].filter(l => l.getTotalLength() > 0);
+      const boxes = [];
+      const text = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      while (text.nextNode()) {
+        if (!text.currentNode.textContent.trim() || text.currentNode.parentElement.closest('.sr,.skip,nav,[aria-hidden="true"],.demo-art')) continue;
+        const range = document.createRange();
+        range.selectNodeContents(text.currentNode);
+        for (const r of range.getClientRects()) if (r.width > 4) boxes.push({ r, label: text.currentNode.textContent.trim().slice(0, 30) });
+      }
+      const crossed = new Set();
+      for (const line of lines) {
+        const m = line.getScreenCTM();
+        for (let d = 0; d < line.getTotalLength(); d += 6) {
+          const { x, y } = line.getPointAtLength(d).matrixTransform(m);
+          for (const { r, label } of boxes) if (x > r.left && x < r.right && y > r.top && y < r.bottom) crossed.add(label);
+        }
+      }
+      return { drawn: lines.length, crossed: [...crossed] };
+    });
+    ok(`${width}px ${path} draws the thread`, thread.drawn > 0);
+    ok(`${width}px ${path} thread clears the text`, thread.crossed.length === 0, thread.crossed.slice(0, 3).join(' | '));
+    if (width === 390) {
+      await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 700) { scrollTo({ top: y, behavior: 'instant' }); await new Promise(r => setTimeout(r, 90)); } });
+      await p.waitForTimeout(1500);
+      ok(`390px ${path} has no image over 500 KB`, heaviest < 500000, `${Math.round(heaviest / 1024)} KB`);
+    }
+    await p.context().close();
+  }
+}
+
 // Keyboard order and focus visibility
 {
   const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();

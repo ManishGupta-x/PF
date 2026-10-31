@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useGsap } from '@/lib/motion';
 
@@ -6,6 +7,22 @@ import { useGsap } from '@/lib/motion';
 // [data-hero-line] on load, [data-reveal] blocks, [data-stagger] children, [data-parallax] px.
 export default function Motion() {
   const pathname = usePathname();
+
+  // Ends the image shimmer in globals.css. Set after hydration, and in capture because load doesn't bubble.
+  useEffect(() => {
+    const mark = (e: Event) => {
+      if (e.target instanceof HTMLImageElement) e.target.dataset.loaded = '';
+    };
+    document.querySelectorAll('img').forEach(img => {
+      if (img.complete) img.dataset.loaded = '';
+    });
+    document.addEventListener('load', mark, true);
+    document.addEventListener('error', mark, true);
+    return () => {
+      document.removeEventListener('load', mark, true);
+      document.removeEventListener('error', mark, true);
+    };
+  }, []);
 
   useGsap(({ gsap, ScrollTrigger }) => {
     const html = document.documentElement;

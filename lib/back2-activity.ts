@@ -5,10 +5,10 @@ export const back2Activity = {
   period: 'Past month',
   source: 'https://back2csgo.com/#casuals',
   metrics: [
-    { label: 'Players', value: '802' },
-    { label: 'Matches', value: '363' },
-    { label: 'Kills', value: '78,409' },
-    { label: 'Rounds', value: '7,617' },
-    { label: 'Aces', value: '652' },
+    { label: 'Players', value: '800' },
+    { label: 'Matches', value: '362' },
+    { label: 'Kills', value: '78,061' },
+    { label: 'Rounds', value: '7,595' },
+    { label: 'Aces', value: '648' },
   ],
 };

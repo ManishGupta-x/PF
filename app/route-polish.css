@@ -1,0 +1,8 @@
+/* Layout corrections from the route audit; independent of image loading effects. */
+@media (max-width: 550px) {
+  .stage--back2 .maps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .approach .display { font-size: clamp(34px, calc((100vw - 2 * var(--gut) - 16px) / 7.6), 64px); }
+  .interlude .display--md { font-size: clamp(28px, calc((100vw - 2 * var(--gut) - 16px) / 9.3), 60px); }
+}

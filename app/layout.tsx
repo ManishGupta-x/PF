@@ -6,6 +6,7 @@ import Nav from '@/components/Nav';
 import Motion from '@/components/Motion';
 import { links, site } from '@/lib/content';
 import './globals.css';
+import './route-polish.css';
 
 const display = Archivo({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
 const mono = IBM_Plex_Mono({ subsets: ['latin', 'latin-ext'], weight: ['400', '500', '600'], variable: '--font-mono', display: 'swap' });

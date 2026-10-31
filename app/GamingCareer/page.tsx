@@ -114,7 +114,7 @@ export default async function GamingCareer() {
       <section className="g-setup s-dark" aria-labelledby="setup-title">
         <h2 id="setup-title" className="display display--sm">The setup behind the commits and the clutches.</h2>
         <div className="g-setup-grid">
-          <Image src={desk} alt="A dark, red-lit desk with two monitors, a microphone, keyboard, mouse, chair and PC tower." sizes="(max-width: 760px) 100vw, 55vw" placeholder="blur" />
+          <Image src={desk} alt="A dark, red-lit desk with two monitors, a microphone, keyboard, mouse, chair and PC tower." sizes="(max-width: 760px) 100vw, 55vw" />
           <table className="g-table g-table--dark">
             <caption>Setup reference / Hardware listed in my previous portfolio.</caption>
             <tbody>

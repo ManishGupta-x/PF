@@ -8,7 +8,7 @@ export default function ProjectArt({ slug, variant = 'chapter' }: { slug: string
   return (
     <figure className={`project-art project-art--${variant}`}>
       <div className="project-art-image">
-        <Image src={art.image} alt={art.alt} sizes={variant === 'case' ? '92vw' : '(max-width: 760px) 90vw, 66vw'} placeholder="blur" />
+        <Image src={art.image} alt={art.alt} sizes={variant === 'case' ? '92vw' : '(max-width: 760px) 90vw, 66vw'} />
       </div>
       <figcaption>
         <span className="eyebrow">{art.number} / Concept illustration</span>

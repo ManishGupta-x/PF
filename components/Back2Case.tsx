@@ -13,9 +13,9 @@ import activity from '@/public/images/back2csgo/activity.webp';
 import s from './Back2Case.module.css';
 
 function Screen({ image, alt, caption, priority = false }: { image: StaticImageData; alt: string; caption: string; priority?: boolean }) {
-  return <figure className={s.screen}>
+  return <figure className={s.screen} style={{ maxWidth: image.width, marginInline: 'auto' }}>
     <a href={image.src} target="_blank" rel="noreferrer" aria-label={`View full-size: ${alt}`}>
-      <Image src={image} alt={alt} sizes="(max-width: 900px) 100vw, 65vw" priority={priority} quality={90} />
+      <Image src={image} alt={alt} sizes="(max-width: 900px) 100vw, 65vw" priority={priority} quality={95} />
       <span className={s.expand} aria-hidden="true">↗</span>
     </a>
     <figcaption>{caption}</figcaption>
@@ -105,7 +105,7 @@ export default function Back2Case({ project: p, next }: { project: Project; next
         {back2Activity.metrics.map(m => <div key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd></div>)}
       </dl>
       <div className={`${s.wrap} ${s.split} ${s.reverse} z`}>
-        <Screen image={casuals} alt="Live casuals dashboard showing 363 matches, 802 players, 78,409 kills, 7,617 rounds and 652 aces" caption="Casual community / Captured from the live site · 31 Oct 2026" />
+        <Screen image={casuals} alt="Live casuals dashboard showing 362 matches, 800 players, 78,061 kills, 7,595 rounds and 648 aces" caption="Casual community / Captured from the live site · 31 Oct 2026" />
         <div className={s.copy}>
           <h3>Activity at a glance.<br />Detail when it matters.</h3>
           <p>The overview brings totals, recent trends, and player comparisons into one screen. Clear hierarchy makes a dense set of game data easier to scan.</p>
