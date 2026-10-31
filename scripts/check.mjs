@@ -62,6 +62,43 @@ ok('tool usage links to its case study', /<h4>Astro<\/h4><p class="xp-used"><a h
   }
   await p.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
 
+  // The work tunnel flies along z, joins the page thread at both ends and lands in the ivory section
+  {
+    const t = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+    const tErrs = [];
+    watch(t, tErrs);
+    await t.goto(BASE, { waitUntil: 'load' });
+    await t.waitForTimeout(1500);
+    const { top, run, stops } = await t.$eval('.tunnel', e => ({ top: e.getBoundingClientRect().top + scrollY, run: e.offsetHeight - innerHeight, stops: e.querySelectorAll('[data-stop]').length }));
+    const go = async f => { await t.evaluate(y => scrollTo({ top: y, behavior: 'instant' }), top + run * f); await t.waitForTimeout(1000); };
+    const startOf = () => t.$eval('.tunnel-thread', e => e.getAttribute('d').match(/M ([\d.-]+) ([\d.-]+)/).slice(1).map(Number));
+    await go(0);
+    const [x0, y0] = await startOf();
+    const entry = await t.$eval('.tunnel', e => { const a = e.querySelector('.tunnel-t').getBoundingClientRect(); return a.left; });
+    ok('tunnel thread starts where the page thread goes under', Math.abs(x0 - entry) < 2 && Math.abs(y0) < 2, `${x0},${y0}`);
+    ok('tunnel stage stays stuck to the viewport', (await t.$eval('.tunnel-stage', e => Math.round(e.getBoundingClientRect().top))) === 0);
+    await go((0.96 * 2) / stops);
+    const dwell = await t.$eval('.tunnel', e => {
+      const s = e.querySelector('[data-stop="2"]');
+      return { top: Math.round(e.querySelector('.tunnel-stage').getBoundingClientRect().top), opacity: getComputedStyle(s).opacity, width: s.getBoundingClientRect().width, own: s.offsetWidth };
+    });
+    ok('a project stops at full size and fully visible', dwell.top === 0 && dwell.opacity === '1' && Math.abs(dwell.width / dwell.own - 1) < 0.03, JSON.stringify(dwell));
+    await t.focus('[data-stop="4"]');
+    await t.waitForTimeout(1800);
+    ok('tabbing to a project brings the camera to it', (await t.$eval('[data-stop="4"]', e => getComputedStyle(e).opacity)) === '1');
+    await go(1);
+    const landed = await t.evaluate(() => {
+      const r = document.querySelector('.tunnel-portal').getBoundingClientRect();
+      return { full: r.left <= 0 && r.top <= 0 && r.right >= innerWidth && r.bottom >= innerHeight, nav: document.querySelector('.nav').dataset.tone, over: document.documentElement.scrollWidth - document.documentElement.clientWidth };
+    });
+    ok('portal fills the stage and the navbar turns ivory', landed.full && landed.nav === 'ivory', JSON.stringify(landed));
+    await t.evaluate(() => scrollTo({ top: innerHeight, behavior: 'instant' }));
+    await t.waitForTimeout(900);
+    ok('the headline flying past the camera adds no sideways scroll', (await t.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)) <= 0);
+    ok('tunnel console clean', tErrs.length === 0, tErrs.join(' | '));
+    await t.context().close();
+  }
+
   // A fast scroller reaches the end of a stage with its contents and the thread already there
   {
     const fast = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
@@ -291,6 +328,9 @@ for (const width of [320, 390, 760]) {
   ok('reduced: no replay controls or dragging', (await p.$$('.demo-btn')).length === 0 && (await p.$$('.loop-handle')).length === 0);
   const pawn = await p.$eval('.piece-bpd', e => e.getAttribute('transform'));
   ok('reduced: board shows the final position', pawn === 'translate(300 300)', pawn);
+  const index = await p.$eval('.tunnel', e => ({ sticky: getComputedStyle(e.querySelector('.tunnel-stage')).position, svg: getComputedStyle(e.querySelector('.tunnel-svg')).display, shown: [...e.querySelectorAll('[data-stop]')].every(s => getComputedStyle(s).opacity === '1'), height: e.offsetHeight }));
+  ok('reduced: the tunnel is a plain index of the work', index.sticky === 'static' && index.svg === 'none' && index.shown && index.height < 2400, JSON.stringify(index));
+  ok('reduced: nothing sits in z', await p.$$eval('[data-depth],[data-fly]', e => e.length > 0 && e.every(x => getComputedStyle(x).transform === 'none' && getComputedStyle(x).opacity === '1')));
   ok('reduced: console clean', errs.length === 0, errs.join(' | '));
   await p.context().close();
 }

@@ -3,8 +3,11 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useGsap } from '@/lib/motion';
 
+const LENS = 1100;
+
 // Page-level entrances, driven by attributes so the sections stay server components:
-// [data-hero-line] on load, [data-reveal] blocks, [data-stagger] children, [data-parallax] px.
+// [data-hero-line] on load, [data-reveal] blocks, [data-stagger] children, [data-parallax] px,
+// [data-fly] and [data-depth] px along z. Keep [data-t] anchors out of anything that moves.
 export default function Motion() {
   const pathname = usePathname();
 
@@ -72,6 +75,23 @@ export default function Motion() {
         ),
       );
     }
+
+    // z-axis, scrubbed: [data-fly] heads past the camera as its section leaves, [data-depth] arrives from
+    // behind the page. Clamped so nothing is left part-way at either end of the page.
+    gsap.utils.toArray<HTMLElement>('[data-fly]').forEach(el =>
+      gsap.fromTo(
+        el,
+        { z: 0, opacity: 1, transformPerspective: LENS },
+        { z: Number(el.dataset.fly), opacity: 0, ease: 'power1.in', scrollTrigger: { trigger: el.closest('section') ?? el, start: 'top top', end: 'bottom 25%', scrub: 0.4 } },
+      ),
+    );
+    gsap.utils.toArray<HTMLElement>('[data-depth]').forEach(el =>
+      gsap.fromTo(
+        el,
+        { z: -Number(el.dataset.depth), rotateX: 16, opacity: 0, transformPerspective: LENS, transformOrigin: '50% 100%' },
+        { z: 0, rotateX: 0, opacity: 1, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'clamp(top bottom)', end: 'clamp(top 58%)', scrub: 0.4 } },
+      ),
+    );
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
   }, [pathname]);
 

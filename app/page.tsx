@@ -15,6 +15,8 @@ import { areas } from '@/lib/expertise';
 import desk from '@/public/images/desk.jpeg';
 import portrait from '@/public/images/manish-editorial.webp';
 import ProjectArt from '@/components/ProjectArt';
+import DepthTunnel from '@/components/DepthTunnel';
+import { projectArt } from '@/lib/visuals';
 
 const [eco, saas, back2, jarvis, servicehub] = projects;
 
@@ -26,7 +28,7 @@ const M = ({ side = 'r' }: { side?: 'w' | 'r' }) => <i className={`tm tm--${side
 const P = ({ x, y }: { x: number; y: number }) => <i className="t" data-t="" style={{ '--x': `${x}%`, '--y': `${y}%` } as CSSProperties} />;
 
 const Lines = ({ lines, as: Tag = 'h2', className = '' }: { lines: string[]; as?: 'h2' | 'h3'; className?: string }) => (
-  <Tag className={`display ${className}`} data-reveal="">
+  <Tag className={`display ${className}`} data-depth="420">
     {lines.map(l => <span key={l} className="line-block">{l}</span>)}
   </Tag>
 );
@@ -39,7 +41,7 @@ const Chapter = ({ p, tone, title, children, pull, exit }: { p: (typeof projects
       <p className="eyebrow">{p.number} / {p.category}</p>
       <p className="chapter-summary">{p.summary}</p>
     </header>
-    <h3 id={`${p.slug}-title`} className="giant" data-parallax="24" aria-label={p.title}>
+    <h3 id={`${p.slug}-title`} className="giant" data-depth="620" aria-label={p.title}>
       {title.map(t => <span key={t}>{t}</span>)}
     </h3>
     {pull && <div className="pull z">{pull}</div>}
@@ -70,7 +72,7 @@ export default function Home() {
             />
             <i className="t-fill" data-t="" data-load="" data-over="" data-pts="6,52 -1,66 8,82 26,92 44,86" data-pts-m="8,50 0,66 8,84 30,92 48,86" />
             <i className="t-fill" data-t="" data-load="" data-pts="44,86 60,72 78,68 94,74 86,100 66,118 61,150" data-pts-m="48,86 70,72 94,80 104,104 102,130" />
-            <h1 className="display display--hero display--experience">
+            <h1 className="display display--hero display--experience" data-fly="620">
               <span className="line-block" data-hero-line="">I BUILD</span>
               <span className="line-block" data-hero-line="">EXPERIENCES WORTH</span>
               <span className="line-block" data-hero-line="">INTERACTING WITH.</span>
@@ -134,12 +136,23 @@ export default function Home() {
         <P x={72} y={5} />
         <P x={98.6} y={20} />
         <P x={98.6} y={88} />
-        <P x={50} y={100} />
         <M />
       </section>
 
       <section id="work" aria-label="Selected work" className="work">
-        <h2 className="sr">Selected work</h2>
+        <DepthTunnel>
+          <h2 className="display tunnel-heading" data-stop="0" style={{ '--i': 0, '--side': 0 } as CSSProperties}>
+            <span className="line-block">Selected</span>
+            <span className="line-block">work</span>
+          </h2>
+          {projects.map((p, i) => (
+            <a key={p.slug} href={`#${p.slug}`} className="tunnel-panel" data-stop={i + 1} style={{ '--i': i + 1, '--side': i % 2 ? -1 : 1 } as CSSProperties}>
+              <Image src={projectArt[p.slug].image} alt="" sizes="(max-width: 760px) 90vw, 66vw" />
+              <span className="eyebrow">{p.number} / {p.category}</span>
+              <span className="tunnel-title">{p.title}</span>
+            </a>
+          ))}
+        </DepthTunnel>
 
         <Chapter p={eco} tone="s-ivory" title={['DROPMYORDER', 'ECOSYSTEM']} exit={<P x={98.6} y={99} />} pull={<p className="pull-text">Built for the pace of a restaurant.</p>}>
           <Ecosystem />
@@ -230,7 +243,7 @@ export default function Home() {
         </p>
         <figure className="desk">
           <i className="t desk-in" data-t="" />
-          <div className="desk-photo z">
+          <div className="desk-photo z" data-depth="520">
             <Image src={desk} alt="A dark, red-lit desk with two monitors, a microphone, keyboard, mouse, chair and PC tower." sizes="(max-width: 760px) 100vw, 80vw" />
             <i className="leader leader--build" aria-hidden="true" />
             <i className="leader leader--speak" aria-hidden="true" />

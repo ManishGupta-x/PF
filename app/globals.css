@@ -76,9 +76,8 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 .badge { display: inline-block; border: 1px solid var(--accent-text); color: var(--accent-text); font: 500 13px/1.4 var(--mono); padding: 6px 12px; letter-spacing: .04em; text-transform: uppercase; }
 
 /* Nav: difference blending flips it over both section colours with no scroll logic. */
-.nav { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 20px var(--gut); color: var(--ivory); background: var(--black); border-bottom: 1px solid transparent; transition: background-color .2s, color .2s, border-color .2s; }
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 20px var(--gut); color: var(--ivory); background: var(--black); transition: background-color .2s, color .2s; }
 .nav[data-tone='ivory'] { color: var(--black); background: var(--ivory); }
-.nav[data-scrolled='true'] { border-bottom-color: color-mix(in srgb, currentColor 16%, transparent); }
 .nav-logo { font: 800 24px/1 var(--display); letter-spacing: -.06em; text-decoration: none; }
 .nav-links { display: flex; gap: clamp(20px, 3.4vw, 54px); }
 .nav-links a, .nav-menu { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; padding: 8px 0; }
@@ -91,7 +90,7 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 .menu nav a { font: 800 44px/1 var(--display); letter-spacing: -.05em; text-transform: uppercase; text-decoration: none; }
 
 /* Hero */
-.hero { min-height: 100svh; padding: 88px var(--gut) 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+.hero { overflow-x: clip; min-height: 100svh; padding: 88px var(--gut) 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
 .hero-mid { flex: 1; display: flex; align-items: center; }
 .hero-title { position: relative; width: 100%; }
 .js-motion [data-hero-line], .js-motion [data-hero-fade] { opacity: 0; }
@@ -135,6 +134,29 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 .pull-text small { display: block; margin-top: 8px; font: 400 13px/1.5 var(--mono); letter-spacing: 0; opacity: .72; }
 .chapter-cta, .chapter-link { padding: 0 var(--gut); margin-top: 30px; text-align: right; }
 .chapter-link .link { margin-right: 0; }
+
+/* Depth tunnel: at rest an index of the work; .js-motion makes it the scene DepthTunnel.tsx flies through. */
+.tunnel { --sway: 22vw; z-index: 4; padding: clamp(70px, 9vw, 130px) var(--gut); }
+.tunnel-t { left: 50%; top: var(--y); }
+.tunnel-svg { display: none; }
+.tunnel-world { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 28px 20px; }
+.tunnel-heading { grid-column: 1 / -1; }
+.tunnel-panel { display: grid; gap: 10px; align-content: start; text-decoration: none; background: var(--black); padding-bottom: 14px; }
+.tunnel-panel img { width: 100%; }
+.tunnel-panel:hover .tunnel-title, .tunnel-panel:focus-visible .tunnel-title { color: var(--orange); }
+.tunnel-title { font: 800 clamp(26px, 3.2vw, 56px)/.95 var(--display); letter-spacing: -.04em; text-transform: uppercase; transition: color .2s; }
+.js-motion .tunnel { height: 550svh; padding: 0; }
+.js-motion .tunnel-stage { position: sticky; top: 0; height: 100svh; overflow: clip; perspective: var(--lens); }
+.js-motion .tunnel-svg { display: block; position: absolute; inset: 0; width: 100%; height: 100%; fill: none; pointer-events: none; }
+.tunnel-rail, .tunnel-frame { stroke: var(--ivory); stroke-width: 1; }
+.tunnel-rail { stroke-opacity: .14; }
+.tunnel-portal { fill: var(--ivory); pointer-events: auto; }
+.tunnel-thread, .thread-tip circle:first-child { stroke: var(--orange); stroke-width: 2.2; stroke-linecap: round; }
+.thread-tip circle:last-child { fill: var(--orange); }
+.js-motion .tunnel-world { display: block; position: absolute; inset: 0; transform-style: preserve-3d; }
+.js-motion [data-stop] { position: absolute; left: 50%; top: 50%; width: min(46vw, 760px); transform: translate(-50%, -50%) translate3d(calc(var(--side) * var(--sway)), 0, calc(var(--i) * var(--gap) * -1)) rotateY(calc(var(--side) * -4deg)); }
+.js-motion [data-stop]:not(:first-child) { opacity: 0; }
+.js-motion .tunnel-heading { left: 30%; top: 74%; width: auto; white-space: nowrap; }
 
 /* Stage: everything in em so the composition scales as one object. */
 .stage { position: relative; font-size: var(--u); max-width: 1760px; margin: 0 auto; }
@@ -463,7 +485,10 @@ hr { border: 0; border-top: 1px dashed currentColor; margin: .45em 0; width: 100
   .hero-actions { text-align: left; justify-items: start; }
   .t { display: none; }
   .loop-start { display: block; }
-  .case-t1, .case-t2, .case-t3, .case-t4 { display: block; left: calc(100% - 9px); }
+  .case-t1, .case-t2, .case-t3, .case-t4, .tunnel-t { display: block; left: calc(100% - 9px); }
+  .tunnel { --sway: 4vw; }
+  .js-motion [data-stop] { width: 84vw; }
+  .js-motion .tunnel-heading { left: 50%; width: auto; }
   .tm { display: block; position: relative; height: 0; width: 1px; pointer-events: none; }
   .tm--r { margin-left: calc(100% - 9px); }
   .tm--w { margin-left: calc(100% - 70px); top: -46px; }

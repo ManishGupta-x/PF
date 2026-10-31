@@ -25,7 +25,6 @@ export default function Nav() {
       if (!bar.current) return;
       const under = document.elementFromPoint(innerWidth / 2, bar.current.getBoundingClientRect().bottom + 1);
       bar.current.dataset.tone = under?.closest('.s-ivory, .s-dark')?.classList.contains('s-ivory') ? 'ivory' : 'dark';
-      bar.current.dataset.scrolled = String(scrollY > 8);
     };
     const queue = () => {
       frame ||= requestAnimationFrame(update);
@@ -33,10 +32,12 @@ export default function Nav() {
     update();
     addEventListener('scroll', queue, { passive: true });
     addEventListener('resize', queue);
+    addEventListener('tunnelmove', queue);
     return () => {
       cancelAnimationFrame(frame);
       removeEventListener('scroll', queue);
       removeEventListener('resize', queue);
+      removeEventListener('tunnelmove', queue);
     };
   }, [pathname]);
 
