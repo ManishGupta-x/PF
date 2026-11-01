@@ -231,6 +231,32 @@ ok('tool usage links to its case study', /<h4>Astro<\/h4><p class="xp-used"><a h
   ok('drag moves the thread and springs back', dragged !== d0 && (await settled()));
   ok('tail of the thread ends with the head hidden', (await p.$eval('.thread-head', e => e.style.display)) === 'none');
 
+  // The thread lassoes each case-study link in plain view, then lights it up, and clears the text around it
+  for (const slug of ['dropmyorder-ecosystem', 'dmo-saas', 'back2csgo', 'jarvis', 'service-hub']) {
+    const at = f => p.$eval(`#${slug} .cta`, (e, f) => window.scrollTo({ top: e.getBoundingClientRect().top + scrollY - innerHeight * f, behavior: 'instant' }), f);
+    const lit = () => p.$eval(`#${slug} .cta-ring`, e => e.classList.contains('on'));
+    await at(0.7);
+    await p.waitForTimeout(700);
+    const before = await lit();
+    await at(0.35);
+    await p.waitForTimeout(1200);
+    const shown = await p.$eval(`#${slug} .cta`, e => { const s = getComputedStyle(e); return s.backgroundSize.startsWith('100%') && s.color === 'rgb(5, 5, 5)'; });
+    const crossed = await p.$eval(`#${slug}`, chapter => {
+      const boxes = [];
+      for (const el of chapter.querySelectorAll('.cta, .project-art figcaption > span:not(.project-art-rule), .chapter-link a')) boxes.push(el.getBoundingClientRect());
+      return [...document.querySelectorAll('.thread path')].some(line => {
+        const m = line.getScreenCTM();
+        for (let d = 0; d < line.getTotalLength(); d += 4) {
+          const { x, y } = line.getPointAtLength(d).matrixTransform(m);
+          if (boxes.some(r => x > r.left && x < r.right && y > r.top && y < r.bottom)) return true;
+        }
+        return false;
+      });
+    });
+    ok(`${slug} link lights up only once the loop closes`, !before && (await lit()) && shown);
+    ok(`${slug} thread clears the link and the caption`, !crossed);
+  }
+
   // Client navigation and cleanup
   const threadCount = await p.$$eval('.thread path', e => e.length);
   await p.click('.chapter--jarvis .cta', { force: true });

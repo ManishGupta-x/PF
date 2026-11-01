@@ -33,7 +33,7 @@ const Lines = ({ lines, as: Tag = 'h2', className = '' }: { lines: string[]; as?
   </Tag>
 );
 
-const Chapter = ({ p, tone, title, children, pull, exit }: { p: (typeof projects)[number]; tone: string; title: string[]; children: React.ReactNode; pull?: React.ReactNode; exit: React.ReactNode }) => (
+const Chapter = ({ p, tone, title, children, pull, enter, exit }: { p: (typeof projects)[number]; tone: string; title: string[]; children: React.ReactNode; pull?: React.ReactNode; enter?: React.ReactNode; exit: React.ReactNode }) => (
   <article id={p.slug} className={`chapter ${tone} chapter--${p.slug}`} aria-labelledby={`${p.slug}-title`}>
     <M side="w" />
         <M />
@@ -47,8 +47,21 @@ const Chapter = ({ p, tone, title, children, pull, exit }: { p: (typeof projects
     {pull && <div className="pull z">{pull}</div>}
     {children}
     <ProjectArt slug={p.slug} />
+    <M />
     <p className="chapter-cta z">
-      <Link href={`/work/${p.slug}`} className="cta">View case study <span aria-hidden="true">↗</span></Link>
+      {enter}
+      <P x={98.6} y={-60} />
+      <span className="cta-wrap">
+        {/* The thread lassoes the link clockwise; .on (set when the loop closes) lights it up. */}
+        <i
+          className="t-fill cta-ring"
+          data-t=""
+          data-lag="0.3"
+          data-pts="106,40 96,135 50,152 -6,132 -12,50 -4,-38 50,-52 100,-40 110,50 104,150"
+          data-pts-m="104,40 94,135 50,152 -5,132 -9,50 -4,-38 50,-52 98,-40 105,50 101,150"
+        />
+        <Link href={`/work/${p.slug}`} className="cta">View case study <span aria-hidden="true">↗</span></Link>
+      </span>
     </p>
     {exit}
     <M />
@@ -160,7 +173,7 @@ export default function Home() {
           <p className="chapter-link z"><a className="link" href="https://dropmyorder.com/" target="_blank" rel="noreferrer">In Shimla? Order on dropmyorder.com <span aria-hidden="true">↗</span></a></p>
         </Chapter>
 
-        <Chapter p={saas} tone="s-dark" title={['DMO SAAS']} exit={<P x={1.3} y={97} />} pull={<p className="badge">In development</p>}>
+        <Chapter p={saas} tone="s-dark" title={['DMO SAAS']} enter={<P x={1.3} y={-60} />} exit={<P x={98.6} y={97} />} pull={<p className="badge">In development</p>}>
           <Saas />
           <div className="roadmap z">
             <div>
@@ -255,7 +268,7 @@ export default function Home() {
           </div>
           <figcaption className="z">
             <span>“The setup behind the commits and the clutches.”</span>
-            <Link href="/GamingCareer" className="link">Beyond the editor <span aria-hidden="true">↗</span></Link>
+            <Link href="/GamingCareer" className="link">Beyond the coder <span aria-hidden="true">↗</span></Link>
           </figcaption>
           <i className="t desk-out" data-t="" />
         </figure>

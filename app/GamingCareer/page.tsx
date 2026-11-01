@@ -5,7 +5,7 @@ import { gaming, links } from '@/lib/content';
 import desk from '@/public/images/desk.jpeg';
 
 export const metadata: Metadata = {
-  title: 'Beyond the Editor',
+  title: 'Beyond the Coder',
   description: 'Counter-Strike, chess, music, and the communities behind the projects. The personal side of Manish Gupta.',
   alternates: { canonical: '/GamingCareer' },
 };
@@ -104,7 +104,7 @@ export default async function GamingCareer() {
   return (
     <>
       <header className="case-hero s-dark">
-        <p className="eyebrow z">Beyond the editor</p>
+        <p className="eyebrow z">Beyond the coder</p>
         <h1 className="display display--case z" data-hero-line="">One more match.</h1>
         <p className="lede z" data-hero-fade="">Counter-Strike, chess, and the communities that make both worth coming back to.</p>
       </header>

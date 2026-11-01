@@ -6,11 +6,12 @@ const NS = 'http://www.w3.org/2000/svg';
 const MOBILE = 760;
 const HEAD_LINE = 0.72; // viewport height the thread's tip tracks
 
-type Seg = { from: number; to: number; over: boolean; onLoad: boolean; el: HTMLElement };
+type Seg = { from: number; to: number; over: boolean; onLoad: boolean; lag: number; el: HTMLElement };
 
 // Every [data-t] in document order adds to one continuous line. An anchor is a point at
 // its centre, or data-pts / data-pts-m: "x,y x,y" in percent of the anchor's own box.
 // display:none anchors are skipped, which is how desktop and mobile get separate geometry.
+// data-lag holds a segment back by that fraction of the viewport, so it draws in plain view.
 function measure(main: HTMLElement) {
   const origin = main.getBoundingClientRect();
   const mobile = innerWidth <= MOBILE;
@@ -28,7 +29,7 @@ function measure(main: HTMLElement) {
       : [[r.left - origin.left + r.width / 2, r.top - origin.top + r.height / 2]];
     const from = Math.max(points.length - 1, 0);
     points.push(...local);
-    segs.push({ from, to: points.length - 1, over: 'over' in el.dataset, onLoad: 'load' in el.dataset, el });
+    segs.push({ from, to: points.length - 1, over: 'over' in el.dataset, onLoad: 'load' in el.dataset, lag: Number(el.dataset.lag ?? 0), el });
   });
   // offsetHeight, not scrollHeight: the SVGs live inside main, so scrollHeight would never let them shrink.
   return { points, segs: segs.filter(s => s.to > s.from), size: [main.clientWidth, main.offsetHeight] };
@@ -87,7 +88,7 @@ export default function Thread() {
         paths.forEach((p, i) => gsap.set(p, { strokeDasharray: `${lengths[i] + 1} ${lengths[i] + 40}`, strokeDashoffset: lengths[i] + 20 }));
         const vh = innerHeight;
         const maxScroll = Math.max(document.documentElement.scrollHeight - vh, 1);
-        const scrolled = segs.flatMap((s, i) => (s.onLoad ? [] : [{ i, y: points[s.to][1] - vh * HEAD_LINE, len: lengths[i] }]));
+        const scrolled = segs.flatMap((s, i) => (s.onLoad ? [] : [{ i, y: points[s.to][1] - vh * (HEAD_LINE - s.lag), len: lengths[i] }]));
         const stops = new Map(scrollStops(scrolled).map((stop, k) => [scrolled[k].i, stop]));
         let cursor = 0;
         const intro = gsap.timeline({ paused: true });
