@@ -427,6 +427,9 @@ for (const width of [320, 390, 760]) {
   await p.click('.video-frame button');
   await p.waitForSelector('iframe');
   ok('click loads one nocookie embed', (await p.$$eval('iframe', e => e.length === 1 && e[0].src.includes('youtube-nocookie.com'))));
+  ok('watch view queues the rest of the set', (await p.$$('.watch-list li')).length === 5);
+  await p.click('.watch-list button');
+  ok('picking from the queue swaps the player', !!(await p.waitForSelector('iframe[src*="qyIrDyOVt3A"]', { timeout: 3000 }).catch(() => null)));
   await p.focus('#g-tab-counter-strike');
   await p.keyboard.press('ArrowRight');
   ok('tabs move by keyboard', (await p.getAttribute('#g-tab-chess', 'aria-selected')) === 'true');

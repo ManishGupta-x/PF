@@ -631,6 +631,31 @@ hr { border: 0; border-top: 1px dashed currentColor; margin: .45em 0; width: 100
 /* Wide players and the approved portfolio headline. */
 .display--experience { font-size: clamp(22px, 7.8vw, 210px); line-height: .91; }
 .video-grid.video-grid--single { grid-template-columns: minmax(0, 1fr); }
-.video--playing { grid-column: 1 / -1; width: 100%; }
+
+/* Watch view: the chosen clip plays large, the rest of the set queues on the right. */
+.watch { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 400px); gap: 24px; width: 100%; align-items: start; }
+.watch--single { grid-template-columns: minmax(0, 1fr); }
+.watch-main figcaption { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; align-items: end; margin-top: 14px; }
+.watch-meta { grid-column: 1 / -1; font: 600 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent-text); }
+.watch-title { font: 800 clamp(22px, 2.4vw, 36px)/1.05 var(--display); letter-spacing: -.03em; text-wrap: balance; }
+.watch-back { border: 1px solid currentColor; padding: 8px 14px; font-size: 13px; min-height: 36px; white-space: nowrap; }
+.watch-back:hover { background: var(--fg); color: var(--bg); }
+.watch-list { list-style: none; display: grid; gap: 12px; }
+.watch-list button { display: grid; grid-template-columns: 168px minmax(0, 1fr); grid-template-rows: auto 1fr; gap: 6px 12px; width: 100%; text-align: left; }
+.watch-thumb { grid-row: 1 / span 2; position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--black); }
+.watch-thumb img { object-fit: cover; transition: scale .3s; }
+.watch-thumb-index { position: absolute; right: 6px; bottom: 6px; padding: 3px 5px; background: #050505d9; color: var(--ivory); font: 500 11px/1 var(--mono); }
+.watch-item-title { font: 700 15px/1.25 var(--display); letter-spacing: -.01em; }
+.watch-item-meta { font: 500 10px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+.watch-list button:hover .watch-thumb img { scale: 1.05; }
+.watch-list button:hover .watch-item-title { color: var(--accent-text); }
+@media (max-width: 960px) {
+  .watch { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .watch-list button { grid-template-columns: 140px minmax(0, 1fr); }
+  .watch-main figcaption { grid-template-columns: minmax(0, 1fr); }
+  .watch-back { justify-self: start; }
+}
 .video-grid--single .video-cover-title { font-size: clamp(26px, 5vw, 88px); max-width: 18ch; }
 .video-grid--single .video-cover-meta, .video-grid--single .video-play { font-size: clamp(11px, 1.1vw, 17px); }
